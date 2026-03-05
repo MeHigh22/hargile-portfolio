@@ -28,11 +28,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Layout adapts correctly across mobile (375px), tablet (768px), and desktop (1440px) viewports
   3. CSS custom property theme system exists and can be toggled between two different color palettes visually
   4. First contentful paint is under 3 seconds on a throttled connection (simulated 3G)
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md -- Scaffold Vite+React+TS, Tailwind CSS 4 theming, typed project data model, test infrastructure
+- [ ] 01-02-PLAN.md -- Responsive layout shell (AppShell, Navigation, ProjectCard) with theme toggle verification
 
 ### Phase 2: Slider & Navigation
 **Goal**: Users can browse all projects through a smooth, accessible carousel with multiple input methods and shareable URLs
@@ -87,7 +87,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/2 | Not started | - |
+| 1. Foundation | 0/2 | Planned | - |
 | 2. Slider & Navigation | 0/2 | Not started | - |
 | 3. Content & Theming | 0/3 | Not started | - |
 | 4. Depth & Production Quality | 0/2 | Not started | - |
