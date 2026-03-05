@@ -68,27 +68,27 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| NAV-01 | — | Pending |
-| NAV-02 | — | Pending |
-| NAV-03 | — | Pending |
-| NAV-04 | — | Pending |
-| CONT-01 | — | Pending |
-| CONT-02 | — | Pending |
-| CONT-03 | — | Pending |
-| CONT-04 | — | Pending |
-| VIS-01 | — | Pending |
-| VIS-02 | — | Pending |
-| VIS-03 | — | Pending |
-| PERF-01 | — | Pending |
-| PERF-02 | — | Pending |
-| PERF-03 | — | Pending |
-| PERF-04 | — | Pending |
+| NAV-01 | Phase 2 | Pending |
+| NAV-02 | Phase 2 | Pending |
+| NAV-03 | Phase 2 | Pending |
+| NAV-04 | Phase 2 | Pending |
+| CONT-01 | Phase 3 | Pending |
+| CONT-02 | Phase 3 | Pending |
+| CONT-03 | Phase 3 | Pending |
+| CONT-04 | Phase 3 | Pending |
+| VIS-01 | Phase 3 | Pending |
+| VIS-02 | Phase 3 | Pending |
+| VIS-03 | Phase 4 | Pending |
+| PERF-01 | Phase 1 | Pending |
+| PERF-02 | Phase 1 | Pending |
+| PERF-03 | Phase 4 | Pending |
+| PERF-04 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 15 total
-- Mapped to phases: 0
-- Unmapped: 15
+- Mapped to phases: 15
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-05*
-*Last updated: 2026-03-05 after initial definition*
+*Last updated: 2026-03-05 after roadmap creation*
