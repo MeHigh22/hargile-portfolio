@@ -7,8 +7,8 @@
 
 ### Navigation
 
-- [ ] **NAV-01**: User can browse 12+ projects via smooth slider/carousel with seamless transitions
-- [ ] **NAV-02**: User can navigate projects using keyboard arrows, touch swipe, and click controls
+- [x] **NAV-01**: User can browse 12+ projects via smooth slider/carousel with seamless transitions
+- [x] **NAV-02**: User can navigate projects using keyboard arrows, touch swipe, and click controls
 - [ ] **NAV-03**: Each project has a unique URL (deep linking) with browser back/forward support
 - [ ] **NAV-04**: User can see current position and total count via progress indicator
 
@@ -68,8 +68,8 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| NAV-01 | Phase 2 | Pending |
-| NAV-02 | Phase 2 | Pending |
+| NAV-01 | Phase 2 | Complete |
+| NAV-02 | Phase 2 | Complete |
 | NAV-03 | Phase 2 | Pending |
 | NAV-04 | Phase 2 | Pending |
 | CONT-01 | Phase 3 | Pending |
