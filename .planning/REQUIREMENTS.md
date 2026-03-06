@@ -14,10 +14,10 @@
 
 ### Content
 
-- [ ] **CONT-01**: Each project displays a high-quality hero visual (screenshot/mockup)
+- [x] **CONT-01**: Each project displays a high-quality hero visual (screenshot/mockup)
 - [x] **CONT-02**: Each project shows a brief "what we solved" narrative (problem, solution, outcome)
 - [x] **CONT-03**: Each project displays metadata tags (industry, tech stack, year)
-- [ ] **CONT-04**: User can reach a contact CTA to inquire about working with Hargile
+- [x] **CONT-04**: User can reach a contact CTA to inquire about working with Hargile
 
 ### Visual Identity
 
@@ -72,10 +72,10 @@
 | NAV-02 | Phase 2 | Complete |
 | NAV-03 | Phase 2 | Complete |
 | NAV-04 | Phase 2 | Complete |
-| CONT-01 | Phase 3 | Pending |
+| CONT-01 | Phase 3 | Complete |
 | CONT-02 | Phase 3 | Complete |
 | CONT-03 | Phase 3 | Complete |
-| CONT-04 | Phase 3 | Pending |
+| CONT-04 | Phase 3 | Complete |
 | VIS-01 | Phase 3 | Complete |
 | VIS-02 | Phase 3 | Pending |
 | VIS-03 | Phase 4 | Pending |
