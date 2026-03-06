@@ -10,7 +10,7 @@ describe('projects data', () => {
     const requiredFields = [
       'id', 'title1', 'title2', 'category', 'year',
       'subtitle', 'client', 'services', 'duration', 'tech',
-      'heroImg', 'colors',
+      'heroImg', 'colors', 'industry', 'narrative',
     ] as const
 
     for (const project of projects) {
@@ -44,6 +44,27 @@ describe('projects data', () => {
     const newIds = ['aura', 'forge', 'prism', 'zenith', 'echo', 'orbit', 'coral']
     for (const id of newIds) {
       expect(ids).toContain(id)
+    }
+  })
+
+  it('all 12 projects have unique accent colors', () => {
+    const accents = projects.map(p => p.colors.accent)
+    expect(new Set(accents).size).toBe(accents.length)
+  })
+
+  it('all projects have narrative with non-empty problem/solution/outcome', () => {
+    for (const project of projects) {
+      expect(project.narrative).toBeDefined()
+      expect(project.narrative.problem.length).toBeGreaterThan(0)
+      expect(project.narrative.solution.length).toBeGreaterThan(0)
+      expect(project.narrative.outcome.length).toBeGreaterThan(0)
+    }
+  })
+
+  it('all projects have non-empty industry', () => {
+    for (const project of projects) {
+      expect(project.industry).toBeDefined()
+      expect(project.industry.length).toBeGreaterThan(0)
     }
   })
 })

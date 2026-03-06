@@ -5,6 +5,12 @@ export interface ProjectColors {
   gradientTo: string;
 }
 
+export interface ProjectNarrative {
+  problem: string;
+  solution: string;
+  outcome: string;
+}
+
 export interface ProjectData {
   id: string;
   title1: string;
@@ -18,4 +24,6 @@ export interface ProjectData {
   tech: string;
   heroImg: string;
   colors: ProjectColors;
+  industry: string;
+  narrative: ProjectNarrative;
 }

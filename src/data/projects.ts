@@ -1,12 +1,5 @@
 import type { ProjectData } from './types';
 
-const defaultColors = {
-  accent: '#96b8f7',
-  background: '#06080d',
-  gradientFrom: '#96b8f7',
-  gradientTo: '#b896f7',
-} as const;
-
 export const projects: ProjectData[] = [
   {
     id: 'atlas',
@@ -20,7 +13,18 @@ export const projects: ProjectData[] = [
     duration: '4 mois',
     tech: 'React, Node.js, AWS',
     heroImg: 'https://images.unsplash.com/photo-1462331940025-496dfbfc7564?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#96b8f7',
+      background: '#06080d',
+      gradientFrom: '#96b8f7',
+      gradientTo: '#b896f7',
+    },
+    industry: 'SaaS',
+    narrative: {
+      problem: "L'ancien tableau de bord etait lent, encombre et ne permettait pas d'analyser les donnees en temps reel.",
+      solution: "Refonte complete avec une architecture reactive et des visualisations interactives optimisees pour la prise de decision rapide.",
+      outcome: "Temps d'analyse reduit de 60%, adoption utilisateur en hausse de 85% des le premier mois.",
+    },
   },
   {
     id: 'pulse',
@@ -34,7 +38,18 @@ export const projects: ProjectData[] = [
     duration: '6 mois',
     tech: 'React Native, Firebase, Swift',
     heroImg: 'https://images.unsplash.com/photo-1543722530-d2c3201371e7?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#f76c6c',
+      background: '#0d0608',
+      gradientFrom: '#f76c6c',
+      gradientTo: '#f7b86c',
+    },
+    industry: 'Sante',
+    narrative: {
+      problem: "Les patients avaient du mal a suivre leurs indicateurs de sante au quotidien avec les outils existants, trop complexes.",
+      solution: "Une application mobile epuree avec synchronisation automatique des capteurs et alertes personnalisees.",
+      outcome: "92% des utilisateurs suivent leurs objectifs sante quotidiennement, note de 4.8 sur les stores.",
+    },
   },
   {
     id: 'verde',
@@ -48,7 +63,18 @@ export const projects: ProjectData[] = [
     duration: '5 mois',
     tech: 'Next.js, Shopify, Stripe',
     heroImg: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#4ade80',
+      background: '#061a0d',
+      gradientFrom: '#4ade80',
+      gradientTo: '#86efac',
+    },
+    industry: 'E-commerce',
+    narrative: {
+      problem: "Les consommateurs eco-responsables manquaient d'une plateforme fiable pour trouver des produits durables et verifies.",
+      solution: "Marketplace avec certification integree, empreinte carbone affichee et parcours d'achat gamifie.",
+      outcome: "15 000 produits references, taux de conversion 3x superieur a la moyenne du secteur.",
+    },
   },
   {
     id: 'lumen',
@@ -62,7 +88,18 @@ export const projects: ProjectData[] = [
     duration: '3 mois',
     tech: 'Webflow, After Effects, Figma',
     heroImg: 'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#fbbf24',
+      background: '#0d0b06',
+      gradientFrom: '#fbbf24',
+      gradientTo: '#f59e0b',
+    },
+    industry: 'Photographie',
+    narrative: {
+      problem: "Le studio avait une presence en ligne qui ne refletait pas la qualite de son travail photographique.",
+      solution: "Identite visuelle chaleureuse avec un site immersif mettant en valeur chaque serie photo dans un ecrin sur mesure.",
+      outcome: "Demandes de devis en hausse de 120%, reconnaissance immediate de la marque dans le milieu artistique.",
+    },
   },
   {
     id: 'nexo',
@@ -76,7 +113,18 @@ export const projects: ProjectData[] = [
     duration: '7 mois',
     tech: 'Vue.js, Python, PostgreSQL',
     heroImg: 'https://images.unsplash.com/photo-1507400492013-162706c8c05e?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#818cf8',
+      background: '#08060d',
+      gradientFrom: '#818cf8',
+      gradientTo: '#c084fc',
+    },
+    industry: 'Fintech',
+    narrative: {
+      problem: "Les investisseurs crypto jonglaient entre plusieurs outils sans vue unifiee de leur portefeuille.",
+      solution: "Dashboard unifie avec suivi multi-exchange, alertes intelligentes et analyses predictives integrees.",
+      outcome: "Plus de 50 000 utilisateurs actifs, volume de transactions suivi depassant 2 milliards d'euros.",
+    },
   },
   {
     id: 'aura',
@@ -90,7 +138,18 @@ export const projects: ProjectData[] = [
     duration: '3 mois',
     tech: 'Figma, Illustrator, After Effects',
     heroImg: 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#f7a896',
+      background: '#0d0806',
+      gradientFrom: '#f7a896',
+      gradientTo: '#fcd9b6',
+    },
+    industry: 'Luxe',
+    narrative: {
+      problem: "L'image de marque vieillissante ne correspondait plus au positionnement haut de gamme de la maison.",
+      solution: "Refonte identitaire elegante avec une palette chaleureuse, typographie sur mesure et packaging premium.",
+      outcome: "Repositionnement reussi, ventes en boutique en hausse de 40% apres le lancement.",
+    },
   },
   {
     id: 'forge',
@@ -104,7 +163,18 @@ export const projects: ProjectData[] = [
     duration: '8 mois',
     tech: 'React, Go, TimescaleDB',
     heroImg: 'https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#fb923c',
+      background: '#0d0906',
+      gradientFrom: '#fb923c',
+      gradientTo: '#f97316',
+    },
+    industry: 'Industrie',
+    narrative: {
+      problem: "Le suivi de production reposait sur des tableaux Excel et des releves manuels, source d'erreurs et de retards.",
+      solution: "Application metier connectee aux capteurs IoT avec tableaux de bord temps reel et alertes automatiques.",
+      outcome: "Reduction de 35% des temps d'arret, economie annuelle estimee a 800 000 euros.",
+    },
   },
   {
     id: 'prism',
@@ -118,7 +188,18 @@ export const projects: ProjectData[] = [
     duration: '5 mois',
     tech: 'D3.js, React, WebGL',
     heroImg: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#22d3ee',
+      background: '#060b0d',
+      gradientFrom: '#22d3ee',
+      gradientTo: '#67e8f9',
+    },
+    industry: 'Data Science',
+    narrative: {
+      problem: "Les chercheurs perdaient des heures a formater des donnees complexes dans des outils de visualisation rigides.",
+      solution: "Plateforme interactive avec import intelligent, visualisations WebGL performantes et export publication-ready.",
+      outcome: "Adoptee par 12 laboratoires de recherche, temps de creation de visualisations divise par 5.",
+    },
   },
   {
     id: 'zenith',
@@ -132,7 +213,18 @@ export const projects: ProjectData[] = [
     duration: '4 mois',
     tech: 'Three.js, Next.js, Blender',
     heroImg: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#e2e8f0',
+      background: '#0a0a0a',
+      gradientFrom: '#e2e8f0',
+      gradientTo: '#94a3b8',
+    },
+    industry: 'Architecture',
+    narrative: {
+      problem: "Le cabinet avait besoin d'un site qui transmette la meme sensation spatiale que ses projets architecturaux.",
+      solution: "Experience web immersive avec navigation 3D, transitions cinematographiques et galerie interactive des projets.",
+      outcome: "Prix du meilleur site d'architecture 2025, augmentation de 200% des demandes internationales.",
+    },
   },
   {
     id: 'echo',
@@ -146,7 +238,18 @@ export const projects: ProjectData[] = [
     duration: '6 mois',
     tech: 'React, Rust, WebAudio API',
     heroImg: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#a78bfa',
+      background: '#09060d',
+      gradientFrom: '#a78bfa',
+      gradientTo: '#ddd6fe',
+    },
+    industry: 'Musique',
+    narrative: {
+      problem: "Les artistes independants etaient noyes dans les algorithmes des grandes plateformes sans visibilite reelle.",
+      solution: "Plateforme de decouverte musicale avec recommandation contextuelle et interface visuelle immersive.",
+      outcome: "30 000 artistes inscrits en 3 mois, temps d'ecoute moyen de 47 minutes par session.",
+    },
   },
   {
     id: 'orbit',
@@ -160,7 +263,18 @@ export const projects: ProjectData[] = [
     duration: '7 mois',
     tech: 'React, Mapbox, Python',
     heroImg: 'https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#38bdf8',
+      background: '#060a0d',
+      gradientFrom: '#38bdf8',
+      gradientTo: '#7dd3fc',
+    },
+    industry: 'Spatial',
+    narrative: {
+      problem: "Les operateurs de constellations manquaient d'outils visuels pour surveiller des centaines de satellites simultanement.",
+      solution: "Dashboard cartographique temps reel avec projection orbitale, alertes de collision et planification de manoeuvres.",
+      outcome: "Gestion de 340 satellites en temps reel, temps de reaction aux anomalies reduit de 15 minutes a 30 secondes.",
+    },
   },
   {
     id: 'coral',
@@ -174,6 +288,17 @@ export const projects: ProjectData[] = [
     duration: '5 mois',
     tech: 'React, Python, PostgreSQL',
     heroImg: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=1600&h=900&fit=crop&q=85',
-    colors: { ...defaultColors },
+    colors: {
+      accent: '#2dd4bf',
+      background: '#060d0b',
+      gradientFrom: '#2dd4bf',
+      gradientTo: '#5eead4',
+    },
+    industry: 'Recherche',
+    narrative: {
+      problem: "Les equipes de recherche marine travaillaient en silos, avec des donnees dispersees et difficilement partageables.",
+      solution: "Plateforme collaborative avec cartographie oceanographique, partage de datasets et outils d'analyse integres.",
+      outcome: "18 equipes de recherche connectees, publication collaborative de 6 articles scientifiques en un an.",
+    },
   },
 ];
