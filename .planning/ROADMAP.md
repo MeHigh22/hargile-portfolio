@@ -58,12 +58,12 @@ Plans:
   2. Navigating between projects causes the page color palette (backgrounds, accents, text tones) to morph smoothly -- each project feels like its own branded environment
   3. A visible contact CTA is reachable from any project slide, inviting the user to inquire about working with Hargile
   4. Page load presents a staggered entry animation that reveals content elements in sequence rather than all at once
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
-- [ ] 03-03: TBD
+- [ ] 03-01-PLAN.md -- Data model extensions (narratives, industry, unique colors) and color derivation utility
+- [ ] 03-02-PLAN.md -- Split-screen content layout, metadata pill tags, and floating contact CTA
+- [ ] 03-03-PLAN.md -- GSAP color morphing during transitions and staggered content reveal animations
 
 ### Phase 4: Depth & Production Quality
 **Goal**: The showcase feels premium and polished -- 3D depth effects respond to the cursor, animations never drop frames, and the experience degrades gracefully for all users
@@ -88,6 +88,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete | 2026-03-06 |
-| 2. Slider & Navigation | 0/2 | Planned | - |
-| 3. Content & Theming | 0/3 | Not started | - |
+| 2. Slider & Navigation | 2/2 | Complete | 2026-03-06 |
+| 3. Content & Theming | 0/3 | Planned | - |
 | 4. Depth & Production Quality | 0/2 | Not started | - |
