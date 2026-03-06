@@ -6,12 +6,18 @@ import { useSliderStore } from '../../store/useSliderStore';
 import { projects } from '../../data/projects';
 import { Slide } from './Slide';
 import { SliderControls } from './SliderControls';
+import { ProgressIndicator } from './ProgressIndicator';
+import { useHashSync } from '../../hooks/useHashSync';
+import { useKeyboardNav } from '../../hooks/useKeyboardNav';
 
 gsap.registerPlugin(Observer, useGSAP);
 
 export function Slider() {
   const containerRef = useRef<HTMLDivElement>(null);
   const prevIndexRef = useRef(0);
+
+  useHashSync();
+  useKeyboardNav();
 
   const { contextSafe } = useGSAP(
     () => {
@@ -83,6 +89,7 @@ export function Slider() {
         <Slide key={project.id} project={project} index={index} />
       ))}
       <SliderControls />
+      <ProgressIndicator />
     </div>
   );
 }
