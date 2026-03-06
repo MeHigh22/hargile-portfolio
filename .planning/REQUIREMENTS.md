@@ -15,13 +15,13 @@
 ### Content
 
 - [ ] **CONT-01**: Each project displays a high-quality hero visual (screenshot/mockup)
-- [ ] **CONT-02**: Each project shows a brief "what we solved" narrative (problem, solution, outcome)
-- [ ] **CONT-03**: Each project displays metadata tags (industry, tech stack, year)
+- [x] **CONT-02**: Each project shows a brief "what we solved" narrative (problem, solution, outcome)
+- [x] **CONT-03**: Each project displays metadata tags (industry, tech stack, year)
 - [ ] **CONT-04**: User can reach a contact CTA to inquire about working with Hargile
 
 ### Visual Identity
 
-- [ ] **VIS-01**: Page color palette morphs dynamically per project during navigation
+- [x] **VIS-01**: Page color palette morphs dynamically per project during navigation
 - [ ] **VIS-02**: Page loads with smooth, staggered entry animations
 - [ ] **VIS-03**: Project visuals have 3D-enhanced parallax depth responding to mouse movement
 
@@ -73,10 +73,10 @@
 | NAV-03 | Phase 2 | Complete |
 | NAV-04 | Phase 2 | Complete |
 | CONT-01 | Phase 3 | Pending |
-| CONT-02 | Phase 3 | Pending |
-| CONT-03 | Phase 3 | Pending |
+| CONT-02 | Phase 3 | Complete |
+| CONT-03 | Phase 3 | Complete |
 | CONT-04 | Phase 3 | Pending |
-| VIS-01 | Phase 3 | Pending |
+| VIS-01 | Phase 3 | Complete |
 | VIS-02 | Phase 3 | Pending |
 | VIS-03 | Phase 4 | Pending |
 | PERF-01 | Phase 1 | Complete |
