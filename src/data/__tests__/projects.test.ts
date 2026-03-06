@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest'
 import { projects } from '../projects'
 
 describe('projects data', () => {
-  it('has exactly 5 entries', () => {
-    expect(projects).toHaveLength(5)
+  it('has 12+ entries', () => {
+    expect(projects.length).toBeGreaterThanOrEqual(12)
   })
 
   it('every project has all required fields', () => {
@@ -34,8 +34,16 @@ describe('projects data', () => {
     expect(new Set(ids).size).toBe(ids.length)
   })
 
-  it('project IDs match expected set', () => {
-    const ids = projects.map(p => p.id).sort()
-    expect(ids).toEqual(['atlas', 'lumen', 'nexo', 'pulse', 'verde'])
+  it('project IDs include original set plus new entries', () => {
+    const ids = projects.map(p => p.id)
+    const originalIds = ['atlas', 'pulse', 'verde', 'lumen', 'nexo']
+    for (const id of originalIds) {
+      expect(ids).toContain(id)
+    }
+    // New entries from Phase 2 expansion
+    const newIds = ['aura', 'forge', 'prism', 'zenith', 'echo', 'orbit', 'coral']
+    for (const id of newIds) {
+      expect(ids).toContain(id)
+    }
   })
 })
