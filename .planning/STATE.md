@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 02-01-PLAN.md
+stopped_at: Completed 02-02-PLAN.md
 last_updated: "2026-03-06"
-last_activity: 2026-03-06 -- Plan 02-01 complete (GSAP slider with Zustand store, Observer input, 13 projects)
+last_activity: 2026-03-06 -- Plan 02-02 complete (hash deep linking, keyboard nav, progress indicator)
 progress:
   total_phases: 4
-  completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
-  percent: 38
+  completed_phases: 2
+  total_plans: 4
+  completed_plans: 4
+  percent: 50
 ---
 
 # Project State
@@ -25,29 +25,29 @@ See: .planning/PROJECT.md (updated 2026-03-05)
 
 ## Current Position
 
-Phase: 2 of 4 (Slider & Navigation)
-Plan: 1 of 2 in current phase -- COMPLETE
-Status: Executing Phase 2
-Last activity: 2026-03-06 -- Plan 02-01 complete (core slider with GSAP + Zustand)
+Phase: 2 of 4 (Slider & Navigation) -- COMPLETE
+Plan: 2 of 2 in current phase -- COMPLETE
+Status: Phase 2 Complete, ready for Phase 3
+Last activity: 2026-03-06 -- Plan 02-02 complete (hash deep linking, keyboard nav, progress indicator)
 
-Progress: [####......] 38%
+Progress: [#####.....] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
+- Total plans completed: 4
 - Average duration: 4min
-- Total execution time: 12min
+- Total execution time: 16min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 Foundation | 2/2 | 7min | 3.5min |
-| 02 Slider & Navigation | 1/2 | 5min | 5min |
+| 02 Slider & Navigation | 2/2 | 9min | 4.5min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (4min), 01-02 (3min), 02-01 (5min)
+- Last 5 plans: 01-01 (4min), 01-02 (3min), 02-01 (5min), 02-02 (4min)
 - Trend: stable
 
 *Updated after each plan completion*
@@ -69,6 +69,8 @@ Recent decisions affecting current work:
 - [Phase 02]: GSAP Observer for unified wheel/touch/pointer input (single API replaces 3+ event systems)
 - [Phase 02]: Zustand store with isAnimating lock pattern for race condition prevention
 - [Phase 02]: forceConsistentCasingInFileNames disabled for GSAP Observer type casing on Windows
+- [Phase 02]: replaceState for initial hash, pushState for user navigation -- avoids history pollution
+- [Phase 02]: Keyboard nav as separate hook (not GSAP Observer) -- Observer does not handle keyboard
 
 ### Pending Todos
 
@@ -82,5 +84,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-06
-Stopped at: Completed 02-01-PLAN.md
+Stopped at: Completed 02-02-PLAN.md
 Resume file: None
