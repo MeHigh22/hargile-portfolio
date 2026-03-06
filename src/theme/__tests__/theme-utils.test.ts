@@ -18,16 +18,18 @@ describe('theme-utils', () => {
     expect(spy).toHaveBeenCalledWith('--color-bg', defaultTheme.bg)
   })
 
-  it('applyTheme sets all 6 theme properties', () => {
+  it('applyTheme sets all 8 theme properties', () => {
     const spy = vi.spyOn(document.documentElement.style, 'setProperty')
     applyTheme(defaultTheme)
     expect(spy).toHaveBeenCalledWith('--color-accent', defaultTheme.accent)
     expect(spy).toHaveBeenCalledWith('--color-bg', defaultTheme.bg)
     expect(spy).toHaveBeenCalledWith('--color-bg-elevated', defaultTheme.bgElevated)
+    expect(spy).toHaveBeenCalledWith('--color-bg-card', defaultTheme.bgCard)
     expect(spy).toHaveBeenCalledWith('--color-text', defaultTheme.text)
+    expect(spy).toHaveBeenCalledWith('--color-text-secondary', defaultTheme.textSecondary)
     expect(spy).toHaveBeenCalledWith('--color-coral', defaultTheme.coral)
     expect(spy).toHaveBeenCalledWith('--color-lavender', defaultTheme.lavender)
-    expect(spy).toHaveBeenCalledTimes(6)
+    expect(spy).toHaveBeenCalledTimes(8)
   })
 
   it('defaultTheme has accent #96b8f7', () => {

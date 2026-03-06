@@ -6,7 +6,7 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project }: ProjectCardProps) {
   return (
-    <article className="bg-bg-card rounded-[--radius-lg] border border-border overflow-hidden hover:border-border-hover transition-colors">
+    <article className="bg-bg-card rounded-lg border border-border overflow-hidden hover:border-border-hover transition-colors">
       <img
         src={project.heroImg}
         alt={`${project.title1} ${project.title2}`}
