@@ -43,11 +43,11 @@ Plans:
   2. User can navigate via keyboard arrows, touch swipe gestures, and on-screen click controls
   3. Each project slide has a unique URL; copying and pasting that URL loads the correct project directly; browser back/forward moves between previously visited projects
   4. A visible progress indicator shows the user which project they are viewing and how many total exist
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
+- [ ] 02-01-PLAN.md -- Core GSAP slider with Zustand store, Observer multi-input, slide transitions, and 12+ projects
+- [ ] 02-02-PLAN.md -- Deep linking (hash URLs with history), keyboard navigation, and progress indicator
 
 ### Phase 3: Content & Theming
 **Goal**: Each project tells its story through rich content panels while the page atmosphere transforms to match each project's identity
@@ -87,7 +87,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/2 | Planned | - |
-| 2. Slider & Navigation | 0/2 | Not started | - |
+| 1. Foundation | 2/2 | Complete | 2026-03-06 |
+| 2. Slider & Navigation | 0/2 | Planned | - |
 | 3. Content & Theming | 0/3 | Not started | - |
 | 4. Depth & Production Quality | 0/2 | Not started | - |
