@@ -9,26 +9,19 @@ export interface ThemePalette {
   lavender: string;
 }
 
+/**
+ * Default theme matches first project (atlas) derived palette.
+ * Hardcoded to avoid circular import with color-utils/projects.
+ */
 export const defaultTheme: ThemePalette = {
   accent: '#96b8f7',
   bg: '#06080d',
-  bgElevated: '#0d1117',
-  bgCard: '#111827',
-  text: '#edf2fc',
-  textSecondary: 'rgba(237,242,252,0.55)',
-  coral: '#f7a896',
-  lavender: '#b896f7',
-};
-
-export const altTheme: ThemePalette = {
-  accent: '#f7a896',
-  bg: '#0d0908',
-  bgElevated: '#1a120e',
-  bgCard: '#1f1510',
-  text: '#fcf2ed',
-  textSecondary: 'rgba(252,242,237,0.55)',
+  bgElevated: '#121419',
+  bgCard: '#1a1c20',
+  text: '#ebebec',
+  textSecondary: '#9b9c9e',
   coral: '#96b8f7',
-  lavender: '#f796b8',
+  lavender: '#b896f7',
 };
 
 export function applyTheme(palette: ThemePalette): void {

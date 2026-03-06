@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  /* Color palette -- migrated from existing site */
+  /* Color palette -- defaults match first project (atlas) derived theme to prevent flash */
   --color-bg: #06080d;
-  --color-bg-elevated: #0d1117;
-  --color-bg-card: #111827;
+  --color-bg-elevated: #121419;
+  --color-bg-card: #1a1c20;
   --color-surface: #151c2c;
   --color-border: rgba(150,184,247,0.08);
   --color-border-hover: rgba(150,184,247,0.15);
-  --color-text: #edf2fc;
-  --color-text-secondary: rgba(237,242,252,0.55);
+  --color-text: #ebebec;
+  --color-text-secondary: #9b9c9e;
   --color-text-muted: rgba(237,242,252,0.3);
   --color-accent: #96b8f7;
   --color-accent-dim: rgba(150,184,247,0.12);
   --color-accent-glow: rgba(150,184,247,0.35);
-  --color-coral: #f7a896;
-  --color-coral-dim: rgba(247,168,150,0.12);
+  --color-coral: #96b8f7;
+  --color-coral-dim: rgba(150,184,247,0.12);
   --color-lavender: #b896f7;
   --color-lavender-dim: rgba(184,150,247,0.12);
 

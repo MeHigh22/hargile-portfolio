@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { applyTheme, defaultTheme, altTheme } from '../theme-utils'
+import { applyTheme, defaultTheme } from '../theme-utils'
 
 describe('theme-utils', () => {
   beforeEach(() => {
@@ -36,7 +36,13 @@ describe('theme-utils', () => {
     expect(defaultTheme.accent).toBe('#96b8f7')
   })
 
-  it('altTheme has different accent than defaultTheme', () => {
-    expect(altTheme.accent).not.toBe(defaultTheme.accent)
+  it('defaultTheme matches atlas project derived palette', () => {
+    expect(defaultTheme.bg).toBe('#06080d')
+    expect(defaultTheme.bgElevated).toBe('#121419')
+    expect(defaultTheme.bgCard).toBe('#1a1c20')
+    expect(defaultTheme.text).toBe('#ebebec')
+    expect(defaultTheme.textSecondary).toBe('#9b9c9e')
+    expect(defaultTheme.coral).toBe('#96b8f7')
+    expect(defaultTheme.lavender).toBe('#b896f7')
   })
 })
