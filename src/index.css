@@ -42,6 +42,20 @@
   --dynamic-bg: var(--color-bg);
 }
 
+/* Initial slide visibility: first slide visible, rest hidden offscreen.
+   GSAP inline styles override these during transitions. */
+.slide[data-index]:not([data-index="0"]) {
+  display: none;
+}
+
+/* Reduced motion: disable page-load stagger animation for [data-anim] elements */
+@media (prefers-reduced-motion: reduce) {
+  .slide[data-index] [data-anim] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* Selection styles -- migrated from existing site */
 ::selection {
   background: var(--color-accent);
