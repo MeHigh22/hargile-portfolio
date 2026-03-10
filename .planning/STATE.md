@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-03-10T16:01:05.250Z"
+stopped_at: Completed 04-02-PLAN.md (awaiting visual checkpoint)
+last_updated: "2026-03-10T16:06:10.492Z"
 last_activity: 2026-03-06 -- Plan 03-03 complete (color morphing, staggered content reveal animations)
 progress:
   total_phases: 4
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 9
-  completed_plans: 8
+  completed_plans: 9
   percent: 100
 ---
 
@@ -53,6 +53,7 @@ Progress: [##########] 100%
 
 *Updated after each plan completion*
 | Phase 04-depth-production-quality P01 | 3 | 2 tasks | 8 files |
+| Phase 04-depth-production-quality P02 | 8 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -87,6 +88,10 @@ Recent decisions affecting current work:
 - [Phase 04-01]: scale-[1.05] on hero img with overflow-hidden container provides parallax headroom
 - [Phase 04-01]: data-parallax attribute on img targets Plan 02 GSAP parallax animations
 - [Phase 04-01]: GSAP isolated into vendor-gsap Vite chunk (79kB) for better cache splitting
+- [Phase 04-02]: useParallax uses activeIndex as dependency to re-init quickTo on slide change (prevents stale element reference)
+- [Phase 04-02]: isReducedMotion as useCallback dependency enables reactive branch switching on media query change
+- [Phase 04-02]: Color morphing kept in reduced motion mode — not spatial animation, WCAG-safe
+- [Phase 04-02]: preloadAdjacentImages called in onComplete to avoid competing with transition GPU work
 
 ### Pending Todos
 
@@ -98,6 +103,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-10T16:01:05.247Z
-Stopped at: Completed 04-01-PLAN.md
+Last session: 2026-03-10T16:06:10.489Z
+Stopped at: Completed 04-02-PLAN.md (awaiting visual checkpoint)
 Resume file: None
