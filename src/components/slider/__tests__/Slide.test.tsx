@@ -90,4 +90,49 @@ describe('Slide', () => {
     render(<Slide project={mockProject} index={2} />);
     expect(screen.getByRole('img')).toHaveAttribute('loading', 'lazy');
   });
+
+  it('renders hero image inside a <picture> element', () => {
+    const { container } = render(<Slide project={mockProject} index={0} />);
+    const picture = container.querySelector('picture');
+    expect(picture).toBeInTheDocument();
+  });
+
+  it('picture element contains a WebP source', () => {
+    const { container } = render(<Slide project={mockProject} index={0} />);
+    const webpSource = container.querySelector('source[type="image/webp"]');
+    expect(webpSource).toBeInTheDocument();
+  });
+
+  it('picture element contains a JPEG source', () => {
+    const { container } = render(<Slide project={mockProject} index={0} />);
+    const jpegSource = container.querySelector('source[type="image/jpeg"]');
+    expect(jpegSource).toBeInTheDocument();
+  });
+
+  it('img inside picture has data-parallax attribute', () => {
+    const { container } = render(<Slide project={mockProject} index={0} />);
+    const img = container.querySelector('picture img');
+    expect(img).toHaveAttribute('data-parallax');
+  });
+
+  it('img inside picture has scale- class for parallax headroom', () => {
+    const { container } = render(<Slide project={mockProject} index={0} />);
+    const img = container.querySelector('picture img');
+    expect(img?.className).toMatch(/scale-/);
+  });
+
+  it('hero image srcset includes 3 responsive breakpoints in WebP source', () => {
+    const { container } = render(<Slide project={mockProject} index={0} />);
+    const webpSource = container.querySelector('source[type="image/webp"]');
+    const srcSet = webpSource?.getAttribute('srcset') ?? '';
+    expect(srcSet).toContain('640w');
+    expect(srcSet).toContain('1280w');
+    expect(srcSet).toContain('1920w');
+  });
+
+  it('applies loading="lazy" on img for slides with index >= 2', () => {
+    const { container } = render(<Slide project={mockProject} index={2} />);
+    const img = container.querySelector('picture img');
+    expect(img).toHaveAttribute('loading', 'lazy');
+  });
 });
