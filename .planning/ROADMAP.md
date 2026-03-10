@@ -74,11 +74,11 @@ Plans:
   2. All slide transitions and animations maintain 60fps (no dropped frames visible in DevTools performance panel) with 12+ projects loaded
   3. Images and heavy assets lazy-load so that projects not yet viewed do not block initial rendering or navigation performance
   4. Users with prefers-reduced-motion enabled see a functional, content-complete experience with animations disabled or simplified
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
+- [ ] 04-01-PLAN.md -- Reduced motion hook, picture element with WebP srcset, font preloading, GSAP vendor chunk splitting
+- [ ] 04-02-PLAN.md -- Mouse parallax depth on hero images, reduced motion transition branch, will-change lifecycle, adjacent image preloading
 
 ## Progress
 
