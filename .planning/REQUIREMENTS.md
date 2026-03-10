@@ -29,8 +29,8 @@
 
 - [x] **PERF-01**: Layout is fully responsive across mobile, tablet, and desktop
 - [ ] **PERF-02**: First contentful paint under 3 seconds
-- [ ] **PERF-03**: All transitions maintain 60fps with lazy-loaded assets
-- [ ] **PERF-04**: Reduced motion fallback for accessibility (prefers-reduced-motion)
+- [x] **PERF-03**: All transitions maintain 60fps with lazy-loaded assets
+- [x] **PERF-04**: Reduced motion fallback for accessibility (prefers-reduced-motion)
 
 ## v2 Requirements
 
@@ -81,8 +81,8 @@
 | VIS-03 | Phase 4 | Pending |
 | PERF-01 | Phase 1 | Complete |
 | PERF-02 | Phase 1 | Pending |
-| PERF-03 | Phase 4 | Pending |
-| PERF-04 | Phase 4 | Pending |
+| PERF-03 | Phase 4 | Complete |
+| PERF-04 | Phase 4 | Complete |
 
 **Coverage:**
 - v1 requirements: 15 total

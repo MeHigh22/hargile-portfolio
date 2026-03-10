@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: completed
-stopped_at: Phase 4 context gathered
-last_updated: "2026-03-10T15:36:45.610Z"
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-10T16:01:05.250Z"
 last_activity: 2026-03-06 -- Plan 03-03 complete (color morphing, staggered content reveal animations)
 progress:
   total_phases: 4
   completed_phases: 3
-  total_plans: 7
-  completed_plans: 7
+  total_plans: 9
+  completed_plans: 8
   percent: 100
 ---
 
@@ -52,6 +52,7 @@ Progress: [##########] 100%
 - Trend: stable
 
 *Updated after each plan completion*
+| Phase 04-depth-production-quality P01 | 3 | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -81,6 +82,11 @@ Recent decisions affecting current work:
 - [Phase 03]: Staggered reveal starts at 0.2s into transition timeline for layered cinematic feel
 - [Phase 03]: defaultTheme hardcoded to atlas derived values to avoid circular import
 - [Phase 03]: altTheme removed; per-project color morphing replaces manual theme toggle
+- [Phase 04-01]: useReducedMotion uses gsap.matchMedia for GSAP ecosystem consistency
+- [Phase 04-01]: Unsplash URL API used for responsive WebP srcset without local asset management
+- [Phase 04-01]: scale-[1.05] on hero img with overflow-hidden container provides parallax headroom
+- [Phase 04-01]: data-parallax attribute on img targets Plan 02 GSAP parallax animations
+- [Phase 04-01]: GSAP isolated into vendor-gsap Vite chunk (79kB) for better cache splitting
 
 ### Pending Todos
 
@@ -92,6 +98,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-10T15:36:45.607Z
-Stopped at: Phase 4 context gathered
-Resume file: .planning/phases/04-depth-production-quality/04-CONTEXT.md
+Last session: 2026-03-10T16:01:05.247Z
+Stopped at: Completed 04-01-PLAN.md
+Resume file: None
