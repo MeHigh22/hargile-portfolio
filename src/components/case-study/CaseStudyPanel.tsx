@@ -11,6 +11,12 @@ import { CaseStudyHero } from './CaseStudyHero';
 import { CaseStudySection } from './CaseStudySection';
 import { ProseBody } from './ProseBody';
 import { Timeline } from './Timeline';
+import { MetricCounter } from './MetricCounter';
+import { DeliverableGallery } from './DeliverableGallery';
+import { ReadingProgressBar } from './ReadingProgressBar';
+import { NextProjectCard } from './NextProjectCard';
+import { TestimonialBlock } from './TestimonialBlock';
+import { TeamCredits } from './TeamCredits';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -220,9 +226,10 @@ export function CaseStudyPanel({ projectId }: CaseStudyPanelProps) {
   return (
     <div
       ref={panelRef}
-      className="fixed inset-0 z-[100] overflow-y-auto bg-bg"
+      className="fixed inset-0 z-[100] overflow-y-auto overflow-x-hidden bg-bg"
       style={{ opacity: 0, visibility: 'hidden', pointerEvents: 'none' }}
     >
+      <ReadingProgressBar panelRef={panelRef} />
       <BackButton onClick={closePanel} />
 
       {/* Full-bleed hero */}
@@ -242,56 +249,42 @@ export function CaseStudyPanel({ projectId }: CaseStudyPanelProps) {
       </CaseStudySection>
 
       <CaseStudySection title="Resultats">
-        {/* Placeholder: Phase 7 fills this with metrics component */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          {caseStudy.metrics.map((metric) => (
-            <div key={metric.label} className="border border-accent/20 rounded-lg p-4 text-center">
-              <div className="font-display text-3xl font-bold text-accent mb-1">{metric.value}</div>
-              <div className="font-mono text-xs text-text-secondary uppercase tracking-wider">{metric.label}</div>
-            </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6">
+          {caseStudy.metrics.map((metric, i) => (
+            <MetricCounter
+              key={metric.label}
+              metric={metric}
+              index={i}
+              panelRef={panelRef}
+              reducedMotion={isReducedMotion}
+            />
           ))}
         </div>
       </CaseStudySection>
 
       <CaseStudySection title="Livrables">
-        {/* Placeholder: Phase 7 fills this with gallery component */}
-        <ul className="space-y-2">
-          {caseStudy.deliverables.map((item) => (
-            <li key={item} className="flex items-start gap-3 text-text-secondary text-sm">
-              <span className="text-accent mt-0.5 shrink-0">→</span>
-              <span>{item}</span>
-            </li>
-          ))}
-        </ul>
+        <p className="text-text-secondary text-sm mb-2">
+          {caseStudy.deliverables.length} livrables principaux
+        </p>
       </CaseStudySection>
+      {/* Gallery breaks out of prose column for full-width display */}
+      {caseStudy.galleryImages && caseStudy.galleryImages.length > 0 && (
+        <DeliverableGallery
+          images={caseStudy.galleryImages}
+          panelRef={panelRef}
+          reducedMotion={isReducedMotion}
+        />
+      )}
 
       <CaseStudySection title="Temoignage">
-        <blockquote className="border-l-2 border-accent pl-6">
-          <p className="text-text italic leading-relaxed text-lg mb-4">
-            "{caseStudy.testimonial.quote}"
-          </p>
-          <footer className="font-mono text-sm">
-            <span className="text-accent">{caseStudy.testimonial.author}</span>
-            <span className="text-text-secondary"> — {caseStudy.testimonial.role}</span>
-          </footer>
-        </blockquote>
+        <TestimonialBlock testimonial={caseStudy.testimonial} />
       </CaseStudySection>
 
       <CaseStudySection title="Equipe">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {caseStudy.team.map((member) => (
-            <div key={member.name} className="flex items-center gap-3 border border-accent/20 rounded-lg p-4">
-              <div>
-                <div className="text-text text-sm font-medium">{member.name}</div>
-                <div className="font-mono text-xs text-accent">{member.role}</div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <TeamCredits team={caseStudy.team} />
       </CaseStudySection>
 
-      {/* Bottom padding */}
-      <div className="h-16" />
+      <NextProjectCard projectId={projectId} />
     </div>
   );
 }
