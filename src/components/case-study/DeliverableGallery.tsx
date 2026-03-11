@@ -46,7 +46,7 @@ export function DeliverableGallery({ images, panelRef, reducedMotion }: Delivera
   }, [images, reducedMotion, panelRef]);
 
   return (
-    <div className="w-screen relative left-1/2 -translate-x-1/2 px-4 md:px-8" ref={containerRef}>
+    <div className="px-8 md:px-16 py-4" ref={containerRef}>
       <div className="columns-2 md:columns-3 gap-3 md:gap-4">
         {images.map((url, i) => (
           <div

@@ -10,7 +10,7 @@ export function CaseStudySection({ title, children, className }: CaseStudySectio
   return (
     <section
       data-anim="cs-section"
-      className={`max-w-[800px] mx-auto px-6 md:px-0 py-16 ${className ?? ''}`}
+      className={`max-w-225 px-8 md:px-16 py-16 ${className ?? ''}`}
     >
       <h3 className="font-mono text-sm uppercase tracking-widest text-accent mb-6">
         {title}
