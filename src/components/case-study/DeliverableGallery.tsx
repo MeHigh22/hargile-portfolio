@@ -22,23 +22,20 @@ export function DeliverableGallery({ images, panelRef, reducedMotion }: Delivera
     const ctx = gsap.context(() => {
       imageRefs.current.forEach((el, i) => {
         if (!el) return;
-        const imgEl = el.querySelector('img');
-        if (!imgEl) return;
-
-        gsap.set(imgEl, { opacity: 0, y: 24 });
+        gsap.set(el, { opacity: 0, y: 24 });
 
         ScrollTrigger.create({
           scroller: panelRef.current,
           trigger: el,
-          start: 'top 88%',
+          start: 'top 92%',
           once: true,
           onEnter: () => {
-            gsap.to(imgEl, {
+            gsap.to(el, {
               opacity: 1,
               y: 0,
-              duration: 0.5,
-              ease: 'power3.out',
-              delay: i * 0.08,
+              duration: 0.6,
+              ease: 'power2.out',
+              delay: (i % 3) * 0.08,
             });
           },
         });
@@ -49,19 +46,19 @@ export function DeliverableGallery({ images, panelRef, reducedMotion }: Delivera
   }, [images, reducedMotion, panelRef]);
 
   return (
-    <div className="w-screen relative left-1/2 -translate-x-1/2" ref={containerRef}>
-      <div className="columns-2 md:columns-3 gap-4 px-4 md:px-8">
+    <div className="w-screen relative left-1/2 -translate-x-1/2 px-4 md:px-8" ref={containerRef}>
+      <div className="columns-2 md:columns-3 gap-3 md:gap-4">
         {images.map((url, i) => (
           <div
             key={url}
             ref={(el) => { imageRefs.current[i] = el; }}
-            className="break-inside-avoid mb-4"
+            className="break-inside-avoid mb-3 md:mb-4 overflow-hidden rounded-xl group"
           >
             <img
               src={url}
               alt=""
               loading="lazy"
-              className="w-full h-auto block rounded-lg"
+              className="w-full h-auto block object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
           </div>
         ))}
