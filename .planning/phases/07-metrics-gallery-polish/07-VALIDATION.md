@@ -2,12 +2,12 @@
 phase: 7
 slug: metrics-gallery-polish
 status: draft
-nyquist_compliant: false
+nyquist_compliant: true
 wave_0_complete: false
 created: 2026-03-11
 ---
 
-# Phase 7 — Validation Strategy
+# Phase 7 -- Validation Strategy
 
 > Per-phase validation contract for feedback sampling during execution.
 
@@ -18,7 +18,7 @@ created: 2026-03-11
 | Property | Value |
 |----------|-------|
 | **Framework** | Vitest 4.0.18 + @testing-library/react 16 |
-| **Config file** | `vite.config.ts` — `test.environment: 'jsdom'`, `setupFiles: ['./src/test-setup.ts']` |
+| **Config file** | `vite.config.ts` -- `test.environment: 'jsdom'`, `setupFiles: ['./src/test-setup.ts']` |
 | **Quick run command** | `npx vitest run src/components/case-study/__tests__/{Component}.test.tsx` |
 | **Full suite command** | `npx vitest run` |
 | **Estimated runtime** | ~5 seconds |
@@ -36,33 +36,30 @@ created: 2026-03-11
 
 ## Per-Task Verification Map
 
-| Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
-|---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 07-01-01 | 01 | 0 | CSCONT-04 | unit | `npx vitest run src/components/case-study/__tests__/MetricCounter.test.tsx` | ❌ W0 | ⬜ pending |
-| 07-01-02 | 01 | 0 | CSCONT-05 | unit | `npx vitest run src/components/case-study/__tests__/DeliverableGallery.test.tsx` | ❌ W0 | ⬜ pending |
-| 07-01-03 | 01 | 0 | CSNAV-03 | unit | `npx vitest run src/components/case-study/__tests__/ReadingProgressBar.test.tsx` | ❌ W0 | ⬜ pending |
-| 07-01-04 | 01 | 0 | CSNAV-04 | unit | `npx vitest run src/components/case-study/__tests__/NextProjectCard.test.tsx` | ❌ W0 | ⬜ pending |
-| 07-01-05 | 01 | 1 | CSCONT-04 | unit | `npx vitest run src/components/case-study/__tests__/MetricCounter.test.tsx` | ❌ W0 | ⬜ pending |
-| 07-01-06 | 01 | 1 | CSCONT-05 | unit | `npx vitest run src/components/case-study/__tests__/DeliverableGallery.test.tsx` | ❌ W0 | ⬜ pending |
-| 07-02-01 | 02 | 2 | CSCONT-06 | unit | `npx vitest run src/components/case-study/__tests__/TestimonialBlock.test.tsx` | ❌ W0 | ⬜ pending |
-| 07-02-02 | 02 | 2 | CSCONT-07 | unit | `npx vitest run src/components/case-study/__tests__/TeamCredits.test.tsx` | ❌ W0 | ⬜ pending |
-| 07-02-03 | 02 | 2 | CSNAV-03 | unit | `npx vitest run src/components/case-study/__tests__/ReadingProgressBar.test.tsx` | ❌ W0 | ⬜ pending |
-| 07-02-04 | 02 | 2 | CSNAV-04 | unit | `npx vitest run src/components/case-study/__tests__/NextProjectCard.test.tsx` | ❌ W0 | ⬜ pending |
+| Task ID | Plan | Requirement | Test Type | Automated Command | Status |
+|---------|------|-------------|-----------|-------------------|--------|
+| 07-01-T1 | 01 | CSCONT-04, CSCONT-05 | unit (TDD) | `npx vitest run src/components/case-study/__tests__/MetricCounter.test.tsx src/components/case-study/__tests__/DeliverableGallery.test.tsx` | pending |
+| 07-01-T2 | 01 | CSNAV-03, CSNAV-04 | unit (TDD) | `npx vitest run src/components/case-study/__tests__/ReadingProgressBar.test.tsx src/components/case-study/__tests__/NextProjectCard.test.tsx` | pending |
+| 07-01-T3 | 01 | CSCONT-06, CSCONT-07 | unit (TDD) | `npx vitest run src/components/case-study/__tests__/TestimonialBlock.test.tsx src/components/case-study/__tests__/TeamCredits.test.tsx` | pending |
+| 07-02-T1 | 02 | CSCONT-04, CSCONT-05, CSCONT-06, CSCONT-07, CSNAV-03, CSNAV-04 | integration | `npx tsc --noEmit && npx vitest run src/components/case-study/__tests__/` | pending |
+| 07-02-T2 | 02 | All | checkpoint:human-verify | `npx tsc --noEmit && npx vitest run` + visual inspection | pending |
 
-*Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+*Status: pending / green / red / flaky*
+
+**Note:** All TDD tasks in Plan 01 create tests within the same task execution (RED then GREEN). There is no separate Wave 0 -- test files are created as the first step of each TDD task.
 
 ---
 
-## Wave 0 Requirements
+## Test File Coverage
 
-- [ ] `src/components/case-study/__tests__/MetricCounter.test.tsx` — stubs for CSCONT-04
-- [ ] `src/components/case-study/__tests__/DeliverableGallery.test.tsx` — stubs for CSCONT-05
-- [ ] `src/components/case-study/__tests__/ReadingProgressBar.test.tsx` — stubs for CSNAV-03
-- [ ] `src/components/case-study/__tests__/NextProjectCard.test.tsx` — stubs for CSNAV-04
-- [ ] `src/components/case-study/__tests__/TestimonialBlock.test.tsx` — stubs for CSCONT-06
-- [ ] `src/components/case-study/__tests__/TeamCredits.test.tsx` — stubs for CSCONT-07
-- [ ] `src/data/types.ts` — add `galleryImages?: string[]` to `CaseStudyContent`
-- [ ] `src/data/projects.ts` — add `galleryImages` arrays with Unsplash URLs
+| Component | Test File | Created By | Requirement |
+|-----------|-----------|------------|-------------|
+| MetricCounter | `__tests__/MetricCounter.test.tsx` | 07-01-T1 | CSCONT-04 |
+| DeliverableGallery | `__tests__/DeliverableGallery.test.tsx` | 07-01-T1 | CSCONT-05 |
+| ReadingProgressBar | `__tests__/ReadingProgressBar.test.tsx` | 07-01-T2 | CSNAV-03 |
+| NextProjectCard | `__tests__/NextProjectCard.test.tsx` | 07-01-T2 | CSNAV-04 |
+| TestimonialBlock | `__tests__/TestimonialBlock.test.tsx` | 07-01-T3 | CSCONT-06 |
+| TeamCredits | `__tests__/TeamCredits.test.tsx` | 07-01-T3 | CSCONT-07 |
 
 ---
 
@@ -75,16 +72,18 @@ created: 2026-03-11
 | Progress bar fills smoothly on scroll | CSNAV-03 | Scroll behavior in fixed panel | Open case study, scroll through content, verify bar tracks position |
 | Next project swap has no flash | CSNAV-04 | Visual transition quality | Click next project card, verify smooth transition |
 | Gallery stagger reveal timing | CSCONT-05 | Visual animation timing | Scroll gallery into view, verify staggered fade-in |
+| Testimonial visual weight | CSCONT-06 | Visual styling judgment | Verify blockquote looks prominent with thick accent border |
+| Team card avatar styling | CSCONT-07 | Visual styling judgment | Verify initial circles render with correct accent color |
 
 ---
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 5s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify commands
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] All 6 requirements (CSCONT-04/05/06/07, CSNAV-03/04) have dedicated test files
+- [x] No watch-mode flags
+- [x] Feedback latency < 5s
+- [x] `nyquist_compliant: true` set in frontmatter
 
 **Approval:** pending
