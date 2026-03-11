@@ -36,8 +36,8 @@
 
 ### Case Study Navigation
 
-- [ ] **CSNAV-01**: User can click into a project from the slider and see a full-screen case study with an animated entry transition
-- [ ] **CSNAV-02**: User can return to the slider via a persistent back button that reverses the entry animation
+- [x] **CSNAV-01**: User can click into a project from the slider and see a full-screen case study with an animated entry transition
+- [x] **CSNAV-02**: User can return to the slider via a persistent back button that reverses the entry animation
 - [ ] **CSNAV-03**: User sees a reading progress bar showing how far they've scrolled through the case study
 - [ ] **CSNAV-04**: User sees a "next project" preview at the bottom of each case study to continue browsing
 
@@ -55,8 +55,8 @@
 
 - [ ] **CSVIS-01**: All case study sections animate into view on scroll with staggered fade-translate reveals
 - [x] **CSVIS-02**: Case study inherits the project's color theme from the slider for visual continuity
-- [ ] **CSVIS-03**: Case study layout is responsive across mobile, tablet, and desktop
-- [ ] **CSVIS-04**: Users with prefers-reduced-motion see a functional experience with animations simplified
+- [x] **CSVIS-03**: Case study layout is responsive across mobile, tablet, and desktop
+- [x] **CSVIS-04**: Users with prefers-reduced-motion see a functional experience with animations simplified
 
 ### Case Study Data
 
@@ -126,8 +126,8 @@
 | PERF-02 | Phase 1 | Pending |
 | PERF-03 | Phase 4 | Complete |
 | PERF-04 | Phase 4 | Complete |
-| CSNAV-01 | Phase 5 | Pending |
-| CSNAV-02 | Phase 5 | Pending |
+| CSNAV-01 | Phase 5 | Complete |
+| CSNAV-02 | Phase 5 | Complete |
 | CSNAV-03 | Phase 7 | Pending |
 | CSNAV-04 | Phase 7 | Pending |
 | CSCONT-01 | Phase 6 | Pending |
@@ -139,8 +139,8 @@
 | CSCONT-07 | Phase 7 | Pending |
 | CSVIS-01 | Phase 6 | Pending |
 | CSVIS-02 | Phase 5 | Complete |
-| CSVIS-03 | Phase 5 | Pending |
-| CSVIS-04 | Phase 5 | Pending |
+| CSVIS-03 | Phase 5 | Complete |
+| CSVIS-04 | Phase 5 | Complete |
 | CSDATA-01 | Phase 5 | Complete |
 
 **Coverage:**

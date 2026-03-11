@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Not started
-stopped_at: Completed 05-01-PLAN.md — data layer and view store
-last_updated: "2026-03-11T10:31:05.960Z"
+stopped_at: Completed 05-02-PLAN.md — CaseStudyPanel shell and integration
+last_updated: "2026-03-11T10:38:32.844Z"
 last_activity: 2026-03-11 — Roadmap created, ready for plan-phase 5
 progress:
   total_phases: 7
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 11
-  completed_plans: 10
+  completed_plans: 11
 ---
 
 # Project State
@@ -55,6 +55,7 @@ v1.1 Progress: [··········] 0% (0/3 phases)
 
 *Updated after each plan completion*
 | Phase 05-scroll-infrastructure-view-scaffold P01 | 15 | 2 tasks | 5 files |
+| Phase 05-scroll-infrastructure-view-scaffold P02 | 12 | 2 tasks | 8 files |
 
 ## Accumulated Context
 
@@ -107,6 +108,9 @@ Recent decisions affecting current work:
 - [v1.1 Architecture]: Block case study open while useSliderStore.isAnimating is true to prevent mid-transition palette bleed
 - [Phase 05-01]: CaseStudyContent type uses optional caseStudy? field on ProjectData for backward compatibility
 - [Phase 05-01]: openCase guard reads useSliderStore.getState().isAnimating directly (one-time check at call time, not reactive subscription)
+- [Phase 05-02]: Zustand v5 subscribe uses (state, prevState) form — selector subscribe form silently broken in v5
+- [Phase 05-02]: gsap.context().revert() called first in closePanel before exit animation — kills ScrollTrigger instances before panel moves
+- [Phase 05-02]: data-slider-container attribute on Slider container for querySelector access without prop drilling
 
 ### Pending Todos
 
@@ -120,6 +124,6 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-03-11T10:31:05.949Z
-Stopped at: Completed 05-01-PLAN.md — data layer and view store
+Last session: 2026-03-11T10:38:32.839Z
+Stopped at: Completed 05-02-PLAN.md — CaseStudyPanel shell and integration
 Resume file: None
