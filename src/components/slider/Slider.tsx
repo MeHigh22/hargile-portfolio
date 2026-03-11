@@ -2,6 +2,7 @@ import { useRef, useEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { Observer } from 'gsap/Observer';
 import { useSliderStore } from '../../store/useSliderStore';
+import { useViewStore } from '../../store/useViewStore';
 import { projects } from '../../data/projects';
 import { deriveTheme } from '../../theme/color-utils';
 import { applyTheme } from '../../theme/theme-utils';
@@ -28,6 +29,7 @@ export function Slider() {
   const containerRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<(HTMLDivElement | null)[]>([]);
   const animatingRef = useRef(false);
+  const obsRef = useRef<Observer | null>(null);
 
   useHashSync();
   useKeyboardNav();
@@ -61,9 +63,33 @@ export function Slider() {
         const store = useSliderStore.getState();
         if (!store.isAnimating) store.prevSlide();
       },
+      onLeft: () => {
+        const store = useSliderStore.getState();
+        if (!store.isAnimating) store.nextSlide();
+      },
+      onRight: () => {
+        const store = useSliderStore.getState();
+        if (!store.isAnimating) store.prevSlide();
+      },
     });
 
+    obsRef.current = obs;
+
     return () => obs.kill();
+  }, []);
+
+  // Subscribe to view mode changes: disable Observer when case study opens, re-enable on close
+  useEffect(() => {
+    const unsub = useViewStore.subscribe((state, prevState) => {
+      if (state.mode !== prevState.mode) {
+        if (state.mode === 'case') {
+          obsRef.current?.disable();
+        } else {
+          obsRef.current?.enable();
+        }
+      }
+    });
+    return () => unsub();
   }, []);
 
   const direction = useSliderStore((s) => s.direction);
@@ -171,6 +197,7 @@ export function Slider() {
   return (
     <div
       ref={containerRef}
+      data-slider-container
       className="relative h-screen w-screen overflow-hidden"
     >
       {projects.map((project, index) => (

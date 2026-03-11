@@ -1,5 +1,7 @@
 import { forwardRef } from 'react';
 import type { ProjectData } from '../../data/types';
+import { useSliderStore } from '../../store/useSliderStore';
+import { useViewStore } from '../../store/useViewStore';
 
 interface SlideProps {
   project: ProjectData;
@@ -88,6 +90,21 @@ export const Slide = forwardRef<HTMLDivElement, SlideProps>(
                   {project.year}
                 </span>
               </div>
+
+              {/* CTA: only render for projects that have case study data */}
+              {project.caseStudy && (
+                <button
+                  data-anim="cta"
+                  className="mt-6 font-mono text-sm tracking-wider text-accent border border-accent/40 px-4 py-2 rounded-full hover:bg-accent/10 transition-colors"
+                  onClick={() => {
+                    if (!useSliderStore.getState().isAnimating) {
+                      useViewStore.getState().openCase(project.id);
+                    }
+                  }}
+                >
+                  Voir l'etude de cas →
+                </button>
+              )}
             </div>
           </div>
 
