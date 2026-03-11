@@ -1,144 +1,234 @@
 # Stack Research
 
-**Domain:** Immersive animated portfolio showcase with 3D-enhanced 2D effects
-**Researched:** 2026-03-05
-**Confidence:** HIGH (all versions verified via npm registry 2026-03-05)
+**Domain:** Scrollable case studies with animated timelines, metrics/charts, scroll-triggered animations, and deliverables galleries — added to existing GSAP + React 19 portfolio
+**Researched:** 2026-03-11
+**Confidence:** HIGH (versions verified via npm registry 2026-03-11, GSAP free-plugin status verified via official announcements)
 
-## Recommended Stack
+---
 
-### Core Technologies
+## Context: What Already Exists (Do Not Re-Add)
 
-| Technology | Version | Purpose | Why Recommended |
-|------------|---------|---------|-----------------|
-| React | ^19.2.4 | UI framework | Component model ideal for composing per-project slides with independent animation behavior. Largest ecosystem for animation libraries (GSAP, Motion). Team expressed interest in moving from plain HTML to a framework -- React has the deepest animation tooling support. |
-| Vite | ^7.3.1 | Build tool + dev server | Fastest DX for a single-page app. No SSR/SSG overhead (unnecessary for a standalone showcase). Hot module replacement keeps animation iteration tight. Zero-config React+TS setup. |
-| TypeScript | ^5.9.3 | Type safety | Per-project theme configs, animation parameters, and slide data models benefit from compile-time validation. Catches misconfigured color palettes before runtime. |
-| Tailwind CSS | ^4.2.1 | Utility-first CSS | Rapid styling with CSS-first configuration (v4's `@theme` directive). CSS custom properties work naturally for per-project color theming. The `@tailwindcss/vite` plugin integrates directly with Vite. |
+| Already in Project | Version | Status |
+|--------------------|---------|--------|
+| React | ^19.2.4 | In package.json |
+| Vite | ^7.3.1 | In package.json |
+| TypeScript | ^5.9.3 | In package.json |
+| Tailwind CSS | ^4.2.1 | In package.json |
+| GSAP | ^3.14.2 | In package.json |
+| @gsap/react | ^2.1.2 | In package.json |
+| Zustand | ^5.0.11 | In package.json |
+| clsx / tailwind-merge | latest | In package.json |
 
-### Animation & Effects
+Note: Lenis appears in the prior STACK.md recommendation but is not yet installed. It is addressed below.
 
-| Library | Version | Purpose | Why Recommended |
-|---------|---------|---------|-----------------|
-| GSAP | ^3.14.2 | Primary animation engine | Industry standard for timeline-based, sequenced animations. ScrollTrigger for scroll-driven effects. Unmatched control for choreographed slide transitions (exit old slide, morph colors, enter new slide). Can animate CSS custom properties directly for color theme transitions. Free for non-gated websites (this portfolio qualifies). |
-| @gsap/react | ^2.1.2 | React integration | Official `useGSAP()` hook -- drop-in replacement for useEffect that auto-cleans GSAP tweens and timelines on unmount. Prevents the most common React+GSAP bug (memory leaks from orphaned animations). |
-| motion | ^12.35.0 | Declarative micro-animations | For simple hover/tap states, `AnimatePresence` mount/unmount transitions, and layout animations. Complements GSAP: use GSAP for orchestrated timelines, Motion for React-aware declarative state transitions. Package was renamed from `framer-motion` to `motion`. |
-| Lenis | ^1.3.18 | Smooth scrolling | Lightweight smooth scroll that integrates with GSAP ScrollTrigger. Creates the premium "buttery" scroll feel. Actively maintained successor to the locomotive-scroll philosophy. |
+---
 
-### State Management
+## New Additions for Case Studies Milestone
 
-| Library | Version | Purpose | Why Recommended |
-|---------|---------|---------|-----------------|
-| Zustand | ^5.0.11 | Lightweight global state | Manages current slide index, active color theme, and transition lock state. Works outside the React tree (callable from GSAP timeline callbacks). No provider wrapping. Minimal boilerplate. |
+### Scroll Infrastructure
 
-### Supporting Libraries
+| Library | Version | Purpose | Why |
+|---------|---------|---------|-----|
+| lenis | ^1.3.18 | Smooth scroll host for case study pages | Lenis syncs its scroll position with GSAP ScrollTrigger via the ScrollTrigger.scrollerProxy API. Provides buttery scroll feel without fighting ScrollTrigger's position tracking. Preferred over GSAP ScrollSmoother because Lenis preserves native DOM layout — no wrapper div requirements — making it compatible with Tailwind's layout classes and the existing AppShell architecture. (MEDIUM confidence on exact version — verify: `npm view lenis version`) |
 
-| Library | Version | Purpose | When to Use |
-|---------|---------|---------|-------------|
-| clsx | latest | Conditional class names | When Tailwind utility classes need conditional logic |
-| tailwind-merge | latest | Merge conflicting Tailwind classes | When composing component style variants |
+No additional install needed for ScrollTrigger or SplitText — they ship inside the `gsap` package already installed. Just register the plugins.
 
-### Development Tools
+### Charts
 
-| Tool | Purpose | Notes |
-|------|---------|-------|
-| @vitejs/plugin-react | React Fast Refresh in Vite | SWC-based for speed |
-| ESLint | Code quality | Standard React/TS config |
-| Prettier | Code formatting | Consistent style |
+| Library | Version | Purpose | Why |
+|---------|---------|---------|-----|
+| recharts | ^3.8.0 | Simple bar and line charts in metrics sections | Declarative React SVG components. No imperative chart instance to fight GSAP over. Theming via CSS custom properties that align with the existing per-project color system. Recharts 3.x dropped legacy D3 coupling for tree-shakable imports. For a portfolio showing 2-3 simple metrics charts per project, the bundle cost (~160KB minified, ~50KB gzipped) is justified by zero custom SVG authoring. |
 
-## Why NOT Next.js
+### Gallery Lightbox
 
-This is a **single standalone page** with no routing, no server-side rendering needs, and no SEO-critical text content (it is a visual showcase). Next.js adds a routing system, server components, middleware, and build complexity that provide zero value here. Vite gives faster builds, simpler mental model, and no framework fighting the animation-heavy single-page architecture.
+| Library | Version | Purpose | Why |
+|---------|---------|---------|-----|
+| yet-another-react-lightbox | ^3.29.1 | Full-screen image viewer for deliverables gallery | React 19 compatible. Plugin architecture means only the features you import are bundled — base is ~40KB gzipped. Keyboard, touchscreen, and mouse navigation built in. TypeScript definitions included. Zero external dependencies. Actively maintained (22-day-old publish as of 2026-03-11). Avoids building a custom modal/lightbox that would need its own scroll-lock, focus-trap, and animation logic. |
 
-If the site later evolves into a multi-page site with blog/SEO needs, Next.js becomes the right choice. For the current scope, it is pure overhead.
+---
 
-## Why NOT Astro
+## Zero-Dependency Additions (Use What's Already Installed)
 
-Astro excels at content-heavy, mostly-static sites with islands of interactivity. This project is the opposite -- a single page that is almost entirely interactive JavaScript (orchestrated animations, parallax, color transitions). Astro's island architecture would fight against the full-page animation orchestration where every element participates in coordinated timelines.
+These capabilities require NO new packages — they exist within the already-installed GSAP.
 
-## Why NOT Three.js / React Three Fiber
+### Animated Counters
 
-PROJECT.md explicitly scopes out full 3D environments. The "3D-enhanced 2D" effect (parallax, depth, perspective) is achievable with CSS transforms (`perspective`, `rotateX/Y`, `translateZ`) orchestrated by GSAP. WebGL adds massive bundle size (~500KB+), complex setup, mobile performance concerns, and accessibility challenges -- all for an effect that CSS transforms achieve at 10% of the complexity.
+Use GSAP's native tween on a plain object, triggered by ScrollTrigger:
+
+```typescript
+// No library needed. Pattern:
+const obj = { value: 0 };
+gsap.to(obj, {
+  value: 94,
+  duration: 2,
+  ease: "power2.out",
+  scrollTrigger: { trigger: counterEl, start: "top 80%" },
+  onUpdate: () => {
+    counterEl.textContent = Math.round(obj.value) + "%";
+  },
+});
+```
+
+This is the standard GSAP community pattern. No counter library (CountUp.js, etc.) needed — adding one would duplicate functionality GSAP already provides.
+
+### Section Reveals (Fade Up, Stagger)
+
+Use GSAP ScrollTrigger with `gsap.from()` or `gsap.fromTo()`. ScrollTrigger ships inside the `gsap` package — register it once at app entry:
+
+```typescript
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+gsap.registerPlugin(ScrollTrigger);
+```
+
+Pattern for staggered card reveals:
+```typescript
+gsap.from(".deliverable-card", {
+  y: 40,
+  opacity: 0,
+  duration: 0.6,
+  stagger: 0.1,
+  ease: "power2.out",
+  scrollTrigger: { trigger: ".deliverables-grid", start: "top 75%" },
+});
+```
+
+### Text Reveals (SplitText)
+
+SplitText is now free as of 2025 (Webflow acquisition of GreenSock made all GSAP plugins free). Ships in the `gsap` package. Use for case study section headings:
+
+```typescript
+import { SplitText } from "gsap/SplitText";
+gsap.registerPlugin(SplitText);
+
+const split = new SplitText(headingEl, { type: "lines" });
+gsap.from(split.lines, {
+  yPercent: 100,
+  opacity: 0,
+  duration: 0.8,
+  stagger: 0.1,
+  ease: "power3.out",
+  scrollTrigger: { trigger: headingEl, start: "top 80%" },
+});
+```
+
+### Process Timeline
+
+The animated timeline (discovery → design → dev → launch) is a layout + scroll animation problem, not a library problem. Build with:
+- Tailwind CSS for layout (vertical line, step dots, step content)
+- GSAP ScrollTrigger to animate each step into view as user scrolls
+- No dedicated timeline library needed
+
+---
 
 ## Installation
 
 ```bash
-# Create project
-npm create vite@latest hargile-showcase -- --template react-ts
-
-# Primary animation engine
-npm install gsap @gsap/react
-
-# Declarative micro-animations
-npm install motion
-
-# Smooth scroll
+# Smooth scroll (not yet installed, needed for case study scroll behavior)
 npm install lenis
 
-# Styling
-npm install tailwindcss @tailwindcss/vite
+# Metrics charts
+npm install recharts
 
-# State management
-npm install zustand
-
-# Utilities
-npm install clsx tailwind-merge
+# Deliverables gallery lightbox
+npm install yet-another-react-lightbox
 ```
+
+Everything else (ScrollTrigger, SplitText, counter animations, section reveals) comes from the already-installed `gsap` package.
+
+---
 
 ## Alternatives Considered
 
 | Recommended | Alternative | When to Use Alternative |
 |-------------|-------------|-------------------------|
-| React + Vite | Next.js 16 | When you need SSR, routing, SEO for content-heavy pages |
-| React + Vite | Astro | When building a content-heavy site with minimal JS interactivity |
-| GSAP | anime.js | Simpler projects without timeline orchestration needs |
-| GSAP + Motion combo | Motion only | When all animations are declarative state transitions (no timelines) |
-| Custom GSAP slider | Swiper 12 | Standard carousel without deep animation integration |
-| Custom GSAP slider | Embla Carousel 8 | Headless carousel when you don't need GSAP-level timeline control |
-| Zustand | React Context | When state is simple and contained within one component tree |
-| Tailwind CSS 4 | CSS Modules | When team prefers scoped CSS without utility classes |
-| Lenis | locomotive-scroll | Do not -- locomotive-scroll is less maintained; Lenis is the actively maintained choice |
+| GSAP ScrollTrigger (built-in) | Intersection Observer API | When you have no GSAP dependency and want zero overhead. This project already has GSAP — adding IntersectionObserver for reveals would be redundant. |
+| GSAP native counter tween | CountUp.js | When you have no animation library and want minimal setup. With GSAP already installed, CountUp.js adds ~5KB for functionality GSAP provides for free. |
+| Recharts | Chart.js + react-chartjs-2 | When you need Canvas rendering for mobile performance, or when you need 10+ chart types. For 2-3 simple bar/line charts, Recharts' React-native SVG is simpler to theme with CSS custom properties. |
+| Recharts | Visx (airbnb) | When you need maximum customization and have D3 expertise. Visx is lower-level and requires more authoring time — overkill for portfolio metrics display. |
+| yet-another-react-lightbox | PhotoSwipe + React wrapper | When you need extremely minimal JS and a pure DOM approach. PhotoSwipe's React integration is less maintained. YARL has better TypeScript support and React 19 compatibility. |
+| yet-another-react-lightbox | lightGallery | When you need video support, social sharing, and comment features. lightGallery is heavier and designed for content platforms, not portfolio showcases. |
+| Lenis | GSAP ScrollSmoother | When your entire site is GSAP-only and you can accept ScrollSmoother's required `#smooth-wrapper`/`#smooth-content` DOM structure. The existing AppShell architecture makes Lenis the lower-friction choice. |
 
-## What NOT to Use
+---
+
+## What NOT to Add
 
 | Avoid | Why | Use Instead |
 |-------|-----|-------------|
-| Three.js / R3F | Out of scope per PROJECT.md. CSS transforms achieve the "3D-enhanced 2D" goal without WebGL complexity, bundle bloat, or mobile perf issues. | GSAP with CSS 3D transforms (perspective, translateZ, rotateX/Y) |
-| Swiper.js for main carousel | Swiper's DOM structure and animation model conflict with GSAP timeline-driven transitions. You fight the library instead of leveraging it. | Custom GSAP-driven slider (~100-150 lines of core logic) |
-| jQuery | Dead weight. GSAP replaced jQuery animation over a decade ago. | GSAP |
-| animate.css | Class-based animations lack timeline control and dynamic parameterization for per-project theming. | GSAP timelines |
-| Locomotive Scroll | Maintenance has stalled. Lenis is actively maintained, lighter, and integrates better with GSAP ScrollTrigger. | Lenis |
-| Redux / MobX | Massive overkill for tracking slide index and active theme. | Zustand |
-| Styled Components / Emotion | Runtime CSS-in-JS adds bundle size and runtime cost. No advantage over Tailwind + CSS custom properties for this use case. | Tailwind CSS 4 with CSS custom properties |
-| CSS-only animations for slide transitions | Cannot orchestrate multi-property, multi-element timelines with the precision needed for choreographed color morph + parallax transitions. | GSAP timelines |
+| CountUp.js | Duplicates GSAP `gsap.to()` counter tween functionality already in the project. Adds ~5KB for zero gain. | GSAP native tween on plain object |
+| react-spring / motion (for scroll reveals) | GSAP ScrollTrigger is already handling orchestrated animation. Adding a second animation system for scroll reveals creates conflicting animation managers and makes cleanup unpredictable. | GSAP ScrollTrigger consistently |
+| AOS (Animate On Scroll) | CSS-class-based approach — cannot integrate with GSAP timelines or per-project color morphing. Designed for simple sites without existing animation infrastructure. | GSAP ScrollTrigger |
+| D3.js directly | D3 is what Recharts is built on. Using D3 raw for simple bar/line charts requires 10x more authoring effort than Recharts declarative components. | Recharts |
+| Swiper for gallery grid | Swiper's opinionated DOM structure conflicts with GSAP-driven reveal animations on the gallery grid. | Custom CSS Grid + GSAP ScrollTrigger reveals + YARL for lightbox |
+| React Router | The case study view is a panel/overlay within the single-page app, not a separate route. Adding routing forces URL management, scroll restoration complexity, and back-button handling that the panel approach avoids entirely. | Zustand state (`activeCaseStudy: string | null`) + CSS/GSAP transition |
 
-## GSAP Licensing Note
+---
 
-GSAP is free for websites that don't gate content behind a paywall. A portfolio showcase qualifies for the "No Charge" license. Core plugins (ScrollTrigger, Draggable, Flip) are included free. Proprietary plugins (MorphSVG, DrawSVG, SplitText) require a paid Club membership -- none are required for this project, though SplitText would be a nice-to-have for text reveal animations.
+## Integration Notes for Existing Architecture
 
-## Key Architecture Decision: GSAP Primary, Motion Secondary
+### Lenis + ScrollTrigger Integration
 
-**Use GSAP for:**
-- Slide transition timelines (coordinated multi-element choreography)
-- Per-project color theme morphing (animating CSS custom properties)
-- Parallax depth effects
-- Complex entry/exit sequences
-- Any animation requiring precise timing control
+Lenis requires ScrollTrigger to use its scroll position as the source of truth. Standard pattern:
 
-**Use Motion for:**
-- Hover/tap micro-interactions on buttons and cards
-- `AnimatePresence` for mount/unmount transitions
-- Layout animations when elements reflow
-- Simple spring-based interactions
+```typescript
+// In case study component or root layout
+lenis.on("scroll", ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+```
 
-This avoids the common pitfall of making one library do everything. GSAP excels at timeline orchestration; Motion excels at declarative React-aware state transitions. They complement each other cleanly.
+### Recharts + CSS Custom Properties
+
+Recharts accepts `stroke` and `fill` as props. Pass CSS custom property values from the per-project theme:
+
+```tsx
+<Bar dataKey="value" fill="var(--color-accent)" />
+```
+
+The color morph system (GSAP animating CSS custom properties) will automatically update chart colors when the active project theme changes.
+
+### YARL (lightbox) + GSAP Gallery Reveals
+
+YARL opens as a portal overlay — it does not interfere with GSAP's ScrollTrigger instances on the gallery grid. The grid items animate in via ScrollTrigger; clicking a thumbnail opens YARL. No conflicts.
+
+### ScrollTrigger Cleanup in React
+
+With the existing `useEffect`-based GSAP pattern (no `useGSAP` hook per project memory), always return a cleanup:
+
+```typescript
+useEffect(() => {
+  const triggers: ScrollTrigger[] = [];
+  // ... create triggers, push to array
+  return () => triggers.forEach(t => t.kill());
+}, []);
+```
+
+---
+
+## Version Compatibility
+
+| Package | Compatible With | Notes |
+|---------|-----------------|-------|
+| recharts ^3.8.0 | React ^19.2.4 | Recharts 3.x added React 18/19 compatibility. Verify peer deps on install. |
+| yet-another-react-lightbox ^3.29.1 | React ^19.2.4 | Explicitly supports React 16.8+, 17, 18, 19. |
+| lenis ^1.3.18 | GSAP ^3.14.2, ScrollTrigger | Standard integration pattern is stable and well-documented in GSAP community forums. |
+| gsap/SplitText (built-in) | @gsap/react ^2.1.2 | SplitText must be re-run after text re-renders. Use `onSplit` callback or run inside `useLayoutEffect` after DOM settles. |
+
+---
 
 ## Sources
 
-- npm registry: all versions verified 2026-03-05 via `npm view [package] version`
-- GSAP licensing: https://gsap.com/pricing/ (No Charge license for non-gated sites)
-- @gsap/react package description confirmed via npm: "Tools for using GSAP in React, like useGSAP()"
-- Architecture patterns based on training data knowledge of GSAP, React, Vite ecosystems (MEDIUM confidence on specific API patterns, HIGH confidence on library purposes and roles)
+- GSAP plugins now free: https://tympanus.net/codrops/2025/05/14/from-splittext-to-morphsvg-5-creative-demos-using-free-gsap-plugins/ (MEDIUM — Codrops editorial, corroborated by GSAP community forum discussions)
+- GSAP ScrollTrigger official docs: https://gsap.com/docs/v3/Plugins/ScrollTrigger/ (HIGH)
+- GSAP React integration: https://gsap.com/resources/React/ (HIGH)
+- Lenis vs ScrollSmoother: https://zuncreative.com/en/blog/smooth_scroll_meditation/ (MEDIUM — third-party editorial)
+- YARL version 3.29.1: npm registry, last published 2026-02-17 (HIGH)
+- Recharts version 3.8.0: npm registry, 3,714 dependent projects (HIGH)
+- Recharts 3.x migration: https://github.com/recharts/recharts/wiki/3.0-migration-guide (HIGH)
+- Bundle sizes: Recharts ~160KB min / ~50KB gzip per Bundlephobia historical data; YARL ~40KB gzip per library docs (LOW confidence on exact current sizes — verify before committing to build budget)
 
 ---
-*Stack research for: Immersive animated portfolio showcase with 3D-enhanced 2D effects*
-*Researched: 2026-03-05*
+
+*Stack research for: Case studies milestone — scroll-triggered animations, charts, timeline, gallery additions to existing GSAP + React 19 portfolio*
+*Researched: 2026-03-11*

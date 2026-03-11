@@ -1,168 +1,281 @@
 # Feature Research
 
 **Domain:** Immersive agency portfolio showcase (single-page, animation-heavy, client-facing)
-**Researched:** 2026-03-05
-**Confidence:** MEDIUM (based on training data for established design patterns; no live web verification available)
+**Researched:** 2026-03-11 (updated for v1.1 case study milestone)
+**Confidence:** MEDIUM-HIGH
 
-## Feature Landscape
+---
 
-### Table Stakes (Users Expect These)
+## v1.0 FOUNDATION (Already Built — Reference Only)
 
-Features that potential clients visiting an agency portfolio will expect. Missing any of these makes the experience feel unfinished or amateurish.
+The following features were researched and built in the slider/foundation phase. They are listed here as context for the case study milestone's dependency analysis.
+
+| Feature | Status |
+|---------|--------|
+| Smooth project slider with GSAP Observer | Shipped |
+| Per-project color theming with `applyTheme()` + CSS custom properties | Shipped |
+| Mouse parallax with `useParallax` hook | Shipped |
+| Hero visuals, narrative copy, tech stack tags per slide | Shipped |
+| Smooth entry animations | Shipped |
+| Responsive layout | Shipped |
+| Reduced-motion compliance (`prefers-reduced-motion`) | Shipped |
+| 60fps performance baseline | Shipped |
+
+---
+
+## v1.1 CASE STUDIES (Current Milestone — New Features Only)
+
+### Context
+
+Case study pages are the second layer of the portfolio: a client clicks/taps into a project from the slider and arrives at a deep, scrollable narrative. The goal is for the case study itself to feel like a demonstration of Hargile's craft — polished, intentional, premium. Potential clients should finish reading and feel confident about hiring Hargile.
+
+---
+
+### Table Stakes (Clients Expect These)
+
+Features a potential client visiting an agency portfolio will assume exist inside any case study. Missing any of these makes the case study feel incomplete.
 
 | Feature | Why Expected | Complexity | Notes |
 |---------|--------------|------------|-------|
-| **Smooth project navigation** (slider/carousel) | This IS the product. Janky transitions = "they can't even build their own site." | High | Core interaction model. Must handle 12+ items without frame drops. Keyboard, swipe, and click navigation all required. |
-| **Per-project hero visuals** | Every agency portfolio shows screenshots/mockups. No visuals = no portfolio. | Low | High-quality imagery or video thumbnails. Lazy loading critical for 12+ projects. |
-| **Per-project narrative** ("what we solved") | Clients want to see problem-solving ability, not just pretty pictures. | Low | Brief, punchy copy: the problem, what Hargile did, the outcome. 3-4 sentences max per project. |
-| **Responsive design** | Clients browse on phones, tablets, in meetings on laptops. | Medium | The slider interaction model must adapt -- not just shrink. Touch gestures on mobile, keyboard on desktop. |
-| **Fast initial load** | Portfolio visitors are evaluating quality. A slow load is a failed first impression. | Medium | Target < 3s first contentful paint. Image optimization, code splitting, preloading the first 2-3 projects. |
-| **Contact/CTA** | The whole point is converting visitors into leads. No CTA = wasted traffic. | Low | Persistent but non-intrusive. A subtle fixed CTA or a clear endpoint CTA after browsing. |
-| **Smooth entry animations** | Visitors from Awwwards/Behance-level sites expect polish on load. Static appearance on entry feels dated. | Medium | Staggered reveals, fade-ins, subtle motion. Must not delay content visibility. |
-| **Project metadata display** | Clients want to know: industry, tech stack, services provided, year. | Low | Clean typography, scannable layout. Tags or pills work well. |
-| **Browser back/forward support** | If each project is a "view," users expect browser nav to work. | Low | URL hash or history API integration. Without this, users get lost. |
-| **Accessible navigation controls** | Visible prev/next buttons, not just gesture-only. WCAG basics. | Low | Keyboard nav (arrow keys), visible controls, focus management. Screen reader labels. |
+| Challenge / problem statement section | Every professional case study opens with context. Clients need to understand what was broken before they can appreciate what was fixed. | LOW | Top of case study. Static copy + atmospheric visual or project screenshot. No interaction required. |
+| Solution / approach section | Clients need to understand what Hargile actually did, not just the outcome. | LOW | Descriptive copy with supporting visuals. Can be static on v1.1. |
+| Results / metrics section | Non-technical clients remember numbers. "300% uplift in conversion" is the sentence they repeat in their next meeting. | MEDIUM | 3–5 animated number counters per project. Triggered on scroll entry via GSAP ScrollTrigger. |
+| Deliverables / screenshots gallery | Shows the tangible output. Clients need to see the actual product screens, not just read about them. | MEDIUM | CSS Grid image gallery with staggered scroll-triggered reveals. Images lazy-loaded. Dependency: lazy loading pattern already in project. |
+| Back-navigation to slider | Users must be able to return to the project carousel without losing context or getting stranded. | LOW | Persistent sticky back button. On click, reverses the entry transition. |
+| Responsive layout for case study sections | Same client may review on phone after seeing it on a conference room display. | MEDIUM | Case study sections reflow. Gallery collapses to single column on mobile. |
+| Reduced-motion compliance | Already established in the slider; must be consistent throughout. Clients with vestibular disorders are in every agency's client list. | LOW | CSS `prefers-reduced-motion` disables counter animations, parallax, and scroll reveals. Pattern already in project. |
+| Color theme inheritance from slider | The client just watched Atlas / Pulse / Verde with its specific color world in the slider. If the case study is white/grey, the continuity breaks and it feels like a different product. | LOW | Calls the existing `applyTheme()` function on case study mount. Near-zero implementation cost. Dependency: existing theming system. |
 
 ### Differentiators (Competitive Advantage)
 
-Features that elevate this from "nice portfolio" to "the portfolio itself is a case study in quality."
+These features are not expected but are noticed. They are what separates this case study experience from a PDF or a standard Notion page.
 
 | Feature | Value Proposition | Complexity | Notes |
 |---------|-------------------|------------|-------|
-| **Dynamic color theme shifts per project** | Each project feels like its own world. Creates emotional variety without separate pages. The portfolio breathes with personality. | Medium | CSS custom properties animated on transition. Extract dominant colors from project imagery. Affects backgrounds, accents, text tones. |
-| **3D-enhanced 2D layout (parallax depth)** | Adds spatial depth and premium feel without WebGL complexity. Layers that respond to scroll or cursor create "alive" feeling. | High | Parallax layers on mouse move and/or scroll. CSS transforms (translate3d, perspective). Must be buttery smooth -- any jank destroys the effect. |
-| **Per-project mood-driven entry animations** | Each project arrives with animation matching its personality (energetic vs calm, playful vs corporate). Shows Hargile tailors to each client. | High | Requires per-project animation config. Risk of being gimmicky if not restrained. Each animation should feel intentional, not random. |
-| **Racing-circuit / track-picker navigation metaphor** | Unique conceptual framing (Alexis's vision). Makes browsing feel like an experience, not a list. Differentiates from every grid-based portfolio. | Very High | Custom interaction design. Needs careful UX testing -- metaphor must be intuitive. Risk: cool idea that confuses users. Fallback to standard nav must exist. |
-| **Scroll-driven storytelling within a project** | Instead of a static slide, scrolling within a project reveals details progressively (problem, solution, results). Creates narrative rhythm. | Medium | Scroll-triggered animations within each project "panel." CSS scroll-driven animations or Intersection Observer. |
-| **Cursor-reactive elements** | Elements that subtly respond to mouse position (tilt, glow follow, magnetic buttons). Signals interactive craft. | Medium | Transform-based tilt on cards/images. Magnetic effect on CTAs. Must be subtle -- heavy-handed feels like a tech demo. |
-| **Project transition choreography** | Instead of simple slide, projects transition with choreographed element-level animations (image scales while text fades, colors morph). | High | Requires animating individual elements independently during transition. FLIP technique or shared layout animations. |
-| **Sound design (optional/muted)** | Subtle UI sounds on transitions. Extremely rare in portfolios, very memorable when done right. | Low | Web Audio API. Must be opt-in (muted by default). Most users will never hear it. Nice for presentations. |
-| **Progress/position indicator** | Visual indicator showing where you are in the project sequence. Dots, progress bar, or numbered position. | Low | Simple but polished. Can incorporate the color theme of the current project. |
-| **Video backgrounds per project** | Short looping video clips instead of static images. Dramatically more immersive. | Medium | Autoplay muted, lazy loaded, compressed. Bandwidth concern -- needs fallback to static images. |
-| **Preloader with brand moment** | A brief, branded loading sequence that sets the tone before the portfolio appears. | Low-Medium | Must be genuinely short (< 2s). If content loads fast, skip it. Never artificial delay. |
+| Animated process timeline | Transforms a static list into a cinematic walk-through of discovery → design → development → launch. Clients feel they are watching the project happen. Aligns with the "racing circuit" narrative motif from Alexis's vision. | MEDIUM | Vertical timeline with per-node scroll-triggered reveals via GSAP ScrollTrigger. Each phase node (icon + label + description) stagger-animates in as the user scrolls down. |
+| Scroll-triggered section reveals (shared utility) | Every section entering the viewport with a smooth fade-translate feels intentional and premium rather than a static page. Controls pacing like a good editorial layout. | MEDIUM | GSAP ScrollTrigger `once: true` for one-shot reveals. `scrub` mode for atmospheric parallax layers. This is a shared utility used by all content sections — build it first. |
+| Slider-to-case-study entry transition | Makes the navigation feel like zooming into the project rather than a page navigation. The active slide panel expands to fill the viewport while the case study content fades in. This is the moment that establishes the case study as a continuation of the slider experience, not a separate page. | HIGH | Baseline: GSAP `.to()` clip-path or scale expansion from slide position + crossfade. Stretch goal: GSAP Flip plugin for true element-morphing. Requires a CSS fallback for any GSAP failure. Risk: if it stutters it damages credibility. |
+| Parallax depth within case study sections | Foreground/background layers moving at different scroll speeds creates spatial depth, consistent with the slider experience. | LOW | Reuses the existing `useParallax` hook directly. Near-zero incremental cost once the hook exists. |
+| Testimonial / client quote pull-out | A large-format client quote styled distinctively adds social proof directly within the narrative. Non-technical clients respond strongly to peer validation in context. | LOW | Large `blockquote` with scroll reveal. High value-to-effort ratio. Static content. |
+| "Next project" CTA at case study end | Keeps clients browsing instead of bouncing after finishing a case study. Creates a natural reading flow through all three projects. | LOW | Minimal preview of the next project (title + color swatch) with a CTA button that triggers the slider transition to the next project. |
+| Reading progress bar | Long scrollable pages benefit from a subtle progress cue. Clients feel oriented rather than lost. | LOW | Thin fixed bar at top of viewport. CSS Scroll-Driven Animations API (`animation-timeline: scroll()`) or lightweight GSAP ScrollTrigger. Zero design overhead. |
+| Team credits section | Builds trust and humanizes the agency. Clients who are evaluating a long-term partner want to know real people did this work. | LOW | Small profile cards at the bottom of the case study. Static content. |
 
 ### Anti-Features (Commonly Requested, Often Problematic)
 
 | Feature | Why Requested | Why Problematic | Alternative |
 |---------|---------------|-----------------|-------------|
-| **Full 3D WebGL environment** | "Wow factor," looks impressive in concept | Massive complexity, poor mobile performance, accessibility nightmare, long load times, breaks on many devices. ROI is terrible -- months of work for an effect most clients won't appreciate. | 3D-enhanced 2D with CSS transforms and parallax. 90% of the visual impact, 10% of the complexity. |
-| **Autoplay background music** | "Sets the mood" | Users hate it. Browsers block it. Feels dated (2008 Flash era). Violates accessibility norms. | Optional sound effects on interaction, muted by default. |
-| **Horizontal scroll as main navigation** | "Unique browsing experience" | Confusing for users, breaks trackpad/mouse expectations, accessibility issues, conflicts with OS gestures. | Vertical scroll with horizontal visual transitions, or explicit prev/next navigation. |
-| **Loading screens longer than 2 seconds** | "Brand moment," "sets expectations" | Users bounce. Artificial delays feel disrespectful of visitor time. | Skeleton screens, progressive loading. If you need a preloader, make it < 1.5s and only show on first visit. |
-| **Particle effects / floating elements everywhere** | "Dynamic feel" | CPU hog, distracts from project content, ages poorly, looks like a template. | One or two tasteful ambient effects (grain overlay, subtle gradient animation). Less is more. |
-| **Auto-advancing carousel** | "Users might not know to click" | Users feel rushed, can't read at their own pace, causes motion sickness complaints. | Clear navigation affordances (arrows, swipe hints). Let users control pace. |
-| **Custom cursor replacement** | "Unique interactive feel" | Breaks user expectations, accessibility issues, feels gimmicky on many sites. Cursor is OS-level UX. | Custom cursor states on specific elements only (hover effects on project cards, magnetic buttons). |
-| **Scroll hijacking** | "Control the narrative flow" | Users lose control of their scroll. Feels frustrating. Breaks momentum scrolling on mobile. | Scroll-snap with natural scroll physics. Guide without hijacking. |
-| **CMS-managed content** | "Easy content updates" | Out of scope per PROJECT.md. Adds auth, API layer, data modeling complexity for a 12-project page updated infrequently. | JSON/TypeScript data files in the codebase. Developers update, commit, deploy. |
-| **Multi-page routing** | "Separate page for each project" | Breaks the immersive single-page flow. Loses transition continuity. Multiple pages = multiple load times. | Deep links via URL hash/state. Project detail can expand in-place or overlay. |
+| Full chart library (Recharts, Chart.js, Victory) | Animated charts look impressive in agency showcases. | Adds 40–80 KB to bundle for 3–5 data points per project. Requires configuration per project update. The "chart" needed is almost always 3 bars and 2 numbers. | Hand-rolled CSS bar chart with GSAP width animation on scroll entry. Zero external dependency, trivially maintainable in code. |
+| Lightbox modal for gallery images | Clients want to see images at full size. | A full-screen modal breaks the scroll narrative. Requires focus trap management for accessibility. Requires keyboard dismiss. Most premium agency portfolios do not use lightbox inside case studies — they use large images inline. | Use generous image sizes in the gallery (full-width panels or large grid cells). For the rare case where a client wants full resolution, a link opening the asset in a new tab is sufficient. |
+| Video autoplay in case study hero | Video adds immersion and is often already produced by clients. | Autoplaying video dramatically increases page weight. Blocked with sound in most browsers. Conflicts with `prefers-reduced-motion`. Requires hosting/CDN strategy. | Use a high-quality static frame from the video with parallax treatment. Provide an opt-in play button if a video asset exists. |
+| Smooth-scroll override (Lenis or similar) | Buttery custom scroll feel. | Overriding native scroll on a content-heavy page causes accessibility failures, conflicts with browser gestures on mobile, and can interact badly with GSAP ScrollTrigger if not coordinated carefully. The existing slider already has its own scroll context — adding a second scroll hijacker creates a conflict surface. | Use GSAP ScrollTrigger with native scroll. The `scrub` parameter on ScrollTrigger already provides the smoothed feel without global scroll override. |
+| Pinned horizontal storytelling panel | Dramatic effect used by award-winning agency sites. GSAP pin + horizontal scrub. | Breaks on mobile (horizontal pin in a vertical scroll context is jarring on narrow screens). Adds significant complexity. Conflicts with any content after the pinned section requiring careful height calculation. | Vertical scroll-stagger reveals for the timeline section achieve a similar "unveiling" rhythm without the pin complexity. Defer horizontal pin to v2 with a dedicated mobile solution. |
+| Infinite scroll / auto-advance between projects | Feels seamless and keeps clients in the portfolio. | Removes the user's sense of place and agency. A client reading a case study needs to finish it deliberately. Auto-redirect to the next project before they are done is disrespectful. | A prominent "Next project →" CTA at the bottom with a brief preview. Explicitly guided, not automatic. |
+| CMS-driven content management | Makes updating content easier for non-developers. | Explicitly out of scope per PROJECT.md. Adds backend, auth, data modeling, and deployment complexity for a portfolio updated infrequently by developers. | Content as TypeScript data objects per project. Structured types (TypeScript interfaces) enforce consistency and catch missing fields at build time. |
+
+---
 
 ## Feature Dependencies
 
 ```
-Core Navigation (slider/carousel)
-  |-- Per-project hero visuals (content for slides)
-  |-- Per-project narrative (content for slides)
-  |-- Per-project metadata (content for slides)
-  |-- Browser history support (URL reflects current project)
-  |-- Progress/position indicator (needs to know total + current)
-  |-- Accessible navigation controls (arrows, keyboard)
-  |
-  +-- Dynamic color theme shifts (triggers on project change)
-  |     |-- Preloader brand moment (uses initial project's theme)
-  |
-  +-- Project transition choreography (animates between projects)
-  |     |-- Per-project mood-driven entries (specialized choreography)
-  |
-  +-- 3D-enhanced parallax depth (layer system on each slide)
-        |-- Cursor-reactive elements (extends the parallax layer system)
+[Slider-to-case-study entry transition]
+    └──requires──> [Case study panel mounted / route active]
+    └──requires──> [GSAP Flip or coordinated GSAP.to timeline]
+    └──enhances──> [Color theme inheritance in case study]
+    └──requires──> [Back-navigation] (entry must be reversible)
 
-Responsive design (cross-cutting, affects everything)
+[Color theme inheritance in case study]
+    └──requires──> [applyTheme() — ALREADY BUILT]
+    └──requires──> [CSS custom properties system — ALREADY BUILT]
 
-Fast initial load (cross-cutting, affects asset strategy)
-  |-- Lazy loading of off-screen projects
-  |-- Image optimization pipeline
-  |-- Video backgrounds (if used, heaviest asset)
+[Animated process timeline]
+    └──requires──> [GSAP ScrollTrigger — NEW dependency]
+    └──requires──> [Structured timeline data per project]
+    └──enhances──> [Scroll-triggered section reveals utility]
 
-Contact/CTA (independent, can be built anytime)
+[Results / metrics (animated counters)]
+    └──requires──> [GSAP ScrollTrigger — NEW dependency]
+    └──requires──> [Structured metrics data per project]
 
-Scroll-driven storytelling (independent per-project enhancement)
+[Deliverables gallery with scroll reveals]
+    └──requires──> [Image assets per project]
+    └──requires──> [Scroll-triggered section reveals utility]
 
-Racing-circuit metaphor (alternative navigation model -- builds ON TOP of core slider, not instead of)
+[Scroll-triggered section reveals — SHARED UTILITY]
+    └──requires──> [GSAP ScrollTrigger — NEW dependency]
+    └──enhances──> [All content sections in case study]
+    └──NOTE: build this first — all other animated sections depend on it]
+
+[Parallax depth in case study sections]
+    └──requires──> [useParallax hook — ALREADY BUILT]
+
+[Back-navigation to slider]
+    └──requires──> [Reverse of entry transition animation]
+    └──requires──> [Zustand useSliderStore — ALREADY BUILT]
+    └──conflicts──> [Entry transition complexity — must mirror it]
+
+[Reading progress bar]
+    └──requires──> [CSS scroll-driven animations OR GSAP ScrollTrigger]
+    └──independent of all other features]
+
+[Testimonial / client quote pull-out]
+    └──requires──> [Scroll-triggered section reveals utility]
+    └──requires──> [Content data per project]
+
+[Next project CTA]
+    └──requires──> [Zustand useSliderStore — to trigger slider navigation]
+    └──requires──> [Project data for preview]
+
+[ScrollTrigger cleanup on unmount]
+    └──required by ALL ScrollTrigger features
+    └──NOTE: Critical — ghost triggers on slider return will break the slider
+    └──Implementation: gsap.context() scoped to case study component, .revert() on unmount]
 ```
+
+### Dependency Notes
+
+- **Color theme inheritance** is near-free. The existing `applyTheme()` function is a direct call. First thing to implement.
+- **Scroll-triggered section reveals** is the foundational utility. All animated sections use it. Build it as a reusable hook or component before building individual sections.
+- **GSAP ScrollTrigger** is the one new plugin dependency. It is part of GSAP core (already installed) but not yet used in the project. No new package needed — just import and register.
+- **ScrollTrigger cleanup on unmount** is non-negotiable. Using `gsap.context()` scoped to the case study component and calling `.revert()` in the `useEffect` cleanup function prevents ghost triggers when returning to the slider. This is the most common GSAP + React bug and will silently break the slider if missed.
+- **Slider-to-case-study entry transition** is the highest-risk feature. A CSS fallback (instant fade-in overlay) must exist so any GSAP failure degrades gracefully without blocking content access.
+- **Pinned horizontal panel** conflicts with mobile layout and is deferred. Do not build in v1.1.
+
+---
 
 ## MVP Definition
 
-### Launch With (v1)
+### Launch With (v1.1 — this milestone)
 
-The minimum that makes this a credible, impressive portfolio showcase.
+Minimum viable case study — what must ship for this milestone to deliver its stated goal.
 
-1. **Smooth project slider/carousel** -- The core interaction. Prev/next with smooth transitions, swipe on mobile, keyboard support.
-2. **Per-project hero visuals + narrative + metadata** -- The content. Without this, there's nothing to show.
-3. **Dynamic color theme shifts** -- The signature differentiator. Per-project color palettes that transition smoothly. This is what makes it feel like "each project is its own world."
-4. **Smooth entry animations** -- First impression matters. Staggered reveals on initial load.
-5. **3D-enhanced parallax depth** -- The depth effect that makes it feel premium. Mouse-reactive parallax layers on project visuals.
-6. **Responsive design** -- Must work on mobile from day one. Touch gestures for the slider.
-7. **Contact CTA** -- The conversion point. Subtle but present.
-8. **Browser history support** -- URL reflects current project for sharing/bookmarking.
-9. **Progress indicator** -- Shows position in the project sequence.
-10. **Performance optimization** -- Lazy loading, image optimization, smooth 60fps transitions.
+- [ ] **Slider-to-case-study entry transition (baseline)** — without this the slider is a dead end; a simple fade-expand is sufficient for v1.1
+- [ ] **Challenge section** — static copy + visual; clients need context before caring about results
+- [ ] **Process timeline with animated reveals** — the signature differentiator of this milestone; scroll-triggered node-by-node stagger
+- [ ] **Results / metrics with animated counters** — most memorable element for non-technical clients; 3–5 counters per project
+- [ ] **Deliverables gallery with scroll reveals** — shows the actual output; staggered grid reveal on scroll entry
+- [ ] **Color theme inheritance** — mandatory for coherence with slider; near-zero effort
+- [ ] **Back-navigation to slider** — clients must be able to return
+- [ ] **Reduced-motion compliance** — non-negotiable given existing pattern in project
+- [ ] **Responsive layout for case study sections** — mobile clients are real
+- [ ] **Rich placeholder content for Atlas, Pulse, Verde** — case studies need plausible content to demo convincingly
+- [ ] **ScrollTrigger cleanup on unmount** — technical prerequisite for everything; prevents slider regression
 
 ### Add After Validation (v1.x)
 
-Features that enhance but can wait until the core is solid.
+Features to add once the core case study is working and stable.
 
-1. **Per-project mood-driven entry animations** -- Customize the arrival animation per project personality. Requires the base transition system to be stable first.
-2. **Project transition choreography** -- Element-level animation during transitions (image scales, text cross-fades, color morphs). Built on top of the working slider.
-3. **Cursor-reactive elements** -- Magnetic buttons, tilt effects on cards. Polish layer.
-4. **Scroll-driven storytelling** -- Within-project scroll reveals for deeper project narratives.
-5. **Video backgrounds** -- Replace or supplement static hero images with looping video clips.
-6. **Preloader brand moment** -- Brief branded loading sequence.
+- [ ] **Testimonial / client quote pull-out** — high value-to-effort; add when core sections are done
+- [ ] **Team credits section** — adds humanity; static content
+- [ ] **Next project CTA** — improves browsing flow; requires slider state integration
+- [ ] **Reading progress bar** — polish detail; pure CSS or minimal ScrollTrigger
+- [ ] **Parallax depth in case study sections** — hook already exists; low effort; add as polish layer
 
 ### Future Consideration (v2+)
 
-1. **Racing-circuit navigation metaphor** -- Alexis's track-picker concept. This is the most ambitious differentiator but also the highest risk. Build it as an alternative navigation mode that can be toggled, not as the only way to browse. Needs dedicated UX prototyping before development.
-2. **Sound design** -- Optional interaction sounds. Very low priority but memorable differentiator.
-3. **Project filtering/categorization** -- If the portfolio grows beyond 15-20 projects, add filtering by industry/service type.
-4. **Analytics integration** -- Track which projects get the most engagement, where visitors drop off.
+- [ ] **GSAP Flip slider-to-case-study transition (upgrade)** — upgrade from fade-expand to true element morphing if v1.1 baseline is well-received
+- [ ] **Pinned horizontal storytelling panel** — high complexity; breaks mobile; needs dedicated mobile solution first
+- [ ] **Opt-in video embed** — requires asset hosting strategy; defer until projects have video assets
+- [ ] **Custom SVG animated chart** — hand-rolled bar chart could replace plain counters for a richer metrics section in v2
+
+---
 
 ## Feature Prioritization Matrix
 
-| Feature | Impact | Effort | Priority | Phase |
-|---------|--------|--------|----------|-------|
-| Smooth slider/carousel | Critical | High | P0 | v1 |
-| Project content (visuals, narrative, meta) | Critical | Low | P0 | v1 |
-| Dynamic color themes | High | Medium | P0 | v1 |
-| Entry animations | High | Medium | P0 | v1 |
-| 3D parallax depth | High | High | P0 | v1 |
-| Responsive design | Critical | Medium | P0 | v1 |
-| Contact CTA | High | Low | P0 | v1 |
-| Browser history | Medium | Low | P0 | v1 |
-| Progress indicator | Medium | Low | P0 | v1 |
-| Performance optimization | Critical | Medium | P0 | v1 |
-| Mood-driven entry animations | Medium | High | P1 | v1.x |
-| Transition choreography | Medium | High | P1 | v1.x |
-| Cursor-reactive elements | Low-Med | Medium | P1 | v1.x |
-| Scroll-driven storytelling | Medium | Medium | P1 | v1.x |
-| Video backgrounds | Medium | Medium | P1 | v1.x |
-| Preloader | Low | Low | P2 | v1.x |
-| Racing-circuit metaphor | High | Very High | P2 | v2+ |
-| Sound design | Low | Low | P2 | v2+ |
+| Feature | User Value | Implementation Cost | Priority |
+|---------|------------|---------------------|----------|
+| Entry transition (fade-expand baseline) | HIGH | LOW | P1 |
+| Challenge section (static) | HIGH | LOW | P1 |
+| Process timeline with animated reveals | HIGH | MEDIUM | P1 |
+| Results / animated counters | HIGH | MEDIUM | P1 |
+| Deliverables gallery | HIGH | MEDIUM | P1 |
+| Color theme inheritance | HIGH | LOW | P1 |
+| Back-navigation | HIGH | LOW | P1 |
+| Scroll-triggered reveals (shared utility) | HIGH | MEDIUM | P1 |
+| Reduced-motion compliance | HIGH | LOW | P1 |
+| Responsive case study layout | HIGH | MEDIUM | P1 |
+| Rich placeholder content (3 projects) | HIGH | MEDIUM | P1 |
+| ScrollTrigger cleanup on unmount | HIGH (technical) | LOW | P1 |
+| Testimonial quote pull-out | MEDIUM | LOW | P2 |
+| Team credits | MEDIUM | LOW | P2 |
+| Next project CTA | MEDIUM | LOW | P2 |
+| Reading progress bar | LOW | LOW | P2 |
+| Parallax in case study sections | MEDIUM | LOW | P2 |
+| GSAP Flip entry transition (upgrade) | MEDIUM | HIGH | P3 |
+| Pinned horizontal storytelling panel | MEDIUM | HIGH | P3 |
+| Opt-in video embed | LOW | HIGH | P3 |
+| Custom SVG animated chart | LOW | HIGH | P3 |
+
+**Priority key:**
+- P1: Must have for v1.1 launch
+- P2: Should have, add when P1 is stable
+- P3: Nice to have, future consideration / v2+
+
+---
+
+## Competitor Feature Analysis
+
+Top-tier agency portfolios and award-winning GSAP sites examined for pattern reference.
+
+| Feature | Metalab (metalab.com) | Award-winning GSAP portfolios (Awwwards) | Our Approach |
+|---------|----------------------|------------------------------------------|--------------|
+| Slider → case study transition | Dedicated route with branded page-level transition | GSAP Flip or clip-path expansion from card element | Fade-expand baseline (v1.1), GSAP Flip upgrade (v2) |
+| Section reveals | Staggered fade-up on scroll entry | ScrollTrigger scrub with parallax depth layers | GSAP ScrollTrigger `once: true` reveals; `scrub` for atmospheric parallax |
+| Metrics display | Bold typographic counters, large numerals | Animated counter with ScrollTrigger trigger | GSAP counter tween triggered on viewport entry |
+| Process timeline | Numbered list with iconography | Horizontal pin + scrub OR vertical scroll-stagger | Vertical scroll-stagger (avoids pin complexity and mobile issues) |
+| Gallery | Full-bleed image rows, minimal chrome | Masonry or stacked panels with staggered reveal | CSS Grid gallery with staggered GSAP reveals per image |
+| Navigation in case study | Minimal sticky back arrow | Project title + back in fixed header | Sticky back button inheriting project accent color |
+| Scroll behavior | Native scroll, no override | Mix of native scroll + Lenis for smoothness | Native scroll + GSAP ScrollTrigger only; no scroll override |
+
+---
+
+## Integration Points with Existing System
+
+Specific touchpoints between new case study features and the already-built slider/theming system.
+
+| New Feature | Depends On (Existing) | Integration Risk |
+|-------------|----------------------|-----------------|
+| Color theme in case study | `applyTheme()`, CSS custom properties | LOW — direct function call |
+| Entry transition | GSAP instance, slide DOM refs, Zustand state | MEDIUM — must not interfere with Observer plugin while transition is active |
+| Back transition | GSAP, `useSliderStore` currentIndex | MEDIUM — must restore Zustand state and reverse animation cleanly |
+| Parallax in sections | `useParallax` hook | LOW — direct reuse |
+| Reduced-motion | CSS `prefers-reduced-motion` pattern | LOW — pattern already established |
+| ScrollTrigger animations | GSAP ScrollTrigger (not yet used) | MEDIUM — must use `gsap.context()` scoped to case study; `.revert()` on unmount is mandatory |
+
+---
 
 ## Key Observations
 
-**What separates good agency portfolios from great ones:**
+**What separates good agency case studies from great ones:**
 
-1. **Restraint over excess.** The best portfolios (studios like Active Theory, Locomotive, Aristide Benoist) use 2-3 effects executed flawlessly rather than 10 effects executed competently. Every animation should serve the content, not compete with it.
+1. **Lead with the outcome, then earn the context.** The most effective case studies open with the most impressive result (the number, the award, the transformation) and then rewind to explain how it happened. Non-technical clients decide whether to keep reading in the first three seconds.
 
-2. **Performance IS the feature.** A 60fps transition is more impressive than a complex transition that stutters. Visitors subconsciously equate smoothness with competence.
+2. **The timeline is the narrative engine.** A process timeline transforms a list of deliverables into a story with a beginning, middle, and end. It is the feature that makes a client feel like they were there. Animate it on scroll so clients discover each phase in sequence rather than scanning it all at once.
 
-3. **The project is the hero, not the portfolio.** The showcase should make the CLIENT'S work look incredible, not draw attention to how clever the portfolio's own animations are. If someone remembers the slider more than the projects, the design has failed.
+3. **Restraint in animation is more impressive than abundance.** Award-winning portfolios (Immersive Garden, Locomotive, Siroppe) use 2–3 animation techniques executed flawlessly. The case study animations should feel inevitable, not showy. Each animation should serve the content's pacing, not compete with it.
 
-4. **Color creates mood cheaply.** Dynamic color themes are the highest-impact, most achievable differentiator. Changing background color, accent tones, and gradient directions per project creates dramatic variety with minimal technical complexity.
+4. **Gallery quality is determined by image quality, not layout complexity.** A simple CSS Grid with scroll reveals and high-quality project screenshots is more impressive than a complex masonry layout with mediocre images. The image assets matter more than the gallery interaction.
 
-5. **3D-enhanced 2D is the sweet spot.** Full WebGL (Three.js scenes) would take months and perform poorly on mobile. CSS transforms with perspective, translateZ, and mouse-reactive parallax achieve 80% of the visual depth at 10% of the effort. This is the correct call per PROJECT.md.
+5. **The entry transition is one of the highest risk / highest reward features.** If it works flawlessly it creates a premium "zoom into the project" feeling. If it stutters or fails, it damages the exact trust the portfolio is trying to build. A simple, reliable fade-expand is better than an ambitious GSAP Flip that fails 10% of the time.
 
 ---
-*Feature research for: Hargile immersive portfolio showcase*
-*Researched: 2026-03-05*
-*Sources: Training data on web portfolio design patterns, award-winning agency sites (Awwwards, FWA patterns), UX best practices for showcase/gallery interfaces. Confidence is MEDIUM -- patterns are well-established but no live verification of current 2026 trends was possible.*
+
+## Sources
+
+- [The Art of Storytelling for Case Studies | Indeed Design](https://indeed.design/article/the-art-of-storytelling-for-case-studies/)
+- [UX Case Study Structure | uxfol.io](https://blog.uxfol.io/ux-case-study-structure/)
+- [Metalab.com Case Study | Awwwards](https://www.awwwards.com/metalab-com-case-study.html)
+- [GSAP ScrollTrigger Docs](https://gsap.com/docs/v3/Plugins/ScrollTrigger/)
+- [GSAP Flip Plugin Docs](https://gsap.com/docs/v3/Plugins/Flip/)
+- [Animating Responsive Grid Layout Transitions with GSAP Flip | Codrops](https://tympanus.net/codrops/2026/01/20/animating-responsive-grid-layout-transitions-with-gsap-flip/)
+- [Building a Layered Zoom Scroll Effect with GSAP ScrollSmoother and ScrollTrigger | Codrops](https://tympanus.net/codrops/2025/10/29/building-a-layered-zoom-scroll-effect-with-gsap-scrollsmoother-and-scrolltrigger/)
+- [Joffrey Spitzer Portfolio — Astro + GSAP FLIP Transitions | Codrops](https://tympanus.net/codrops/2026/02/18/joffrey-spitzer-portfolio-a-minimalist-astro-gsap-build-with-reveals-flip-transitions-and-subtle-motion/)
+- [GSAP Showcase](https://gsap.com/showcase/)
+- [54 GSAP ScrollTrigger Examples | freefrontend.com](https://freefrontend.com/scroll-trigger-js/)
+- [10 Award-Winning Websites Pushing Boundaries with GSAP | Orpetron / Medium](https://medium.com/orpetron/10-award-winning-websites-pushing-boundaries-with-gsap-animation-8b83bb45e94f)
+- [Siroppe Creative Agency Case Study | Awwwards](https://www.awwwards.com/siroppe-creative-agency-case-study.html)
+
+---
+
+*Feature research for: Hargile portfolio case study pages (v1.1 milestone)*
+*Researched: 2026-03-11*
