@@ -11,6 +11,38 @@ export interface ProjectNarrative {
   outcome: string;
 }
 
+export interface CaseStudyMetric {
+  label: string;
+  value: string;
+}
+
+export interface CaseStudyTimelineStep {
+  phase: string;
+  duration: string;
+  description: string;
+}
+
+export interface CaseStudyTestimonial {
+  quote: string;
+  author: string;
+  role: string;
+}
+
+export interface CaseStudyTeamMember {
+  name: string;
+  role: string;
+}
+
+export interface CaseStudyContent {
+  challenge: string;
+  solution: string;
+  timeline: CaseStudyTimelineStep[];
+  metrics: CaseStudyMetric[];
+  deliverables: string[];
+  testimonial: CaseStudyTestimonial;
+  team: CaseStudyTeamMember[];
+}
+
 export interface ProjectData {
   id: string;
   title1: string;
@@ -26,4 +58,5 @@ export interface ProjectData {
   colors: ProjectColors;
   industry: string;
   narrative: ProjectNarrative;
+  caseStudy?: CaseStudyContent;
 }
