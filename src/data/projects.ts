@@ -67,6 +67,14 @@ export const projects: ProjectData[] = [
         'Portail de formation interactif pour les équipes',
         'Guide de gouvernance data et conventions de nommage',
       ],
+      galleryImages: [
+        'https://images.unsplash.com/photo-1551288049-bebda4e38f71?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1460925895917-afdab827c52f?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1526628953301-3cd6bfbb9b99?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1543286386-713bdd548da4?fm=webp&w=800&q=80',
+      ],
       testimonial: {
         quote: "Hargile a transforme la facon dont nos equipes prennent des decisions. Ce qui prenait trois heures se fait maintenant en dix minutes. Le ROI a ete visible des le premier trimestre apres le lancement.",
         author: 'Caroline Fontaine',
@@ -145,6 +153,14 @@ export const projects: ProjectData[] = [
         'Documentation technique et guide de conformite RGPD',
         'Programme d\'onboarding personnalise selon le profil patient',
       ],
+      galleryImages: [
+        'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1538805060514-97d9cc17730c?fm=webp&w=800&q=80',
+      ],
       testimonial: {
         quote: "Depuis le lancement de Pulse, nous observons une transformation remarquable dans l'engagement de nos patients. Ils ne subissent plus leur sante, ils la comprennent et agissent. C'est exactement ce que la medecine preventive promettait sans jamais y parvenir.",
         author: 'Dr. Philippe Moreau',
@@ -222,6 +238,14 @@ export const projects: ProjectData[] = [
         'Systeme de recommandation personnalise par valeurs',
         'Page d\'impact collectif avec metriques en temps reel',
         'Guide editorial et charte d\'acceptation des produits',
+      ],
+      galleryImages: [
+        'https://images.unsplash.com/photo-1542601906897-ecd3d8e0b3a2?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1501854140801-50d01698950b?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?fm=webp&w=800&q=80',
+        'https://images.unsplash.com/photo-1473073899705-e7b1055a7419?fm=webp&w=800&q=80',
       ],
       testimonial: {
         quote: "Verde a reussi ce que personne n'avait fait avant : rendre l'achat durable plus attrayant que l'achat ordinaire. Nos vendeurs voient leur chiffre d'affaires augmenter de 40% en moyenne dans les six mois suivant leur certification. C'est la preuve que la durabilite est un avantage competitif, pas une contrainte.",

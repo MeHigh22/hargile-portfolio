@@ -39,6 +39,7 @@ export interface CaseStudyContent {
   timeline: CaseStudyTimelineStep[];
   metrics: CaseStudyMetric[];
   deliverables: string[];
+  galleryImages?: string[];
   testimonial: CaseStudyTestimonial;
   team: CaseStudyTeamMember[];
 }
