@@ -5,9 +5,9 @@ milestone_name: Case Studies & Storytelling
 status: active
 stopped_at: null
 last_updated: "2026-03-11"
-last_activity: 2026-03-11 -- Milestone v1.1 started
+last_activity: 2026-03-11 -- Roadmap created for v1.1 milestone (phases 5-7)
 progress:
-  total_phases: 0
+  total_phases: 3
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -21,37 +21,40 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-11)
 
 **Core value:** Potential clients instantly feel the quality of Hargile's work through a showcase experience so smooth and polished that the portfolio itself demonstrates Hargile's capabilities.
-**Current focus:** Defining requirements for v1.1 Case Studies & Storytelling
+**Current focus:** Phase 5 — Scroll Infrastructure & View Scaffold
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 5 — Scroll Infrastructure & View Scaffold
 Plan: —
-Status: Defining requirements
-Last activity: 2026-03-11 — Milestone v1.1 started
+Status: Not started
+Last activity: 2026-03-11 — Roadmap created, ready for plan-phase 5
+
+```
+v1.1 Progress: [··········] 0% (0/3 phases)
+```
 
 ## Performance Metrics
 
-**Velocity:**
-- Total plans completed: 7
+**Velocity (v1.0):**
+- Total plans completed: 9
 - Average duration: 4min
-- Total execution time: 26min
+- Total execution time: ~36min
 
-**By Phase:**
+**By Phase (v1.0):**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01 Foundation | 2/2 | 7min | 3.5min |
 | 02 Slider & Navigation | 2/2 | 9min | 4.5min |
 | 03 Content & Theming | 3/3 | 10min | 3.3min |
+| 04 Depth & Production Quality | 2/2 | ~10min | ~5min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (5min), 02-02 (4min), 03-01 (4min), 03-02 (3min), 03-03 (3min)
+- Last plans: 04-01 (~5min), 04-02 (~5min)
 - Trend: stable
 
 *Updated after each plan completion*
-| Phase 04-depth-production-quality P01 | 3 | 2 tasks | 8 files |
-| Phase 04-depth-production-quality P02 | 8 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -90,17 +93,31 @@ Recent decisions affecting current work:
 - [Phase 04-02]: isReducedMotion as useCallback dependency enables reactive branch switching on media query change
 - [Phase 04-02]: Color morphing kept in reduced motion mode — not spatial animation, WCAG-safe
 - [Phase 04-02]: preloadAdjacentImages called in onComplete to avoid competing with transition GPU work
+- [v1.1 Architecture]: Case study is a sibling DOM element of Slider inside AppShell, never a child — avoids overflow-hidden clip and will-change containing block issues
+- [v1.1 Architecture]: GSAP Observer is disabled (obs.disable(), not .kill()) on case study open and re-enabled on close
+- [v1.1 Architecture]: All ScrollTrigger instances inside case study must pass scroller: panelRef.current — never window
+- [v1.1 Architecture]: gsap.context() scoped to case study container; .revert() called on every close path (button, Escape, browser back)
+- [v1.1 Architecture]: useViewStore Zustand store holds mode ('slider' | 'case') and activeProjectId — no router introduced
+- [v1.1 Architecture]: useHashSync extended to parse #atlas/case-study format; popstate guard checks view mode before running slider logic
+- [v1.1 Architecture]: CSS custom property overrides inside case study use --cs-* prefix, scoped to case study container element (not :root)
+- [v1.1 Architecture]: Native scroll preferred over Lenis for Phase 5 scaffold; add Lenis only if scroll feel is unsatisfactory after panel shell is working
+- [v1.1 Architecture]: Recharts deferred — build GSAP counter animations first; add Recharts only if bar-chart representation is needed after Phase 7 visual review
+- [v1.1 Architecture]: CaseStudyData type extends existing project data type with caseStudy?: { challenge, solution, timeline, metrics, deliverables, testimonial, team }
+- [v1.1 Architecture]: "Voir l'étude de cas" CTA added to Slide.tsx after CaseStudyPanel destination is established (Phase 5 end)
+- [v1.1 Architecture]: Block case study open while useSliderStore.isAnimating is true to prevent mid-transition palette bleed
 
 ### Pending Todos
 
-None yet.
+- Decide: Lenis vs native scroll after Phase 5 panel shell is interactive (review scroll feel before Phase 6)
+- Decide: Recharts vs pure GSAP counters after Phase 7 first pass (review counter visual before adding dependency)
+- Verify: YARL (yet-another-react-lightbox) bundle size on current Bundlephobia before committing to Phase 7
 
 ### Blockers/Concerns
 
-- GSAP + React integration requires @gsap/react useGSAP hook (never raw useEffect)
+None currently.
 
 ## Session Continuity
 
-Last session: 2026-03-10T16:22:51.794Z
-Stopped at: Completed 04-02-PLAN.md (visual checkpoint approved by user)
+Last session: 2026-03-11
+Stopped at: Roadmap created for v1.1 (phases 5-7); ready to plan Phase 5
 Resume file: None

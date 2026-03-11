@@ -126,29 +126,29 @@
 | PERF-02 | Phase 1 | Pending |
 | PERF-03 | Phase 4 | Complete |
 | PERF-04 | Phase 4 | Complete |
-| CSNAV-01 | — | Pending |
-| CSNAV-02 | — | Pending |
-| CSNAV-03 | — | Pending |
-| CSNAV-04 | — | Pending |
-| CSCONT-01 | — | Pending |
-| CSCONT-02 | — | Pending |
-| CSCONT-03 | — | Pending |
-| CSCONT-04 | — | Pending |
-| CSCONT-05 | — | Pending |
-| CSCONT-06 | — | Pending |
-| CSCONT-07 | — | Pending |
-| CSVIS-01 | — | Pending |
-| CSVIS-02 | — | Pending |
-| CSVIS-03 | — | Pending |
-| CSVIS-04 | — | Pending |
-| CSDATA-01 | — | Pending |
+| CSNAV-01 | Phase 5 | Pending |
+| CSNAV-02 | Phase 5 | Pending |
+| CSNAV-03 | Phase 7 | Pending |
+| CSNAV-04 | Phase 7 | Pending |
+| CSCONT-01 | Phase 6 | Pending |
+| CSCONT-02 | Phase 6 | Pending |
+| CSCONT-03 | Phase 6 | Pending |
+| CSCONT-04 | Phase 7 | Pending |
+| CSCONT-05 | Phase 7 | Pending |
+| CSCONT-06 | Phase 7 | Pending |
+| CSCONT-07 | Phase 7 | Pending |
+| CSVIS-01 | Phase 6 | Pending |
+| CSVIS-02 | Phase 5 | Pending |
+| CSVIS-03 | Phase 5 | Pending |
+| CSVIS-04 | Phase 5 | Pending |
+| CSDATA-01 | Phase 5 | Pending |
 
 **Coverage:**
 - v1.0 requirements: 15 total (14 complete, 1 pending)
 - v1.1 requirements: 16 total
-- Mapped to phases: 0
-- Unmapped: 16 ⚠️
+- Mapped to phases: 16
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-05*
-*Last updated: 2026-03-11 after v1.1 milestone requirements added*
+*Last updated: 2026-03-11 after v1.1 roadmap created (phases 5-7)*
