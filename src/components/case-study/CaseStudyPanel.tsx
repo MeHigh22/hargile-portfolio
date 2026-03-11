@@ -9,6 +9,8 @@ import { useReducedMotion } from '../../hooks/useReducedMotion';
 import { BackButton } from './BackButton';
 import { CaseStudyHero } from './CaseStudyHero';
 import { CaseStudySection } from './CaseStudySection';
+import { ProseBody } from './ProseBody';
+import { Timeline } from './Timeline';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -121,6 +123,8 @@ export function CaseStudyPanel({ projectId }: CaseStudyPanelProps) {
         const tl = gsap.timeline({
           onComplete: () => {
             ScrollTrigger.refresh();
+            // Ensure all sections are visible in reduced motion mode
+            gsap.set(sections, { opacity: 1, y: 0 });
           },
         });
 
@@ -138,6 +142,34 @@ export function CaseStudyPanel({ projectId }: CaseStudyPanelProps) {
           onComplete: () => {
             panel.style.pointerEvents = 'auto';
             ScrollTrigger.refresh();
+
+            // Below-fold detection: reset sections that are out of view and attach ScrollTrigger
+            const panelHeight = panel.clientHeight;
+            const panelRect = panel.getBoundingClientRect();
+
+            sections.forEach((section) => {
+              const el = section as HTMLElement;
+              const rect = el.getBoundingClientRect();
+              const relativeTop = rect.top - panelRect.top;
+
+              if (relativeTop >= panelHeight) {
+                // Section is below the fold — reset to hidden and reveal on scroll
+                gsap.set(el, { opacity: 0, y: 30 });
+                ScrollTrigger.create({
+                  trigger: el,
+                  scroller: panel,
+                  start: 'top 85%',
+                  onEnter: () => {
+                    gsap.to(el, {
+                      opacity: 1,
+                      y: 0,
+                      duration: 0.5,
+                      ease: 'power3.out',
+                    });
+                  },
+                });
+              }
+            });
           },
         });
 
@@ -198,26 +230,15 @@ export function CaseStudyPanel({ projectId }: CaseStudyPanelProps) {
 
       {/* Case study sections in prescribed order */}
       <CaseStudySection title="Defi">
-        <p className="text-text-secondary leading-relaxed">{caseStudy.challenge}</p>
+        <ProseBody text={caseStudy.challenge} />
       </CaseStudySection>
 
       <CaseStudySection title="Solution">
-        <p className="text-text-secondary leading-relaxed">{caseStudy.solution}</p>
+        <ProseBody text={caseStudy.solution} />
       </CaseStudySection>
 
       <CaseStudySection title="Processus">
-        {/* Placeholder: Phase 6 fills this with timeline component */}
-        <div className="space-y-4">
-          {caseStudy.timeline.map((step) => (
-            <div key={step.phase} className="border border-accent/20 rounded-lg p-4">
-              <div className="flex justify-between items-center mb-2">
-                <span className="font-mono text-sm text-accent">{step.phase}</span>
-                <span className="font-mono text-xs text-text-secondary">{step.duration}</span>
-              </div>
-              <p className="text-text-secondary text-sm">{step.description}</p>
-            </div>
-          ))}
-        </div>
+        <Timeline steps={caseStudy.timeline} panelRef={panelRef} reducedMotion={isReducedMotion} />
       </CaseStudySection>
 
       <CaseStudySection title="Resultats">
