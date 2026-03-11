@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A standalone, visually stunning portfolio showcase page for Hargile that presents 12+ client projects through an immersive slider/carousel experience. Each project transitions with its own color palette and mood, enhanced with parallax and 3D depth effects. Built to impress potential clients evaluating Hargile for new projects.
+An immersive portfolio showcase for Hargile that presents client projects through a slider entry point leading into deep, scrollable case studies. Each project tells its full story — challenge, process timeline, results with metrics, and deliverables — through scroll-triggered animations and rich visual storytelling. Built to impress potential clients evaluating Hargile for new projects.
 
 ## Core Value
 
@@ -12,18 +12,27 @@ Potential clients instantly feel the quality of Hargile's work through a showcas
 
 ### Validated
 
-(None yet — ship to validate)
+<!-- Shipped in v1.0 -->
+- ✓ Immersive project slider/carousel with smooth transitions — v1.0
+- ✓ Per-project color theme/mood that shifts dynamically — v1.0
+- ✓ 3D-enhanced 2D layout with parallax and depth effects — v1.0
+- ✓ Hero visual, narrative, tech stack, and CTA per slide — v1.0
+- ✓ Smooth entry animations per project — v1.0
+- ✓ Responsive design across devices — v1.0
+- ✓ Performant with 12+ projects loaded — v1.0
+- ✓ Best-in-class framework and animation stack — v1.0
 
 ### Active
 
-- [ ] Immersive project slider/carousel with smooth transitions between 12+ projects
-- [ ] Per-project color theme/mood that shifts dynamically during navigation
-- [ ] 3D-enhanced 2D layout with parallax and depth effects
-- [ ] Each project slide shows: hero visual, compelling "what we solved" story, tech stack, and CTA
-- [ ] Smooth entry animations per project (mood-driven)
-- [ ] Responsive design that works across devices
-- [ ] Performant with 12+ projects loaded
-- [ ] Best-in-class framework and animation stack for smooth, modern feel
+- [ ] Scrollable case study view per project (click from slider to dive deep)
+- [ ] Project challenge/problem section with visual storytelling
+- [ ] Animated process timeline (discovery → design → dev → launch)
+- [ ] Results/metrics section with animated counters and simple charts
+- [ ] Deliverables/screenshots gallery with scroll-triggered reveals
+- [ ] Rich placeholder content for 3 beta projects (atlas, pulse, verde)
+- [ ] Scroll-triggered animations throughout case study sections
+- [ ] Smooth transition from slider to case study view and back
+- [ ] Intuitive navigation so clients can read through naturally
 
 ### Out of Scope
 
@@ -55,7 +64,18 @@ Potential clients instantly feel the quality of Hargile's work through a showcas
 | Standalone page over full site | Focused scope, maximum impact on the showcase experience | — Pending |
 | 3D-enhanced 2D over full 3D | Best wow-factor-to-effort ratio, avoids WebGL complexity rabbit hole | — Pending |
 | Color theme shifts per project | Creates mood variety without requiring per-project 3D scenes | — Pending |
-| Framework TBD (research needed) | Team open to best tool — research will inform React vs Vue vs other | — Pending |
+| Framework TBD (research needed) | Team open to best tool — research will inform React vs Vue vs other | ✓ Good (React 19 + Vite 7 + GSAP) |
+
+## Current Milestone: v1.1 Case Studies & Storytelling
+
+**Goal:** Transform project slides into deep, scrollable case studies with animated timelines, metrics, and visual storytelling — inspired by modern agency portfolios like Redstone.
+
+**Target features:**
+- Scrollable case study pages per project
+- Animated process timeline
+- Results/metrics with animated counters and charts
+- Deliverables gallery with scroll-triggered reveals
+- Rich placeholder content for 3 beta projects
 
 ---
-*Last updated: 2026-03-05 after initialization*
+*Last updated: 2026-03-11 after milestone v1.1 started*
