@@ -99,7 +99,11 @@ Plans:
   4. The URL updates to reflect the case study view (e.g. `#atlas/case-study`); browser back exits the case study, not the slider
   5. The case study inherits the project's color theme on open; no color bleed from adjacent projects appears
   6. Closing and reopening a case study multiple times leaves no ghost scroll animations from previous sessions
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 05-01-PLAN.md -- CaseStudyContent types, rich French data for all 3 projects, useViewStore with isAnimating guard
+- [ ] 05-02-PLAN.md -- CaseStudyPanel overlay with layout skeleton, entry/exit animations, BackButton, hash routing extension, Observer toggle, Slide CTA
 
 ### Phase 6: Narrative Content Sections
 **Goal**: Users can read the full challenge, solution, and process story for each project, with content that reveals section-by-section as they scroll
@@ -135,6 +139,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 2. Slider & Navigation | 2/2 | Complete | 2026-03-06 |
 | 3. Content & Theming | 3/3 | Complete | 2026-03-06 |
 | 4. Depth & Production Quality | 2/2 | Complete | 2026-03-10 |
-| 5. Scroll Infrastructure & View Scaffold | 0/? | Not started | - |
+| 5. Scroll Infrastructure & View Scaffold | 0/2 | Not started | - |
 | 6. Narrative Content Sections | 0/? | Not started | - |
 | 7. Metrics, Gallery & Polish | 0/? | Not started | - |
