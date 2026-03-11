@@ -43,9 +43,9 @@
 
 ### Case Study Content
 
-- [ ] **CSCONT-01**: User reads a challenge/problem section explaining what the client needed
-- [ ] **CSCONT-02**: User reads a solution/approach section describing what Hargile did
-- [ ] **CSCONT-03**: User sees an animated process timeline (discovery, design, development, launch) that reveals step-by-step on scroll
+- [x] **CSCONT-01**: User reads a challenge/problem section explaining what the client needed
+- [x] **CSCONT-02**: User reads a solution/approach section describing what Hargile did
+- [x] **CSCONT-03**: User sees an animated process timeline (discovery, design, development, launch) that reveals step-by-step on scroll
 - [ ] **CSCONT-04**: User sees key results with animated number counters (3-5 metrics per project) triggered on scroll
 - [ ] **CSCONT-05**: User browses a deliverables/screenshots gallery with staggered scroll-triggered reveals
 - [ ] **CSCONT-06**: User reads a testimonial/client quote styled as a prominent pull-out
@@ -130,9 +130,9 @@
 | CSNAV-02 | Phase 5 | Complete |
 | CSNAV-03 | Phase 7 | Pending |
 | CSNAV-04 | Phase 7 | Pending |
-| CSCONT-01 | Phase 6 | Pending |
-| CSCONT-02 | Phase 6 | Pending |
-| CSCONT-03 | Phase 6 | Pending |
+| CSCONT-01 | Phase 6 | Complete |
+| CSCONT-02 | Phase 6 | Complete |
+| CSCONT-03 | Phase 6 | Complete |
 | CSCONT-04 | Phase 7 | Pending |
 | CSCONT-05 | Phase 7 | Pending |
 | CSCONT-06 | Phase 7 | Pending |

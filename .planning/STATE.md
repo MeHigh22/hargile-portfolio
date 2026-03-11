@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Not started
-stopped_at: Phase 6 context gathered
-last_updated: "2026-03-11T14:19:37.607Z"
+stopped_at: Completed 06-01-PLAN.md
+last_updated: "2026-03-11T14:40:22.169Z"
 last_activity: 2026-03-11 — Roadmap created, ready for plan-phase 5
 progress:
   total_phases: 7
   completed_phases: 5
-  total_plans: 11
-  completed_plans: 11
+  total_plans: 13
+  completed_plans: 12
 ---
 
 # Project State
@@ -56,6 +56,7 @@ v1.1 Progress: [··········] 0% (0/3 phases)
 *Updated after each plan completion*
 | Phase 05-scroll-infrastructure-view-scaffold P01 | 15 | 2 tasks | 5 files |
 | Phase 05-scroll-infrastructure-view-scaffold P02 | 12 | 2 tasks | 8 files |
+| Phase 06-narrative-content-sections P01 | 2 | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -111,6 +112,9 @@ Recent decisions affecting current work:
 - [Phase 05-02]: Zustand v5 subscribe uses (state, prevState) form — selector subscribe form silently broken in v5
 - [Phase 05-02]: gsap.context().revert() called first in closePanel before exit animation — kills ScrollTrigger instances before panel moves
 - [Phase 05-02]: data-slider-container attribute on Slider container for querySelector access without prop drilling
+- [Phase 06-01]: GSAP mock must include registerPlugin: vi.fn() for module-level registerPlugin call at test import time
+- [Phase 06-01]: Timeline unfilled node dots use color-mix(in srgb, var(--color-accent) 20%, transparent) for CSS variable binding
+- [Phase 06-01]: data-timeline-node and data-timeline-connector attributes for reliable GSAP and test targeting
 
 ### Pending Todos
 
@@ -124,6 +128,6 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-03-11T14:19:37.603Z
-Stopped at: Phase 6 context gathered
-Resume file: .planning/phases/06-narrative-content-sections/06-CONTEXT.md
+Last session: 2026-03-11T14:40:22.162Z
+Stopped at: Completed 06-01-PLAN.md
+Resume file: None
