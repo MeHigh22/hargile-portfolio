@@ -117,8 +117,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 06-01-PLAN.md -- ProseBody editorial paragraph component and Timeline vertical scroll-reveal component with unit tests
-- [ ] 06-02-PLAN.md -- Wire ProseBody and Timeline into CaseStudyPanel, add ScrollTrigger below-fold reveals, reduced motion path
+- [x] 06-01-PLAN.md -- ProseBody editorial paragraph component and Timeline vertical scroll-reveal component with unit tests
+- [x] 06-02-PLAN.md -- Wire ProseBody and Timeline into CaseStudyPanel, add ScrollTrigger below-fold reveals, reduced motion path
 
 ### Phase 7: Metrics, Gallery & Polish
 **Goal**: Users finish reading each case study having seen compelling results, browsed deliverable screenshots, read a client quote, and been offered a path to the next project
@@ -130,7 +130,11 @@ Plans:
   3. A testimonial pull-out and a team credits block appear near the bottom of each case study
   4. A "next project" preview at the bottom of the case study lets the user continue browsing without returning to the slider
   5. A reading progress bar visible at the top of the case study tracks how far through the content the user has scrolled
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 07-01-PLAN.md -- MetricCounter, DeliverableGallery, ReadingProgressBar, NextProjectCard standalone components with tests and data layer extension
+- [ ] 07-02-PLAN.md -- Wire all components into CaseStudyPanel, upgrade testimonial/team styling, visual verification
 
 ## Progress
 
@@ -145,4 +149,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 4. Depth & Production Quality | 2/2 | Complete | 2026-03-10 |
 | 5. Scroll Infrastructure & View Scaffold | 2/2 | Complete   | 2026-03-11 |
 | 6. Narrative Content Sections | 2/2 | Complete   | 2026-03-11 |
-| 7. Metrics, Gallery & Polish | 0/? | Not started | - |
+| 7. Metrics, Gallery & Polish | 0/2 | Not started | - |
