@@ -38,18 +38,18 @@
 
 - [x] **CSNAV-01**: User can click into a project from the slider and see a full-screen case study with an animated entry transition
 - [x] **CSNAV-02**: User can return to the slider via a persistent back button that reverses the entry animation
-- [ ] **CSNAV-03**: User sees a reading progress bar showing how far they've scrolled through the case study
-- [ ] **CSNAV-04**: User sees a "next project" preview at the bottom of each case study to continue browsing
+- [x] **CSNAV-03**: User sees a reading progress bar showing how far they've scrolled through the case study
+- [x] **CSNAV-04**: User sees a "next project" preview at the bottom of each case study to continue browsing
 
 ### Case Study Content
 
 - [x] **CSCONT-01**: User reads a challenge/problem section explaining what the client needed
 - [x] **CSCONT-02**: User reads a solution/approach section describing what Hargile did
 - [x] **CSCONT-03**: User sees an animated process timeline (discovery, design, development, launch) that reveals step-by-step on scroll
-- [ ] **CSCONT-04**: User sees key results with animated number counters (3-5 metrics per project) triggered on scroll
-- [ ] **CSCONT-05**: User browses a deliverables/screenshots gallery with staggered scroll-triggered reveals
-- [ ] **CSCONT-06**: User reads a testimonial/client quote styled as a prominent pull-out
-- [ ] **CSCONT-07**: User sees team credits with small profile cards at the bottom
+- [x] **CSCONT-04**: User sees key results with animated number counters (3-5 metrics per project) triggered on scroll
+- [x] **CSCONT-05**: User browses a deliverables/screenshots gallery with staggered scroll-triggered reveals
+- [x] **CSCONT-06**: User reads a testimonial/client quote styled as a prominent pull-out
+- [x] **CSCONT-07**: User sees team credits with small profile cards at the bottom
 
 ### Case Study Visual Polish
 
@@ -128,15 +128,15 @@
 | PERF-04 | Phase 4 | Complete |
 | CSNAV-01 | Phase 5 | Complete |
 | CSNAV-02 | Phase 5 | Complete |
-| CSNAV-03 | Phase 7 | Pending |
-| CSNAV-04 | Phase 7 | Pending |
+| CSNAV-03 | Phase 7 | Complete |
+| CSNAV-04 | Phase 7 | Complete |
 | CSCONT-01 | Phase 6 | Complete |
 | CSCONT-02 | Phase 6 | Complete |
 | CSCONT-03 | Phase 6 | Complete |
-| CSCONT-04 | Phase 7 | Pending |
-| CSCONT-05 | Phase 7 | Pending |
-| CSCONT-06 | Phase 7 | Pending |
-| CSCONT-07 | Phase 7 | Pending |
+| CSCONT-04 | Phase 7 | Complete |
+| CSCONT-05 | Phase 7 | Complete |
+| CSCONT-06 | Phase 7 | Complete |
+| CSCONT-07 | Phase 7 | Complete |
 | CSVIS-01 | Phase 6 | Complete |
 | CSVIS-02 | Phase 5 | Complete |
 | CSVIS-03 | Phase 5 | Complete |

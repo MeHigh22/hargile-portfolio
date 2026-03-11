@@ -149,4 +149,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 4. Depth & Production Quality | 2/2 | Complete | 2026-03-10 |
 | 5. Scroll Infrastructure & View Scaffold | 2/2 | Complete   | 2026-03-11 |
 | 6. Narrative Content Sections | 2/2 | Complete   | 2026-03-11 |
-| 7. Metrics, Gallery & Polish | 0/2 | Not started | - |
+| 7. Metrics, Gallery & Polish | 1/2 | In Progress|  |
