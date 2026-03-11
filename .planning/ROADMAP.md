@@ -102,8 +102,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 05-01-PLAN.md -- CaseStudyContent types, rich French data for all 3 projects, useViewStore with isAnimating guard
-- [ ] 05-02-PLAN.md -- CaseStudyPanel overlay with layout skeleton, entry/exit animations, BackButton, hash routing extension, Observer toggle, Slide CTA
+- [x] 05-01-PLAN.md -- CaseStudyContent types, rich French data for all 3 projects, useViewStore with isAnimating guard
+- [x] 05-02-PLAN.md -- CaseStudyPanel overlay with layout skeleton, entry/exit animations, BackButton, hash routing extension, Observer toggle, Slide CTA
 
 ### Phase 6: Narrative Content Sections
 **Goal**: Users can read the full challenge, solution, and process story for each project, with content that reveals section-by-section as they scroll
@@ -114,7 +114,11 @@ Plans:
   2. Scrolling through the case study reveals each section with a staggered fade-and-translate animation; sections above the fold are already visible on open
   3. The process timeline (discovery, design, development, launch) reveals its steps one by one as the user scrolls past each node
   4. All scroll-triggered text animations are absent or replaced with instant visibility for users with prefers-reduced-motion enabled
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 06-01-PLAN.md -- ProseBody editorial paragraph component and Timeline vertical scroll-reveal component with unit tests
+- [ ] 06-02-PLAN.md -- Wire ProseBody and Timeline into CaseStudyPanel, add ScrollTrigger below-fold reveals, reduced motion path
 
 ### Phase 7: Metrics, Gallery & Polish
 **Goal**: Users finish reading each case study having seen compelling results, browsed deliverable screenshots, read a client quote, and been offered a path to the next project
@@ -140,5 +144,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 3. Content & Theming | 3/3 | Complete | 2026-03-06 |
 | 4. Depth & Production Quality | 2/2 | Complete | 2026-03-10 |
 | 5. Scroll Infrastructure & View Scaffold | 2/2 | Complete   | 2026-03-11 |
-| 6. Narrative Content Sections | 0/? | Not started | - |
+| 6. Narrative Content Sections | 0/2 | Not started | - |
 | 7. Metrics, Gallery & Polish | 0/? | Not started | - |
