@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Not started
-stopped_at: Completed 06-01-PLAN.md
-last_updated: "2026-03-11T14:40:22.169Z"
+stopped_at: Completed 06-02-PLAN.md
+last_updated: "2026-03-11T14:46:30.008Z"
 last_activity: 2026-03-11 — Roadmap created, ready for plan-phase 5
 progress:
   total_phases: 7
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 13
-  completed_plans: 12
+  completed_plans: 13
 ---
 
 # Project State
@@ -57,6 +57,7 @@ v1.1 Progress: [··········] 0% (0/3 phases)
 | Phase 05-scroll-infrastructure-view-scaffold P01 | 15 | 2 tasks | 5 files |
 | Phase 05-scroll-infrastructure-view-scaffold P02 | 12 | 2 tasks | 8 files |
 | Phase 06-narrative-content-sections P01 | 2 | 2 tasks | 4 files |
+| Phase 06-narrative-content-sections P02 | 3 | 1 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -115,6 +116,9 @@ Recent decisions affecting current work:
 - [Phase 06-01]: GSAP mock must include registerPlugin: vi.fn() for module-level registerPlugin call at test import time
 - [Phase 06-01]: Timeline unfilled node dots use color-mix(in srgb, var(--color-accent) 20%, transparent) for CSS variable binding
 - [Phase 06-01]: data-timeline-node and data-timeline-connector attributes for reliable GSAP and test targeting
+- [Phase 06-02]: Below-fold detection uses getBoundingClientRect() in entry onComplete — positions stable after animation
+- [Phase 06-02]: ScrollTrigger.create inside gsap.context() auto-reverts on panel close — no extra cleanup
+- [Phase 06-02]: gsap.set(sections, opacity/y) in reduced motion onComplete ensures visibility without stagger
 
 ### Pending Todos
 
@@ -128,6 +132,6 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-03-11T14:40:22.162Z
-Stopped at: Completed 06-01-PLAN.md
+Last session: 2026-03-11T14:46:15.506Z
+Stopped at: Completed 06-02-PLAN.md
 Resume file: None

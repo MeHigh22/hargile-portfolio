@@ -53,7 +53,7 @@
 
 ### Case Study Visual Polish
 
-- [ ] **CSVIS-01**: All case study sections animate into view on scroll with staggered fade-translate reveals
+- [x] **CSVIS-01**: All case study sections animate into view on scroll with staggered fade-translate reveals
 - [x] **CSVIS-02**: Case study inherits the project's color theme from the slider for visual continuity
 - [x] **CSVIS-03**: Case study layout is responsive across mobile, tablet, and desktop
 - [x] **CSVIS-04**: Users with prefers-reduced-motion see a functional experience with animations simplified
@@ -137,7 +137,7 @@
 | CSCONT-05 | Phase 7 | Pending |
 | CSCONT-06 | Phase 7 | Pending |
 | CSCONT-07 | Phase 7 | Pending |
-| CSVIS-01 | Phase 6 | Pending |
+| CSVIS-01 | Phase 6 | Complete |
 | CSVIS-02 | Phase 5 | Complete |
 | CSVIS-03 | Phase 5 | Complete |
 | CSVIS-04 | Phase 5 | Complete |

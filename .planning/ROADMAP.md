@@ -22,7 +22,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Milestone v1.1: Case Studies & Storytelling**
 
 - [x] **Phase 5: Scroll Infrastructure & View Scaffold** - Case study overlay architecture, view-mode store, Observer lifecycle, ScrollTrigger scope, hash routing guard, and placeholder data model (completed 2026-03-11)
-- [ ] **Phase 6: Narrative Content Sections** - Challenge/solution prose, animated process timeline, color theme inheritance, and all scroll-triggered section reveals
+- [x] **Phase 6: Narrative Content Sections** - Challenge/solution prose, animated process timeline, color theme inheritance, and all scroll-triggered section reveals (completed 2026-03-11)
 - [ ] **Phase 7: Metrics, Gallery & Polish** - Animated metric counters, deliverables gallery, testimonial pull-out, team credits, reading progress bar, and next-project CTA
 
 ## Phase Details
@@ -144,5 +144,5 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 3. Content & Theming | 3/3 | Complete | 2026-03-06 |
 | 4. Depth & Production Quality | 2/2 | Complete | 2026-03-10 |
 | 5. Scroll Infrastructure & View Scaffold | 2/2 | Complete   | 2026-03-11 |
-| 6. Narrative Content Sections | 0/2 | Not started | - |
+| 6. Narrative Content Sections | 2/2 | Complete   | 2026-03-11 |
 | 7. Metrics, Gallery & Polish | 0/? | Not started | - |
