@@ -56,21 +56,21 @@ describe('DeliverableGallery', () => {
     });
   });
 
-  it('each image wrapper has break-inside-avoid class', () => {
+  it('each image wrapper has overflow-hidden class', () => {
     const { container } = render(
       <DeliverableGallery images={mockImages} panelRef={mockPanelRef} reducedMotion={true} />
     );
-    const wrappers = container.querySelectorAll('.break-inside-avoid');
+    const wrappers = container.querySelectorAll('.overflow-hidden');
     expect(wrappers.length).toBeGreaterThanOrEqual(mockImages.length);
   });
 
-  it('uses columns layout classes', () => {
+  it('uses grid layout classes', () => {
     const { container } = render(
       <DeliverableGallery images={mockImages} panelRef={mockPanelRef} reducedMotion={true} />
     );
-    // The inner masonry container should have columns-2 class
-    const columnsEl = container.querySelector('.columns-2');
-    expect(columnsEl).toBeInTheDocument();
+    // The inner grid container should have grid class
+    const gridEl = container.querySelector('.grid');
+    expect(gridEl).toBeInTheDocument();
   });
 
   it('renders empty without errors when images array is empty', () => {
