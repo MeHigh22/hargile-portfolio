@@ -139,6 +139,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 2. Slider & Navigation | 2/2 | Complete | 2026-03-06 |
 | 3. Content & Theming | 3/3 | Complete | 2026-03-06 |
 | 4. Depth & Production Quality | 2/2 | Complete | 2026-03-10 |
-| 5. Scroll Infrastructure & View Scaffold | 0/2 | Not started | - |
+| 5. Scroll Infrastructure & View Scaffold | 1/2 | In Progress|  |
 | 6. Narrative Content Sections | 0/? | Not started | - |
 | 7. Metrics, Gallery & Polish | 0/? | Not started | - |

@@ -54,13 +54,13 @@
 ### Case Study Visual Polish
 
 - [ ] **CSVIS-01**: All case study sections animate into view on scroll with staggered fade-translate reveals
-- [ ] **CSVIS-02**: Case study inherits the project's color theme from the slider for visual continuity
+- [x] **CSVIS-02**: Case study inherits the project's color theme from the slider for visual continuity
 - [ ] **CSVIS-03**: Case study layout is responsive across mobile, tablet, and desktop
 - [ ] **CSVIS-04**: Users with prefers-reduced-motion see a functional experience with animations simplified
 
 ### Case Study Data
 
-- [ ] **CSDATA-01**: Rich placeholder content exists for all 3 beta projects (atlas, pulse, verde) with realistic fake metrics, timelines, testimonials, and screenshots
+- [x] **CSDATA-01**: Rich placeholder content exists for all 3 beta projects (atlas, pulse, verde) with realistic fake metrics, timelines, testimonials, and screenshots
 
 ## Future Requirements
 
@@ -138,10 +138,10 @@
 | CSCONT-06 | Phase 7 | Pending |
 | CSCONT-07 | Phase 7 | Pending |
 | CSVIS-01 | Phase 6 | Pending |
-| CSVIS-02 | Phase 5 | Pending |
+| CSVIS-02 | Phase 5 | Complete |
 | CSVIS-03 | Phase 5 | Pending |
 | CSVIS-04 | Phase 5 | Pending |
-| CSDATA-01 | Phase 5 | Pending |
+| CSDATA-01 | Phase 5 | Complete |
 
 **Coverage:**
 - v1.0 requirements: 15 total (14 complete, 1 pending)

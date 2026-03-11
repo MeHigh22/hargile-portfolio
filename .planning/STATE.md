@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Not started
-stopped_at: Phase 5 context gathered
-last_updated: "2026-03-11T10:06:35.224Z"
+stopped_at: Completed 05-01-PLAN.md — data layer and view store
+last_updated: "2026-03-11T10:31:05.960Z"
 last_activity: 2026-03-11 — Roadmap created, ready for plan-phase 5
 progress:
   total_phases: 7
   completed_phases: 4
-  total_plans: 9
-  completed_plans: 9
+  total_plans: 11
+  completed_plans: 10
 ---
 
 # Project State
@@ -54,6 +54,7 @@ v1.1 Progress: [··········] 0% (0/3 phases)
 - Trend: stable
 
 *Updated after each plan completion*
+| Phase 05-scroll-infrastructure-view-scaffold P01 | 15 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -104,6 +105,8 @@ Recent decisions affecting current work:
 - [v1.1 Architecture]: CaseStudyData type extends existing project data type with caseStudy?: { challenge, solution, timeline, metrics, deliverables, testimonial, team }
 - [v1.1 Architecture]: "Voir l'étude de cas" CTA added to Slide.tsx after CaseStudyPanel destination is established (Phase 5 end)
 - [v1.1 Architecture]: Block case study open while useSliderStore.isAnimating is true to prevent mid-transition palette bleed
+- [Phase 05-01]: CaseStudyContent type uses optional caseStudy? field on ProjectData for backward compatibility
+- [Phase 05-01]: openCase guard reads useSliderStore.getState().isAnimating directly (one-time check at call time, not reactive subscription)
 
 ### Pending Todos
 
@@ -117,6 +120,6 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-03-11T10:06:35.217Z
-Stopped at: Phase 5 context gathered
-Resume file: .planning/phases/05-scroll-infrastructure-view-scaffold/05-CONTEXT.md
+Last session: 2026-03-11T10:31:05.949Z
+Stopped at: Completed 05-01-PLAN.md — data layer and view store
+Resume file: None
