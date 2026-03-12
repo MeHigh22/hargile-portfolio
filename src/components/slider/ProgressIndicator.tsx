@@ -9,7 +9,7 @@ export function ProgressIndicator() {
   const percentage = ((currentIndex + 1) / totalSlides) * 100;
 
   return (
-    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3">
+    <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-40 hidden md:flex items-center gap-3">
       <span className="font-mono text-sm text-text-secondary">
         {current}
       </span>

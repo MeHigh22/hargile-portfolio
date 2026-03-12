@@ -1,17 +1,33 @@
 import { forwardRef } from 'react';
-import type { ProjectData } from '../../data/types';
+import type { ImageRatio, ProjectData } from '../../data/types';
 import { useSliderStore } from '../../store/useSliderStore';
 import { useViewStore } from '../../store/useViewStore';
+import { SlideAmbience } from './SlideAmbience';
 
 interface SlideProps {
   project: ProjectData;
   index: number;
 }
 
+const gridColsMap: Record<ImageRatio, string> = {
+  balanced: 'md:grid-cols-[45fr_55fr]',
+  'left-heavy': 'md:grid-cols-[55fr_45fr]',
+  'right-heavy': 'md:grid-cols-[40fr_60fr]',
+};
+
+const imageSizesMap: Record<ImageRatio, string> = {
+  balanced: '(max-width: 768px) 100vw, 55vw',
+  'left-heavy': '(max-width: 768px) 100vw, 45vw',
+  'right-heavy': '(max-width: 768px) 100vw, 60vw',
+};
+
 export const Slide = forwardRef<HTMLDivElement, SlideProps>(
   ({ project, index }, ref) => {
     const techItems = project.tech.split(',').map((t) => t.trim());
     const imgLoading = index <= 1 ? 'eager' : 'lazy';
+
+    const gridCols = gridColsMap[project.imageRatio];
+    const imgSizes = imageSizesMap[project.imageRatio];
 
     return (
       <div
@@ -20,13 +36,15 @@ export const Slide = forwardRef<HTMLDivElement, SlideProps>(
         className="slide absolute inset-0 h-screen w-full overflow-hidden"
       >
         {/* Desktop: CSS Grid split layout | Mobile: stacked with overlay */}
-        <div className="h-full md:grid md:grid-cols-[45fr_55fr]">
+        <div className={`h-full md:grid ${gridCols}`}>
           {/* Content panel */}
-          <div className="relative z-10 flex h-full flex-col justify-center px-8 md:px-16">
-            {/* Mobile: gradient scrim over hero background */}
-            <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/80 to-transparent md:hidden" />
+          <div className="relative z-10 flex h-full flex-col justify-start md:justify-center px-8 md:px-16">
+            {/* Per-project ambient decoration — behind all content */}
+            <SlideAmbience ambience={project.ambience} />
+            {/* Mobile: dark scrim so text stays readable over bright hero images */}
+            <div className="absolute inset-0 bg-bg/70 md:hidden" />
 
-            <div className="relative z-10 mt-auto pb-12 md:mt-0 md:pb-0">
+            <div className="relative z-10 pt-20 md:pt-0 md:mt-0">
               {/* Category */}
               <span
                 data-anim="category"
@@ -110,25 +128,41 @@ export const Slide = forwardRef<HTMLDivElement, SlideProps>(
 
           {/* Hero image panel */}
           <div data-anim="hero" className="absolute inset-0 md:relative md:inset-auto -z-0 md:z-0 overflow-hidden">
-            <picture>
-              <source
-                type="image/webp"
-                srcSet={`${project.heroImg}&fm=webp&w=640 640w, ${project.heroImg}&fm=webp&w=1280 1280w, ${project.heroImg}&fm=webp&w=1920 1920w`}
-                sizes="(max-width: 768px) 100vw, 55vw"
-              />
-              <source
-                type="image/jpeg"
-                srcSet={`${project.heroImg}&w=640 640w, ${project.heroImg}&w=1280 1280w, ${project.heroImg}&w=1920 1920w`}
-                sizes="(max-width: 768px) 100vw, 55vw"
-              />
+            {/* Gradient overlay tint — per-project brand color wash */}
+            <div
+              className="absolute inset-0 z-10 pointer-events-none"
+              style={{
+                background: `linear-gradient(135deg, ${project.colors.gradientFrom}28 0%, ${project.colors.gradientTo}14 40%, transparent 70%)`,
+              }}
+              aria-hidden="true"
+            />
+            {project.heroImg.includes('unsplash.com') ? (
+              <picture>
+                <source
+                  type="image/webp"
+                  srcSet={`${project.heroImg}&fm=webp&w=640 640w, ${project.heroImg}&fm=webp&w=1280 1280w, ${project.heroImg}&fm=webp&w=1920 1920w`}
+                  sizes={imgSizes}
+                />
+                <source
+                  type="image/jpeg"
+                  srcSet={`${project.heroImg}&w=640 640w, ${project.heroImg}&w=1280 1280w, ${project.heroImg}&w=1920 1920w`}
+                  sizes={imgSizes}
+                />
+                <img
+                  src={project.heroImg}
+                  alt={`${project.title1} ${project.title2}`}
+                  loading={imgLoading}
+                  className="h-full w-full object-cover scale-[1.05]"
+                />
+              </picture>
+            ) : (
               <img
                 src={project.heroImg}
                 alt={`${project.title1} ${project.title2}`}
                 loading={imgLoading}
                 className="h-full w-full object-cover scale-[1.05]"
-                data-parallax
               />
-            </picture>
+            )}
           </div>
         </div>
       </div>

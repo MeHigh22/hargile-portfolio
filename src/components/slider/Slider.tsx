@@ -12,7 +12,6 @@ import { ProgressIndicator } from './ProgressIndicator';
 import { useHashSync } from '../../hooks/useHashSync';
 import { useKeyboardNav } from '../../hooks/useKeyboardNav';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-import { useParallax } from '../../hooks/useParallax';
 
 gsap.registerPlugin(Observer);
 
@@ -36,8 +35,6 @@ export function Slider() {
 
   const isReducedMotion = useReducedMotion();
   const currentIndex = useSliderStore((s) => s.currentIndex);
-
-  useParallax(containerRef, slideRefs, currentIndex, animatingRef, isReducedMotion);
 
   // Apply first project theme
   useEffect(() => {
@@ -102,10 +99,7 @@ export function Slider() {
       if (!prevEl || !nextEl || animatingRef.current) return;
       animatingRef.current = true;
 
-      // will-change: promote next slide and its hero for GPU compositing
       gsap.set(nextEl, { willChange: 'transform, opacity' });
-      const nextHero = nextEl.querySelector('[data-parallax]');
-      if (nextHero) gsap.set(nextHero, { willChange: 'transform' });
 
       const nextColors = deriveTheme(projects[newIndex].colors);
       const contentEls = nextEl.querySelectorAll('[data-anim]');
@@ -151,10 +145,7 @@ export function Slider() {
         const tl = gsap.timeline({
           onComplete: () => {
             prevEl.style.display = 'none';
-            // will-change cleanup: remove from prev, keep on next for parallax
             gsap.set(prevEl, { willChange: 'auto' });
-            const prevHero = prevEl.querySelector('[data-parallax]');
-            if (prevHero) gsap.set(prevHero, { willChange: 'auto' });
             animatingRef.current = false;
             useSliderStore.getState().setAnimating(false);
             preloadAdjacentImages(newIndex);

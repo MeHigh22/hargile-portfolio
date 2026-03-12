@@ -44,6 +44,23 @@ export interface CaseStudyContent {
   team: CaseStudyTeamMember[];
 }
 
+/**
+ * Ambient feel of the slide — drives hero motion style + decorative background element.
+ * 'grid'  = dot-matrix + slow horizontal drift     (data, SaaS, tech, precision)
+ * 'pulse' = expanding rings + gentle vertical breathe  (health, wellness, rhythm)
+ * 'drift' = floating organic blobs + diagonal drift   (eco, nature, lifestyle, luxury)
+ * Add more types here as new project flavors are onboarded.
+ */
+export type SlideAmbience = 'grid' | 'pulse' | 'drift';
+
+/**
+ * Controls the content/image column ratio on desktop.
+ * 'balanced'    = 45fr / 55fr  (default)
+ * 'left-heavy'  = 55fr / 45fr  (more content space)
+ * 'right-heavy' = 40fr / 60fr  (more image space)
+ */
+export type ImageRatio = 'balanced' | 'left-heavy' | 'right-heavy';
+
 export interface ProjectData {
   id: string;
   title1: string;
@@ -57,6 +74,8 @@ export interface ProjectData {
   tech: string;
   heroImg: string;
   colors: ProjectColors;
+  ambience: SlideAmbience;
+  imageRatio: ImageRatio;
   industry: string;
   narrative: ProjectNarrative;
   caseStudy?: CaseStudyContent;

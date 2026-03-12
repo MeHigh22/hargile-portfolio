@@ -1,5 +1,4 @@
 import type { ReactNode } from 'react';
-import { ContactCTA } from './ContactCTA';
 import { CaseStudyPanel } from '../case-study/CaseStudyPanel';
 import { useViewStore } from '../../store/useViewStore';
 
@@ -17,7 +16,6 @@ export function AppShell({ children }: AppShellProps) {
       {children}
       {/* CaseStudyPanel: sibling of Slider, not nested inside it */}
       {activeProjectId && <CaseStudyPanel projectId={activeProjectId} />}
-      <ContactCTA />
       {/* Grain overlay */}
       <div
         className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.012]"
