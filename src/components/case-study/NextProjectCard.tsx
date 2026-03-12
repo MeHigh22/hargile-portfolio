@@ -15,40 +15,47 @@ export function NextProjectCard({ projectId }: NextProjectCardProps) {
   };
 
   return (
-    <div className="w-screen relative left-1/2 -translate-x-1/2">
-      <button
-        onClick={handleClick}
-        className="relative w-full min-h-[300px] md:min-h-[400px] overflow-hidden cursor-pointer group block"
-        aria-label={`Voir le projet ${nextProject.title1} ${nextProject.title2}`}
-      >
-        {/* Background image */}
-        <img
-          src={nextProject.heroImg}
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-        />
+    <button
+      onClick={handleClick}
+      className="w-full py-16 md:py-24 cursor-pointer group text-center"
+      aria-label={`Voir le projet ${nextProject.title1} ${nextProject.title2}`}
+    >
+      <span className="font-mono text-xs uppercase tracking-wider text-text-secondary mb-6 block">
+        Projet suivant
+      </span>
 
-        {/* Gradient overlay */}
-        <div
-          className="absolute inset-0 transition-opacity duration-300"
-          style={{
-            background: `linear-gradient(135deg, color-mix(in srgb, ${nextProject.colors.gradientFrom} 60%, transparent) 0%, color-mix(in srgb, ${nextProject.colors.gradientTo} 75%, transparent) 100%)`,
-          }}
-        />
+      <div className="flex items-baseline justify-center gap-4">
+        <h3
+          className="text-4xl md:text-6xl lg:text-7xl font-bold transition-colors duration-300"
+          style={{ color: nextProject.colors.accent }}
+        >
+          {nextProject.title1} {nextProject.title2}
+        </h3>
+        <svg
+          className="w-6 h-6 md:w-8 md:h-8 shrink-0 transition-transform duration-300 group-hover:translate-x-2"
+          style={{ color: nextProject.colors.accent }}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </div>
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col justify-end h-full min-h-[300px] md:min-h-[400px] p-8 md:p-12">
-          <span className="font-mono text-xs uppercase tracking-wider text-white/70 mb-3">
-            Projet suivant
-          </span>
-          <div className="flex flex-col gap-1">
-            <h3 className="text-3xl md:text-4xl font-bold text-white">
-              {nextProject.title1} {nextProject.title2}
-            </h3>
-            <p className="font-mono text-sm text-white/70">{nextProject.category}</p>
-          </div>
-        </div>
-      </button>
-    </div>
+      <div className="flex items-center justify-center gap-4 mt-4 text-sm text-text-secondary font-mono">
+        <span>{nextProject.category}</span>
+        <span className="w-1 h-1 rounded-full bg-text-secondary/40" />
+        <span>{nextProject.year}</span>
+      </div>
+
+      {/* Subtle divider line with accent gradient */}
+      <div
+        className="mx-auto mt-8 h-px w-1/2 opacity-20 transition-opacity duration-300 group-hover:opacity-40"
+        style={{
+          background: `linear-gradient(90deg, transparent, ${nextProject.colors.accent}, transparent)`,
+        }}
+      />
+    </button>
   );
 }
