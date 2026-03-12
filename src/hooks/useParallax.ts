@@ -1,58 +1,45 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect } from 'react';
 import gsap from 'gsap';
+import type { SlideAmbience } from '../data/types';
 
-const MAX_SHIFT = 12; // px — within 10-15px user constraint
+/**
+ * Ambient hero image motion — replaces cursor-tracking parallax.
+ * Each ambience type applies a distinct looping drift to the hero image
+ * giving each project a different physical "feel" beyond color alone.
+ */
+const AMBIENT_CONFIGS: Record<SlideAmbience, gsap.TweenVars> = {
+  // Precise, controlled — slow horizontal sweep. Data / SaaS / tech.
+  grid:  { x: 10, y: 0,   duration: 20, ease: 'power1.inOut', repeat: -1, yoyo: true },
+  // Breathing rhythm — gentle vertical rise and fall. Health / wellness.
+  pulse: { x: 0,  y: -10, duration: 5,  ease: 'sine.inOut',   repeat: -1, yoyo: true },
+  // Organic drift — slow diagonal wander. Nature / eco / lifestyle.
+  drift: { x: -8, y: -7,  duration: 24, ease: 'sine.inOut',   repeat: -1, yoyo: true },
+};
 
 export function useParallax(
   containerRef: React.RefObject<HTMLDivElement | null>,
   slideRefs: React.RefObject<(HTMLDivElement | null)[]>,
   activeIndex: number,
   isAnimatingRef: React.RefObject<boolean>,
-  isReducedMotion: boolean
+  isReducedMotion: boolean,
+  ambience: SlideAmbience
 ) {
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const quickXRef = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
-  const quickYRef = useRef<ReturnType<typeof gsap.quickTo> | null>(null);
-
-  const getHeroEl = useCallback(() => {
-    const slide = slideRefs.current?.[activeIndex];
-    return slide?.querySelector<HTMLElement>('[data-parallax]') ?? null;
-  }, [slideRefs, activeIndex]);
+  void containerRef;
+  void isAnimatingRef;
 
   useEffect(() => {
-    if (isReducedMotion) return; // parallax disabled entirely per user decision
-    const container = containerRef.current;
-    if (!container) return;
+    if (isReducedMotion) return;
 
-    const hero = getHeroEl();
+    const slide = slideRefs.current?.[activeIndex];
+    const hero = slide?.querySelector<HTMLElement>('[data-parallax]');
     if (!hero) return;
 
-    // Initialize quickTo for smooth interpolation
-    quickXRef.current = gsap.quickTo(hero, 'x', { duration: 0.6, ease: 'power2.out' });
-    quickYRef.current = gsap.quickTo(hero, 'y', { duration: 0.6, ease: 'power2.out' });
-
-    const onMouseMove = (e: MouseEvent) => {
-      if (isAnimatingRef.current) return;
-      const rect = container.getBoundingClientRect();
-      mouseRef.current.x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-      mouseRef.current.y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-    };
-
-    const onTick = () => {
-      if (isAnimatingRef.current) return;
-      quickXRef.current?.(mouseRef.current.x * MAX_SHIFT);
-      quickYRef.current?.(mouseRef.current.y * MAX_SHIFT);
-    };
-
-    container.addEventListener('mousemove', onMouseMove);
-    gsap.ticker.add(onTick);
+    gsap.set(hero, { x: 0, y: 0 });
+    const tween = gsap.to(hero, AMBIENT_CONFIGS[ambience]);
 
     return () => {
-      container.removeEventListener('mousemove', onMouseMove);
-      gsap.ticker.remove(onTick);
+      tween.kill();
       gsap.set(hero, { x: 0, y: 0 });
-      quickXRef.current = null;
-      quickYRef.current = null;
     };
-  }, [containerRef, getHeroEl, isAnimatingRef, isReducedMotion]);
+  }, [slideRefs, activeIndex, isReducedMotion, ambience]);
 }

@@ -3,56 +3,24 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { useRef } from 'react';
 import { useParallax } from '../useParallax';
 
-// Mock gsap
-vi.mock('gsap', () => {
-  const tickerCallbacks: Array<() => void> = [];
-
-  const quickToFn = vi.fn(() => vi.fn());
-
-  return {
-    default: {
-      quickTo: quickToFn,
-      ticker: {
-        add: vi.fn((cb: () => void) => { tickerCallbacks.push(cb); }),
-        remove: vi.fn((cb: () => void) => {
-          const idx = tickerCallbacks.indexOf(cb);
-          if (idx !== -1) tickerCallbacks.splice(idx, 1);
-        }),
-      },
-      set: vi.fn(),
-    },
-  };
-});
+vi.mock('gsap', () => ({
+  default: {
+    to:  vi.fn(() => ({ kill: vi.fn() })),
+    set: vi.fn(),
+  },
+}));
 
 describe('useParallax', () => {
   let container: HTMLDivElement;
-  let heroImg: HTMLImageElement;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     container = document.createElement('div');
-    container.getBoundingClientRect = vi.fn(() => ({
-      left: 0,
-      top: 0,
-      width: 1920,
-      height: 1080,
-      right: 1920,
-      bottom: 1080,
-      x: 0,
-      y: 0,
-      toJSON: vi.fn(),
-    }));
-
     const slide = document.createElement('div');
-    heroImg = document.createElement('img');
+    const heroImg = document.createElement('img');
     heroImg.setAttribute('data-parallax', '');
     slide.appendChild(heroImg);
     container.appendChild(slide);
     document.body.appendChild(container);
-
-    const gsap = (await import('gsap')).default;
-    vi.mocked(gsap.quickTo).mockReturnValue(vi.fn() as ReturnType<typeof gsap.quickTo>);
-    vi.mocked(gsap.ticker.add).mockClear();
-    vi.mocked(gsap.ticker.remove).mockClear();
   });
 
   afterEach(() => {
@@ -60,70 +28,77 @@ describe('useParallax', () => {
     vi.clearAllMocks();
   });
 
-  it('adds a mousemove listener to the container element', async () => {
-    const addEventSpy = vi.spyOn(container, 'addEventListener');
+  it('starts an ambient tween on the hero element', async () => {
+    const gsap = (await import('gsap')).default;
 
-    const { result } = renderHook(() => {
-      const containerRef = useRef<HTMLDivElement>(container);
-      const slideRefs = useRef<(HTMLDivElement | null)[]>([
-        container.querySelector('div') as HTMLDivElement,
-      ]);
-      const animatingRef = useRef(false);
-      useParallax(containerRef, slideRefs, 0, animatingRef, false);
+    renderHook(() => {
+      const containerRef  = useRef<HTMLDivElement>(container);
+      const slideRefs     = useRef<(HTMLDivElement | null)[]>([container.querySelector('div') as HTMLDivElement]);
+      const animatingRef  = useRef(false);
+      useParallax(containerRef, slideRefs, 0, animatingRef, false, 'grid');
       return null;
     });
 
-    expect(result.current).toBeNull();
-    expect(addEventSpy).toHaveBeenCalledWith('mousemove', expect.any(Function));
+    expect(gsap.to).toHaveBeenCalledWith(
+      expect.any(HTMLImageElement),
+      expect.objectContaining({ repeat: -1, yoyo: true })
+    );
   });
 
-  it('removes the mousemove listener on cleanup', async () => {
-    const removeEventSpy = vi.spyOn(container, 'removeEventListener');
+  it('does not start a tween when isReducedMotion is true', async () => {
+    const gsap = (await import('gsap')).default;
+
+    renderHook(() => {
+      const containerRef  = useRef<HTMLDivElement>(container);
+      const slideRefs     = useRef<(HTMLDivElement | null)[]>([container.querySelector('div') as HTMLDivElement]);
+      const animatingRef  = useRef(false);
+      useParallax(containerRef, slideRefs, 0, animatingRef, true, 'grid');
+      return null;
+    });
+
+    expect(gsap.to).not.toHaveBeenCalled();
+  });
+
+  it('kills the tween on unmount', async () => {
+    const killMock = vi.fn();
+    const gsap = (await import('gsap')).default;
+    vi.mocked(gsap.to).mockReturnValue({ kill: killMock } as ReturnType<typeof gsap.to>);
 
     const { unmount } = renderHook(() => {
-      const containerRef = useRef<HTMLDivElement>(container);
-      const slideRefs = useRef<(HTMLDivElement | null)[]>([
-        container.querySelector('div') as HTMLDivElement,
-      ]);
-      const animatingRef = useRef(false);
-      useParallax(containerRef, slideRefs, 0, animatingRef, false);
+      const containerRef  = useRef<HTMLDivElement>(container);
+      const slideRefs     = useRef<(HTMLDivElement | null)[]>([container.querySelector('div') as HTMLDivElement]);
+      const animatingRef  = useRef(false);
+      useParallax(containerRef, slideRefs, 0, animatingRef, false, 'pulse');
       return null;
     });
 
     unmount();
-
-    expect(removeEventSpy).toHaveBeenCalledWith('mousemove', expect.any(Function));
+    expect(killMock).toHaveBeenCalled();
   });
 
-  it('adds a ticker callback on mount', async () => {
+  it('uses different motion configs per ambience type', async () => {
     const gsap = (await import('gsap')).default;
 
-    renderHook(() => {
-      const containerRef = useRef<HTMLDivElement>(container);
-      const slideRefs = useRef<(HTMLDivElement | null)[]>([
-        container.querySelector('div') as HTMLDivElement,
-      ]);
-      const animatingRef = useRef(false);
-      useParallax(containerRef, slideRefs, 0, animatingRef, false);
-      return null;
-    });
+    const testAmbience = async (ambience: 'grid' | 'pulse' | 'drift') => {
+      vi.mocked(gsap.to).mockClear();
+      const { unmount } = renderHook(() => {
+        const containerRef = useRef<HTMLDivElement>(container);
+        const slideRefs    = useRef<(HTMLDivElement | null)[]>([container.querySelector('div') as HTMLDivElement]);
+        const animatingRef = useRef(false);
+        useParallax(containerRef, slideRefs, 0, animatingRef, false, ambience);
+        return null;
+      });
+      const call = vi.mocked(gsap.to).mock.calls[0]?.[1] as Record<string, unknown>;
+      unmount();
+      return call;
+    };
 
-    expect(gsap.ticker.add).toHaveBeenCalledWith(expect.any(Function));
-  });
+    const grid  = await testAmbience('grid');
+    const pulse = await testAmbience('pulse');
+    const drift = await testAmbience('drift');
 
-  it('does not add listener when isReducedMotion is true', async () => {
-    const addEventSpy = vi.spyOn(container, 'addEventListener');
-
-    renderHook(() => {
-      const containerRef = useRef<HTMLDivElement>(container);
-      const slideRefs = useRef<(HTMLDivElement | null)[]>([
-        container.querySelector('div') as HTMLDivElement,
-      ]);
-      const animatingRef = useRef(false);
-      useParallax(containerRef, slideRefs, 0, animatingRef, true);
-      return null;
-    });
-
-    expect(addEventSpy).not.toHaveBeenCalledWith('mousemove', expect.any(Function));
+    // Each ambience should produce distinct motion parameters
+    expect(grid?.duration).not.toBe(pulse?.duration);
+    expect(pulse?.duration).not.toBe(drift?.duration);
   });
 });

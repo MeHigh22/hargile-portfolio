@@ -233,7 +233,7 @@ export function CaseStudyPanel({ projectId }: CaseStudyPanelProps) {
       <BackButton onClick={closePanel} />
 
       {/* Full-bleed hero */}
-      <CaseStudyHero ref={heroRef} project={project} />
+      <CaseStudyHero ref={heroRef} project={project} panelRef={panelRef} reducedMotion={isReducedMotion} />
 
       {/* Case study sections in prescribed order */}
       <CaseStudySection title="Defi">

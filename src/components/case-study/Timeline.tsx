@@ -31,6 +31,7 @@ export function Timeline({ steps, panelRef, reducedMotion }: TimelineProps) {
           scroller: panelRef.current,
           start: 'top 80%',
           end: 'bottom 20%',
+          once: true,
           onEnter: () => {
             gsap.to(connectorRef.current, {
               scaleY: 1,
@@ -52,6 +53,7 @@ export function Timeline({ steps, panelRef, reducedMotion }: TimelineProps) {
           trigger: row,
           scroller: panelRef.current,
           start: 'top 85%',
+          once: true,
           onEnter: () => {
             gsap.to(row, {
               opacity: 1,
@@ -85,7 +87,7 @@ export function Timeline({ steps, panelRef, reducedMotion }: TimelineProps) {
       <div
         ref={connectorRef}
         data-timeline-connector
-        className="absolute left-[7px] top-2 bottom-2 w-0.5 bg-accent"
+        className="absolute left-3.25 top-2 bottom-2 w-0.5 bg-accent"
         style={reducedMotion ? {} : { transformOrigin: 'top' }}
       />
 
@@ -101,7 +103,7 @@ export function Timeline({ steps, panelRef, reducedMotion }: TimelineProps) {
             <div
               ref={(el) => { nodeRefs.current[index] = el; }}
               data-timeline-node
-              className="absolute left-[-26px] top-1 w-4 h-4 rounded-full border-2 border-accent"
+              className="absolute -left-6.5 top-1 w-4 h-4 rounded-full border-2 border-accent"
               style={{
                 backgroundColor: reducedMotion
                   ? 'var(--color-accent)'

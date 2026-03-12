@@ -58,7 +58,7 @@ export function DeliverableGallery({ images, panelRef, reducedMotion }: Delivera
               src={url}
               alt=""
               loading="lazy"
-              className="w-full h-auto block object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              className="w-full h-auto max-h-96 block object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
           </div>
         ))}

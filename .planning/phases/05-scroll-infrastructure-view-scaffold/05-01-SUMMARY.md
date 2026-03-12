@@ -111,3 +111,16 @@ None — no external service configuration required.
 ---
 *Phase: 05-scroll-infrastructure-view-scaffold*
 *Completed: 2026-03-11*
+
+## Self-Check: PASSED
+
+- `src/data/types.ts` — FOUND
+- `src/data/projects.ts` — FOUND
+- `src/store/useViewStore.ts` — FOUND
+- `src/store/__tests__/useViewStore.test.ts` — FOUND
+- `src/data/__tests__/projects.test.ts` — FOUND
+- `.planning/phases/05-scroll-infrastructure-view-scaffold/05-01-SUMMARY.md` — FOUND
+- Commit `c54ac9c` (TDD RED) — FOUND
+- Commit `f361942` (TDD GREEN) — FOUND
+- All 48 tests pass
+- TypeScript compiles clean (`npx tsc --noEmit` — no errors)
