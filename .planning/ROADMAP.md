@@ -25,6 +25,10 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [x] **Phase 6: Narrative Content Sections** - Challenge/solution prose, animated process timeline, color theme inheritance, and all scroll-triggered section reveals (completed 2026-03-11)
 - [ ] **Phase 7: Metrics, Gallery & Polish** - Animated metric counters, deliverables gallery, testimonial pull-out, team credits, reading progress bar, and next-project CTA
 
+**Milestone v2.0: Portfolio Page**
+
+- [ ] **Phase 8: Portfolio Page — React/TSX** - Convert static public/portfolio HTML into a proper /portfolio route using React 18 + TypeScript + Tailwind CSS v4 + GSAP, with all data sourced from projects.ts
+
 ## Phase Details
 
 ### Phase 1: Foundation
@@ -138,8 +142,25 @@ Plans:
 
 ## Progress
 
+### Phase 8: Portfolio Page — React/TSX
+**Goal**: The static `public/portfolio/` HTML files are replaced by a fully typed React/TSX portfolio page at `/portfolio`, built with the existing Vite + React 18 + TypeScript + Tailwind CSS v4 + GSAP stack, accessible via a `/portfolio` route while the existing app root remains intact
+**Depends on**: Phase 1
+**Requirements**: PORT-01, PORT-02, PORT-03, PORT-04
+**Success Criteria** (what must be TRUE):
+  1. Visiting `/portfolio` renders the full portfolio slider (cover + all projects + contact) as React components — no static HTML involved
+  2. The globe iframe, year-filter sidebar, marquee, project slides, and contact outro all work identically to the static version
+  3. The existing app root (`/`) continues to work — the slider showcase app is unaffected
+  4. All data comes from `src/data/projects.ts` — no duplication of project data in HTML or JS strings
+  5. The page is navigable via React Router; direct URL `/portfolio` and `/portfolio?p=<slug>` both load correctly
+**Plans**: 3 plans
+
+Plans:
+- [ ] 08-01-PLAN.md -- Install React Router, add /portfolio route, scaffold PortfolioPage shell with CSS custom properties and theme system
+- [ ] 08-02-PLAN.md -- CoverSlide, ProjectSlide, OutroSlide, YearNav, Marquee components — all data from projects.ts
+- [ ] 08-03-PLAN.md -- GSAP slide transitions, keyboard/arrow navigation, progress bar, globe iframe integration, CaseStudyPage at /portfolio/case-study
+
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -150,3 +171,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7
 | 5. Scroll Infrastructure & View Scaffold | 2/2 | Complete   | 2026-03-11 |
 | 6. Narrative Content Sections | 2/2 | Complete   | 2026-03-11 |
 | 7. Metrics, Gallery & Polish | 1/2 | In Progress|  |
+| 8. Portfolio Page — React/TSX | 0/3 | Planned | |
