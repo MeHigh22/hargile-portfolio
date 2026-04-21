@@ -17,4 +17,8 @@ describe('Vite configuration', () => {
     expect(configContent).toContain('test:')
     expect(configContent).toContain("environment: 'jsdom'")
   })
+
+  it('has historyApiFallback for SPA routing', () => {
+    expect(configContent).toContain('historyApiFallback: true')
+  })
 })
