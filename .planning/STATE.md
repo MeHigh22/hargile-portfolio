@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Not started
-stopped_at: Completed 07-01-PLAN.md
-last_updated: "2026-03-11T16:20:52.247Z"
+stopped_at: Completed 08-01-PLAN.md
+last_updated: "2026-04-21T08:09:42.022Z"
 last_activity: 2026-03-11 — Roadmap created, ready for plan-phase 5
 progress:
-  total_phases: 7
+  total_phases: 8
   completed_phases: 6
-  total_plans: 15
-  completed_plans: 14
+  total_plans: 18
+  completed_plans: 15
 ---
 
 # Project State
@@ -59,6 +59,7 @@ v1.1 Progress: [··········] 0% (0/3 phases)
 | Phase 06-narrative-content-sections P01 | 2 | 2 tasks | 4 files |
 | Phase 06-narrative-content-sections P02 | 3 | 1 tasks | 1 files |
 | Phase 07-metrics-gallery-polish P01 | 10 | 3 tasks | 14 files |
+| Phase 08-portfolio-page-react-tsx P01 | 5 | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -122,6 +123,10 @@ Recent decisions affecting current work:
 - [Phase 06-02]: gsap.set(sections, opacity/y) in reduced motion onComplete ensures visibility without stagger
 - [Phase 07-01]: parseMetricValue regex preserves sign in numeric field; component uses Math.abs() for animation counter, isNegative for display prefix
 - [Phase 07-01]: jsdom does not reflect img.loading as IDL property; use getAttribute('loading') in tests for lazy load assertions
+- [Phase 08-portfolio-page-react-tsx]: React Router v7 BrowserRouter + historyApiFallback:true for /portfolio SPA routing without breaking / slider
+- [Phase 08-portfolio-page-react-tsx]: All portfolio CSS scoped under [data-portfolio] attribute selector — zero bleed into existing slider app CSS vars (--bg, --ink, --blue)
+- [Phase 08-portfolio-page-react-tsx]: Globe _unbundled_ (transparent bg, reads --blue) copied to public/portfolio for CoverSlide iframe — not _standalone_ (has black bg)
+- [Phase 08-portfolio-page-react-tsx]: adaptProjects() is a pure function at module level — no React dependency, trivially testable, zero side effects
 
 ### Pending Todos
 
@@ -135,6 +140,6 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-03-11T16:20:52.242Z
-Stopped at: Completed 07-01-PLAN.md
+Last session: 2026-04-21T08:09:42.018Z
+Stopped at: Completed 08-01-PLAN.md
 Resume file: None

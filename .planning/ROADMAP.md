@@ -171,4 +171,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 5. Scroll Infrastructure & View Scaffold | 2/2 | Complete   | 2026-03-11 |
 | 6. Narrative Content Sections | 2/2 | Complete   | 2026-03-11 |
 | 7. Metrics, Gallery & Polish | 1/2 | In Progress|  |
-| 8. Portfolio Page — React/TSX | 0/3 | Planned | |
+| 8. Portfolio Page — React/TSX | 1/3 | In Progress|  |
