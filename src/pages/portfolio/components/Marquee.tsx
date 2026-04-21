@@ -13,19 +13,22 @@ export const Marquee = memo(function Marquee({ items, className }: MarqueeProps)
     const track = trackRef.current;
     if (!track) return;
 
-    // Wait one frame so the browser has painted and scrollWidth is accurate
     const raf = requestAnimationFrame(() => {
-      const fullWidth = track.scrollWidth / 2; // two identical tracks
+      const halfWidth = track.scrollWidth / 2;
       gsap.killTweensOf(track);
-      gsap.set(track, { x: 0 });
-      gsap.to(track, {
-        x: -fullWidth,
-        duration: 40,
+
+      // Proxy + wrap: playhead runs forever, wrap keeps x in [-halfWidth, 0)
+      // so there is never a hard position reset — fully seamless
+      const proxy = { x: 0 };
+      const wrap = gsap.utils.wrap(-halfWidth, 0);
+
+      gsap.to(proxy, {
+        x: -halfWidth,
+        duration: 60,
         ease: 'none',
         repeat: -1,
-        // snap the position back on each repeat so floating-point never drifts
-        onRepeat() {
-          gsap.set(track, { x: 0 });
+        onUpdate() {
+          gsap.set(track, { x: wrap(proxy.x) });
         },
       });
     });
@@ -44,7 +47,6 @@ export const Marquee = memo(function Marquee({ items, className }: MarqueeProps)
 
   return (
     <div className={['marquee', className].filter(Boolean).join(' ')}>
-      {/* Single div containing two copies — GSAP slides it left by exactly one copy width */}
       <div ref={trackRef} className="marquee-track">
         {content}
         {content}
