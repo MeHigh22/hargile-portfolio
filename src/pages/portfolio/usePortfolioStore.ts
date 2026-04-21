@@ -9,7 +9,7 @@ interface PortfolioStore {
 
 export const usePortfolioStore = create<PortfolioStore>((set) => ({
   currentIndex: 0,
-  activeYear: '2025',
+  activeYear: '2026',
   setIndex: (n) => set({ currentIndex: n }),
   setActiveYear: (yr) => set({ activeYear: yr }),
 }));

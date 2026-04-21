@@ -35,7 +35,7 @@ export function TweaksPanel({ portfolioRef, className }: TweaksPanelProps) {
     const el = portfolioRef.current;
     if (!el) return;
 
-    // Theme: 'ink' = default (no attribute), 'cobalt'/'paper' = data-theme
+    // Theme: 'ink' = default (no data-theme), 'cobalt'/'paper' override bg
     if (theme === 'ink') {
       el.removeAttribute('data-theme');
     } else {

@@ -73,7 +73,8 @@
 }
 
 [data-portfolio] {
-  height: 100%;
+  position: fixed;
+  inset: 0;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--sans);
@@ -161,7 +162,7 @@
   animation: pulse 2s ease-in-out infinite;
 }
 
-/* ---------- year filter sidebar ---------- */
+/* ---------- year-filter sidebar ---------- */
 [data-portfolio] .year-nav {
   position: fixed;
   top: 50%;
@@ -191,7 +192,9 @@
   border-right: 1px solid rgba(255, 255, 255, .12);
   transition: all .25s;
   background: transparent;
-  border: none;
+  border-top: none;
+  border-bottom: none;
+  border-left: none;
   text-align: right;
   mix-blend-mode: difference;
 }

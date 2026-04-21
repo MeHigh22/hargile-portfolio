@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useCallback } from 'react';
-import { useSearchParams, Routes, Route } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import gsap from 'gsap';
 import './PortfolioPage.css';
 import { projects } from '../../data/projects';
@@ -11,7 +11,6 @@ import { OutroSlide } from './components/OutroSlide';
 import { YearNav } from './components/YearNav';
 import { ProgressBar } from './components/ProgressBar';
 import { TweaksPanel } from './components/TweaksPanel';
-import { CaseStudyPage } from './components/CaseStudyPage';
 
 // Called once at module level — pure function, no React dependency
 const adaptedProjects = adaptProjects(projects);
@@ -142,7 +141,9 @@ export function PortfolioPage() {
         <YearNav
           slides={adaptedProjects}
           currentIndex={store.currentIndex}
+          activeYear={store.activeYear}
           onGo={go}
+          onYearChange={store.setActiveYear}
         />
         <ProgressBar
           current={store.currentIndex}
@@ -176,12 +177,7 @@ export function PortfolioPage() {
         <OutroSlide ref={setSlideRef(slides.length - 1) as React.Ref<HTMLElement>} />
       </main>
 
-      <TweaksPanel portfolioRef={rootRef} />
-
-      {/* Nested route for case study — /portfolio/case-study?p=<slug> */}
-      <Routes>
-        <Route path="case-study" element={<CaseStudyPage />} />
-      </Routes>
+      <TweaksPanel portfolioRef={rootRef as React.RefObject<HTMLElement | null>} />
     </div>
   );
 }

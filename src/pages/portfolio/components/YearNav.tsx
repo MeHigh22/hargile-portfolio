@@ -1,66 +1,50 @@
 import type { PortfolioSlideData } from '../types';
-import { usePortfolioStore } from '../usePortfolioStore';
 
 interface YearNavProps {
   slides: PortfolioSlideData[];
-  currentIndex: number;
+  currentIndex: number; // 0 = cover, 1..N = projects, N+1 = outro
+  activeYear: string;
   onGo: (slideIndex: number) => void;
-  className?: string;
+  onYearChange: (year: string) => void;
 }
 
-export function YearNav({ slides, currentIndex, onGo, className }: YearNavProps) {
-  const activeYear = usePortfolioStore((s) => s.activeYear);
-  const setActiveYear = usePortfolioStore((s) => s.setActiveYear);
-
-  // Unique years sorted descending
+export function YearNav({ slides, currentIndex, activeYear, onGo, onYearChange }: YearNavProps) {
   const years = [...new Set(slides.map(s => s.year))].sort((a, b) => Number(b) - Number(a));
 
-  // Projects for the currently active year
-  const projectsForYear = slides.filter(s => s.year === activeYear);
-
-  function handleYearClick(yr: string) {
-    setActiveYear(yr);
-    // Navigate to first project of the selected year (offset by 1 for cover slide)
-    const firstSlide = slides.find(s => s.year === yr);
-    if (firstSlide) {
-      const slideIndex = 1 + slides.findIndex(s => s.slug === firstSlide.slug);
-      onGo(slideIndex);
-    }
-  }
-
-  function handleDotClick(slug: string) {
-    // slideIndex = 1 (cover) + position in slides array
-    const idx = slides.findIndex(s => s.slug === slug);
-    if (idx !== -1) onGo(1 + idx);
-  }
+  // On cover (0) or outro (last): show year tabs only, no dots
+  const isChrome = currentIndex === 0 || currentIndex === slides.length + 1;
+  const visibleDots = isChrome ? [] : slides.filter(s => s.year === activeYear);
 
   return (
-    <nav className={['year-nav', className].filter(Boolean).join(' ')}>
+    <nav className="year-nav">
       <div className="year-tabs">
         {years.map(yr => (
           <button
             key={yr}
-            className={['year-tab', activeYear === yr ? 'active' : ''].filter(Boolean).join(' ')}
-            onClick={() => handleYearClick(yr)}
+            className={['year-tab', yr === activeYear ? 'active' : ''].filter(Boolean).join(' ')}
+            onClick={() => {
+              onYearChange(yr);
+              const first = slides.find(s => s.year === yr);
+              if (first) onGo(slides.indexOf(first) + 1);
+            }}
           >
             {yr}
           </button>
         ))}
       </div>
       <div className="proj-dots">
-        {projectsForYear.map(slide => {
-          const slideIndex = 1 + slides.findIndex(s => s.slug === slide.slug);
+        {visibleDots.map(slide => {
+          const slideIndex = slides.indexOf(slide) + 1;
           const isActive = currentIndex === slideIndex;
           return (
-            <button
+            <div
               key={slide.slug}
               className={['proj-dot', isActive ? 'active' : ''].filter(Boolean).join(' ')}
-              onClick={() => handleDotClick(slide.slug)}
-              title={slide.name[0]}
+              onClick={() => onGo(slideIndex)}
             >
+              <span className="dot-label">{slide.name[0]}{slide.name[1] ? ' ' + slide.name[1] : ''}</span>
               <span className="dot-mark" />
-              <span className="dot-label">{slide.name[0]}</span>
-            </button>
+            </div>
           );
         })}
       </div>
