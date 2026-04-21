@@ -33,9 +33,9 @@ export const OutroSlide = React.forwardRef<HTMLElement, OutroSlideProps>(
             </dd>
             <dt>Contact</dt>
             <dd>
-              <a href="mailto:contact@hargile.com">contact@hargile.com</a>
+              <a href="mailto:charles.dl@hargile.com">charles.dl@hargile.com</a>
               <br />
-              <a href="mailto:charles.dl@hargile.com" style={{ opacity: 0.7 }}>charles.dl@hargile.com</a>
+              <a href="mailto:contact@hargile.com">contact@hargile.com</a>
             </dd>
             <dt>Téléphone</dt>
             <dd>
