@@ -3,6 +3,7 @@ import { render } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import App from '../../../App';
 import { PortfolioPage } from '../PortfolioPage';
+import { SceneRenderer } from '../components/SceneRenderer';
 
 // Mock GSAP — comprehensive mock to cover SlideAmbience.fromTo and all Slider/CaseStudy usage
 vi.mock('gsap', () => ({
@@ -24,6 +25,24 @@ vi.mock('gsap/ScrollTrigger', () => ({
 vi.mock('gsap/Observer', () => ({
   Observer: { create: vi.fn(() => ({ kill: vi.fn(), enable: vi.fn(), disable: vi.fn() })) },
 }));
+
+describe('SceneRenderer', () => {
+  it('renders an SVG for each SceneKind', () => {
+    (['dashboard', 'trading', 'gallery', 'banking', 'editorial', 'shop'] as const).forEach(kind => {
+      const { container } = render(<SceneRenderer scene={kind} />);
+      expect(container.querySelector('svg')).toBeTruthy();
+    });
+  });
+
+  it('uses unique gradient IDs across two instances', () => {
+    const { container: c1 } = render(<SceneRenderer scene="dashboard" />);
+    const { container: c2 } = render(<SceneRenderer scene="dashboard" />);
+    const ids1 = Array.from(c1.querySelectorAll('[id]')).map(el => el.id);
+    const ids2 = Array.from(c2.querySelectorAll('[id]')).map(el => el.id);
+    const overlap = ids1.filter(id => ids2.includes(id));
+    expect(overlap).toHaveLength(0);
+  });
+});
 
 describe('PortfolioPage smoke tests', () => {
   it('renders PortfolioPage without throwing', () => {
