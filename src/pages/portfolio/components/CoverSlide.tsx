@@ -16,36 +16,34 @@ export const CoverSlide = React.forwardRef<HTMLDivElement, CoverSlideProps>(
         <div className="cover-left stagger">
           <div className="cover-main">
             <div className="eyebrow">
-              <span className="kicker">Hargile Studio</span>
+              <span className="kicker">Portfolio 2019 — 2026</span>
               <span style={{ height: '1px', background: 'var(--line)', flex: '1', maxWidth: '80px' }} />
-              <span className="kicker blue">
-                <span className="dot" />
-                Disponible — Q3 2026
-              </span>
+              <span className="kicker blue">Vol. VII</span>
             </div>
             <h1>
-              <span className="thin">Des sites</span>{' '}
-              <em>qui convertissent</em>
+              <span className="thin">L&apos;innovation digitale</span><br />
+              <em>au service </em><br />
+              <span className="thin">de votre entreprise</span>
             </h1>
             <p className="lede">
-              Nous construisons des expériences digitales sur-mesure pour des marques ambitieuses.
+              HARGILE est une agence digitale pensée pour concevoir et développer des solutions technologiques innovantes, adaptées à vos défis stratégiques et opérationnels.
             </p>
             <div className="cover-actions">
               <button className="btn-ghost" onClick={onGoToProjects}>
-                Explorer nos projets <span className="arrow">→</span>
+                Parcourir les projets <span className="arrow">→</span>
               </button>
               <div className="stats">
                 <div className="stat">
-                  <div className="n"><em>{slides.length}</em></div>
+                  <div className="n"><em>24</em></div>
                   <div className="l">Projets livrés</div>
                 </div>
                 <div className="stat">
-                  <div className="n">4+</div>
-                  <div className="l">Années d&apos;expérience</div>
+                  <div className="n">11</div>
+                  <div className="l">Clients récurrents</div>
                 </div>
                 <div className="stat">
-                  <div className="n"><em>100%</em></div>
-                  <div className="l">Clients satisfaits</div>
+                  <div className="n"><em>∞</em></div>
+                  <div className="l">Lignes de code</div>
                 </div>
               </div>
             </div>
