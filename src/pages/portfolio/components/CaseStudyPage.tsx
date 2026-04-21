@@ -1,317 +1,188 @@
+import { useEffect, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { projects } from '../../../data/projects';
+import '../PortfolioPage.css';
+import './CaseStudyPage.css';
+import { CASE_STUDY_PROJECTS } from '../caseStudyData';
+import { SceneRenderer } from './SceneRenderer';
+import type { SceneKind } from '../types';
 
 export function CaseStudyPage() {
   const [searchParams] = useSearchParams();
-  const slug = searchParams.get('p');
-  const project = projects.find(p => p.id === slug);
+  const slug = searchParams.get('p') ?? 'atlas';
+  const rootRef = useRef<HTMLDivElement>(null);
 
-  if (!project) {
-    return (
-      <div
-        data-portfolio
-        style={{
-          position: 'fixed',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          gap: '1rem',
-          background: 'var(--bg)',
-          color: 'var(--ink)',
-          fontFamily: 'var(--mono)',
-          zIndex: 200,
-        }}
-      >
-        <p>Projet introuvable : {slug}</p>
-        <Link to="/portfolio" style={{ color: 'var(--blue)' }}>← Retour au portfolio</Link>
-      </div>
+  const idx = CASE_STUDY_PROJECTS.findIndex(p => p.slug === slug);
+  const p = CASE_STUDY_PROJECTS[idx] ?? CASE_STUDY_PROJECTS[0];
+  const nextP = CASE_STUDY_PROJECTS[(idx + 1) % CASE_STUDY_PROJECTS.length];
+
+  // Scroll-reveal via IntersectionObserver
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
+      { threshold: 0.08 }
     );
-  }
+    root.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    return () => io.disconnect();
+  }, [slug]);
 
-  const cs = project.caseStudy;
+  // Scroll to top on slug change
+  useEffect(() => {
+    rootRef.current?.scrollTo(0, 0);
+  }, [slug]);
 
   return (
-    <div
-      data-portfolio
-      style={{
-        position: 'fixed',
-        inset: 0,
-        overflowY: 'auto',
-        background: 'var(--bg)',
-        color: 'var(--ink)',
-        fontFamily: 'var(--sans)',
-        zIndex: 200,
-      }}
-    >
-      {/* Back navigation */}
-      <Link
-        to="/portfolio"
-        style={{
-          position: 'fixed',
-          top: '28px',
-          left: '36px',
-          fontFamily: 'var(--mono)',
-          fontSize: '11px',
-          letterSpacing: '.16em',
-          textTransform: 'uppercase',
-          color: 'var(--blue)',
-          textDecoration: 'none',
-          zIndex: 100,
-        }}
-      >
-        ← Portfolio
-      </Link>
+    <div data-case-study data-portfolio data-theme="cobalt" ref={rootRef}>
 
-      <article style={{ maxWidth: '760px', margin: '0 auto', padding: '120px 36px 80px' }}>
-        {/* Hero */}
-        <p
-          style={{
-            fontFamily: 'var(--mono)',
-            fontSize: '10px',
-            letterSpacing: '.24em',
-            textTransform: 'uppercase',
-            color: 'var(--blue)',
-            marginBottom: '16px',
-          }}
-        >
-          {project.category} · {project.industry}
-        </p>
-        <h1
-          style={{
-            fontFamily: 'var(--display)',
-            fontWeight: 300,
-            fontSize: 'clamp(48px,7vw,96px)',
-            lineHeight: 0.92,
-            letterSpacing: '-0.03em',
-            marginBottom: '24px',
-          }}
-        >
-          {project.title1}<br /><em style={{ color: 'var(--blue)' }}>{project.title2}</em>
-        </h1>
-        <p
-          style={{
-            fontSize: '18px',
-            lineHeight: 1.55,
-            color: 'var(--ink-dim)',
-            marginBottom: '48px',
-            maxWidth: '560px',
-          }}
-        >
-          {project.subtitle}
-        </p>
+      {/* Topbar */}
+      <div className="cs-topbar">
+        <Link to="/portfolio" className="cs-logo">
+          <img src="/brand-large-white.png" alt="Hargile" />
+        </Link>
+        <nav>
+          <Link to="/portfolio">← Portfolio</Link>
+          <a href="#"><span className="dot" />Dispo Q3 2026</a>
+          <a href="mailto:hello@hargile.studio" className="cta">Démarrer un projet →</a>
+        </nav>
+      </div>
 
-        {project.heroImg && (
-          <img
-            src={project.heroImg}
-            alt={`${project.title1} ${project.title2}`}
-            style={{
-              width: '100%',
-              borderRadius: '8px',
-              marginBottom: '64px',
-              objectFit: 'cover',
-              maxHeight: '480px',
-            }}
-          />
-        )}
+      {/* Breadcrumbs */}
+      <div className="crumbs reveal">
+        <Link to="/portfolio">Portfolio</Link>
+        <span className="sep">/</span>
+        <a href="#">{p.kind}</a>
+        <span className="sep">/</span>
+        <span className="cur">{p.name.join(' ')}</span>
+      </div>
 
-        {/* Projects with caseStudy data */}
-        {cs && (
-          <>
-            <section style={{ marginBottom: '48px' }}>
-              <h2
-                style={{
-                  fontFamily: 'var(--mono)',
-                  fontSize: '10px',
-                  letterSpacing: '.22em',
-                  textTransform: 'uppercase',
-                  color: 'var(--ink-dim)',
-                  marginBottom: '16px',
-                  fontWeight: 400,
-                }}
-              >
-                Défi
-              </h2>
-              <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--ink)', whiteSpace: 'pre-line' }}>{cs.challenge}</p>
-            </section>
+      {/* Hero */}
+      <section className="hero reveal">
+        <div>
+          <div className="num">Projet n° {p.num} · {p.year}</div>
+          <h1>{p.name[0]}<br /><em>{p.name[1]}</em></h1>
+          <p className="tagline">{p.tagline}</p>
+        </div>
+        <div className="meta">
+          <div><div className="k">Client</div><div className="v">{p.client}</div></div>
+          <div><div className="k">Année</div><div className="v">{p.year}</div></div>
+          <div><div className="k">Durée</div><div className="v">{p.duration}</div></div>
+          <div><div className="k">Équipe</div><div className="v">{p.team}</div></div>
+        </div>
+      </section>
 
-            <section style={{ marginBottom: '48px' }}>
-              <h2
-                style={{
-                  fontFamily: 'var(--mono)',
-                  fontSize: '10px',
-                  letterSpacing: '.22em',
-                  textTransform: 'uppercase',
-                  color: 'var(--ink-dim)',
-                  marginBottom: '16px',
-                  fontWeight: 400,
-                }}
-              >
-                Solution
-              </h2>
-              <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--ink)', whiteSpace: 'pre-line' }}>{cs.solution}</p>
-            </section>
+      {/* Feature frame */}
+      <section className="feature reveal">
+        <div className="frame">
+          <div className="scene">
+            <SceneRenderer scene={p.scene as SceneKind} />
+          </div>
+          <div className="caption">
+            <span>Fig. 001 — {p.name.join(' ')}</span>
+            <span>Aperçu produit</span>
+          </div>
+        </div>
+      </section>
 
-            {/* Metrics */}
-            {cs.metrics.length > 0 && (
-              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', marginBottom: '48px' }}>
-                {cs.metrics.map((m, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      background: 'rgba(255,255,255,0.05)',
-                      border: '1px solid rgba(255,255,255,0.12)',
-                      borderRadius: '12px',
-                      padding: '20px 24px',
-                      minWidth: '140px',
-                    }}
-                  >
-                    <div
-                      style={{
-                        fontFamily: 'var(--display)',
-                        fontSize: '32px',
-                        fontWeight: 300,
-                        color: 'var(--blue)',
-                        lineHeight: 1,
-                      }}
-                    >
-                      {m.value}
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: 'var(--mono)',
-                        fontSize: '10px',
-                        letterSpacing: '.18em',
-                        textTransform: 'uppercase',
-                        color: 'var(--ink-dim)',
-                        marginTop: '8px',
-                      }}
-                    >
-                      {m.label}
-                    </div>
-                  </div>
-                ))}
+      {/* Metrics band */}
+      <section className="metrics-band reveal">
+        <h3>— Résultats mesurés</h3>
+        <div className="grid">
+          {p.metrics.map((m, i) => (
+            <div className="cell" key={i}>
+              <div className="n"><em>{m.n}</em>{m.suf}</div>
+              <div>
+                <div className="l">{m.l}</div>
+                <div className="s">{m.s}</div>
               </div>
-            )}
+            </div>
+          ))}
+        </div>
+      </section>
 
-            {/* Testimonial */}
-            {cs.testimonial && (
-              <blockquote
-                style={{
-                  borderLeft: '2px solid var(--blue)',
-                  paddingLeft: '24px',
-                  marginBottom: '48px',
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: 'var(--display)',
-                    fontStyle: 'italic',
-                    fontSize: '22px',
-                    lineHeight: 1.5,
-                    color: 'var(--ink)',
-                    marginBottom: '12px',
-                  }}
-                >
-                  &ldquo;{cs.testimonial.quote}&rdquo;
-                </p>
-                <cite
-                  style={{
-                    fontFamily: 'var(--mono)',
-                    fontSize: '11px',
-                    color: 'var(--ink-dim)',
-                    fontStyle: 'normal',
-                  }}
-                >
-                  — {cs.testimonial.author}, {cs.testimonial.role}
-                </cite>
-              </blockquote>
-            )}
-          </>
-        )}
+      {/* Narrative */}
+      <section className="narrative">
+        <aside className="reveal">— Étude</aside>
+        <div className="body">
+          <div className="chap reveal">
+            <h2>Le <em>contexte</em>.</h2>
+            <p className="lede">{p.tagline}</p>
+            <p>
+              <span className="drop">{p.problem[0]}</span>
+              {p.problem.slice(1)}
+            </p>
+          </div>
+          <div className="chap reveal">
+            <h2>L'<em>approche</em>.</h2>
+            <p>{p.approach}</p>
+          </div>
+          <div className="pull reveal">{p.pull}</div>
+          <div className="chap reveal">
+            <h2>Le <em>résultat</em>.</h2>
+            <p>{p.outcome}</p>
+          </div>
+        </div>
+      </section>
 
-        {/* Projects without caseStudy — show narrative */}
-        {!cs && (
-          <>
-            <section style={{ marginBottom: '48px' }}>
-              <h2
-                style={{
-                  fontFamily: 'var(--mono)',
-                  fontSize: '10px',
-                  letterSpacing: '.22em',
-                  textTransform: 'uppercase',
-                  color: 'var(--ink-dim)',
-                  marginBottom: '16px',
-                  fontWeight: 400,
-                }}
-              >
-                Défi
-              </h2>
-              <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--ink)' }}>{project.narrative.problem}</p>
-            </section>
+      {/* Stack */}
+      <section className="stack-sec reveal">
+        <h3>— Stack technique</h3>
+        <div className="stack-grid">
+          {p.stack.map(([t, n], i) => (
+            <div className="stack-item" key={i}>
+              <div className="t">{t}</div>
+              <div className="n">{n}</div>
+            </div>
+          ))}
+        </div>
+      </section>
 
-            <section style={{ marginBottom: '48px' }}>
-              <h2
-                style={{
-                  fontFamily: 'var(--mono)',
-                  fontSize: '10px',
-                  letterSpacing: '.22em',
-                  textTransform: 'uppercase',
-                  color: 'var(--ink-dim)',
-                  marginBottom: '16px',
-                  fontWeight: 400,
-                }}
-              >
-                Solution
-              </h2>
-              <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--ink)' }}>{project.narrative.solution}</p>
-            </section>
+      {/* Gallery */}
+      <section className="gallery reveal">
+        <div className="frame">
+          <div className="scene"><SceneRenderer scene={p.gallery[0] as SceneKind} /></div>
+          <div className="cap">Vue 01 — interface</div>
+        </div>
+        <div className="frame">
+          <div className="scene"><SceneRenderer scene={p.gallery[1] as SceneKind} /></div>
+          <div className="cap">Vue 02 — détail</div>
+        </div>
+      </section>
 
-            <section style={{ marginBottom: '48px' }}>
-              <h2
-                style={{
-                  fontFamily: 'var(--mono)',
-                  fontSize: '10px',
-                  letterSpacing: '.22em',
-                  textTransform: 'uppercase',
-                  color: 'var(--ink-dim)',
-                  marginBottom: '16px',
-                  fontWeight: 400,
-                }}
-              >
-                Résultat
-              </h2>
-              <p style={{ fontSize: '16px', lineHeight: 1.7, color: 'var(--ink)' }}>{project.narrative.outcome}</p>
-            </section>
-          </>
-        )}
+      {/* Timeline */}
+      <section className="timeline reveal">
+        <h3>— Chronologie</h3>
+        {p.timeline.map(([week, what, out], i) => (
+          <div className="tl-row" key={i}>
+            <div className="week">{week}</div>
+            <div className="what">{what}</div>
+            <div className="out">{out}</div>
+          </div>
+        ))}
+      </section>
 
-        {/* Website CTA */}
-        {project.websiteUrl && (
-          <a
-            href={project.websiteUrl}
-            target="_blank"
-            rel="noreferrer"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '14px 22px',
-              border: '1px solid rgba(255,255,255,0.22)',
-              borderRadius: '999px',
-              fontFamily: 'var(--mono)',
-              fontSize: '11px',
-              letterSpacing: '.16em',
-              textTransform: 'uppercase',
-              color: 'var(--ink)',
-              textDecoration: 'none',
-            }}
-          >
-            Voir le site →
-          </a>
-        )}
-      </article>
+      {/* Testimonial */}
+      <section className="testimonial reveal">
+        <blockquote>« <em>{p.quote[0]}</em> »</blockquote>
+        <div className="sig">— {p.quote[1]}</div>
+      </section>
+
+      {/* Next project */}
+      <section className="cs-next reveal">
+        <div>
+          <div className="k">Projet suivant · {nextP.num}</div>
+          <h2>{nextP.name[0]} <em>{nextP.name[1]}</em></h2>
+        </div>
+        <Link to={`/portfolio/case-study?p=${nextP.slug}`} className="btn">Lire l'étude →</Link>
+      </section>
+
+      {/* Footer */}
+      <footer className="cs-footer">
+        <div>Hargile · 14 rue de Turenne, 75003 Paris</div>
+        <div><a href="mailto:hello@hargile.studio">hello@hargile.studio</a></div>
+        <div>© 2026 — Tous droits réservés</div>
+      </footer>
+
     </div>
   );
 }

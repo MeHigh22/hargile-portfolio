@@ -45,6 +45,9 @@ export const ProjectSlide = React.forwardRef<HTMLElement, ProjectSlideProps>(
             ))}
           </div>
           <div className="actions">
+            <a href={`/portfolio/case-study?p=${slide.slug}`} className="btn-ghost">
+              Étude de cas <span className="arrow">→</span>
+            </a>
             {slide.websiteUrl ? (
               <a href={slide.websiteUrl} className="btn-ghost" target="_blank" rel="noreferrer">
                 Voir le site <span className="arrow">→</span>

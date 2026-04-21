@@ -79,4 +79,5 @@ export interface ProjectData {
   industry: string;
   narrative: ProjectNarrative;
   caseStudy?: CaseStudyContent;
+  websiteUrl?: string;
 }

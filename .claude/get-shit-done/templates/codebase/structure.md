@@ -216,7 +216,7 @@ get-shit-done/
 
 **New Workflow:**
 - Implementation: `get-shit-done/workflows/{name}.md`
-- Usage: Reference from command with `@./.claude/get-shit-done/workflows/{name}.md`
+- Usage: Reference from command with `@C:/Argent/Hargile Portfolio/hargile-portfolio/.claude/get-shit-done/workflows/{name}.md`
 
 **New Reference Document:**
 - Implementation: `get-shit-done/references/{name}.md`
@@ -229,12 +229,12 @@ get-shit-done/
 ## Special Directories
 
 **get-shit-done/**
-- Purpose: Resources installed to ./.claude/
+- Purpose: Resources installed to C:/Argent/Hargile Portfolio/hargile-portfolio/.claude/
 - Source: Copied by bin/install.js during installation
 - Committed: Yes (source of truth)
 
 **commands/**
-- Purpose: Slash commands installed to ./.claude/commands/
+- Purpose: Slash commands installed to C:/Argent/Hargile Portfolio/hargile-portfolio/.claude/commands/
 - Source: Copied by bin/install.js during installation
 - Committed: Yes (source of truth)
 

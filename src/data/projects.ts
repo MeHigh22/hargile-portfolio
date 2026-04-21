@@ -235,7 +235,7 @@ export const projects: ProjectData[] = [
     services: 'Site Web, UI/UX, Branding',
     duration: '3 mois',
     tech: 'Next.js, Sanity, Vercel',
-    heroImg: `${HARGILE_IMG}/domainedepuy.webp`,
+    heroImg: new URL('../../assets/domaine.webp', import.meta.url).href,
     colors: {
       accent: '#d4a76a',
       background: '#0d0a06',
@@ -250,6 +250,7 @@ export const projects: ProjectData[] = [
       solution: "Site immersif avec visite virtuelle, reservation en ligne et storytelling photographique du domaine.",
       outcome: "Reservations en ligne +120%, temps moyen sur le site 4 min 30s.",
     },
+    websiteUrl: 'https://domainedepuybernier.com',
   },
   {
     id: 'venizi',
@@ -262,7 +263,7 @@ export const projects: ProjectData[] = [
     services: 'E-commerce, UI/UX, Branding',
     duration: '4 mois',
     tech: 'Shopify, Liquid, Klaviyo',
-    heroImg: `${HARGILE_IMG}/venizi.webp`,
+    heroImg: new URL('../../assets/venizi.webp', import.meta.url).href,
     colors: {
       accent: '#c9a96e',
       background: '#0a0810',
@@ -277,6 +278,7 @@ export const projects: ProjectData[] = [
       solution: "Refonte complete de l'e-commerce avec mise en valeur produit, navigation par collection et experience mobile-first.",
       outcome: "Taux de conversion +65%, panier moyen en hausse de 28%.",
     },
+    websiteUrl: 'https://venizi.com',
   },
   {
     id: 'fondacio',
@@ -289,12 +291,12 @@ export const projects: ProjectData[] = [
     services: 'Site Web, UI/UX, CMS',
     duration: '3 mois',
     tech: 'WordPress, PHP, ACF',
-    heroImg: `${HARGILE_IMG}/fondacio.webp`,
+    heroImg: new URL('../../assets/fondacio.png', import.meta.url).href,
     colors: {
-      accent: '#e8734a',
-      background: '#0d0806',
-      gradientFrom: '#e8734a',
-      gradientTo: '#f0a070',
+      accent: '#46418E',
+      background: '#0a0a1a',
+      gradientFrom: '#46418E',
+      gradientTo: '#6a66b8',
     },
     ambience: 'pulse',
     imageRatio: 'left-heavy',
@@ -304,6 +306,7 @@ export const projects: ProjectData[] = [
       solution: "Plateforme unifiee multilingue avec CMS centralise et navigation par mission, pays et programmes.",
       outcome: "Inscriptions aux programmes +90%, coherence de marque sur 4 continents.",
     },
+    websiteUrl: 'https://fondacio.org',
   },
   {
     id: 'itsabouttogo',
@@ -331,6 +334,7 @@ export const projects: ProjectData[] = [
       solution: "Site avec carte interactive du parcours, blog de voyage et galeries photo immersives mises a jour sur la route.",
       outcome: "35 000 visiteurs uniques pendant le voyage, couverture mediatique dans 3 pays.",
     },
+    websiteUrl: 'https://itsabouttogo.be',
   },
   {
     id: 'mybob',
@@ -358,6 +362,7 @@ export const projects: ProjectData[] = [
       solution: "Storytelling par artisan, fiches produits enrichies avec origine et savoir-faire, et checkout optimise.",
       outcome: "Taux de retour -40%, engagement sur les pages produit +55%.",
     },
+    websiteUrl: 'https://mybob.com',
   },
   {
     id: 'centrespms',
@@ -385,6 +390,7 @@ export const projects: ProjectData[] = [
       solution: "Site accessible et clair avec parcours par profil (parent, eleve, enseignant) et prise de rendez-vous simplifiee.",
       outcome: "Demandes de rendez-vous en ligne +150%, score d'accessibilite WCAG AA atteint.",
     },
+    websiteUrl: 'https://centrespms.be',
   },
   {
     id: 'delphinesimonis',
@@ -412,6 +418,7 @@ export const projects: ProjectData[] = [
       solution: "Galerie immersive avec audiodescriptions integrees, navigation par serie et experience plein ecran.",
       outcome: "Ventes en ligne lancees, 12 expositions promues, accessibilite saluee par la communaute.",
     },
+    websiteUrl: 'https://delphinesimonis.be',
   },
   {
     id: 'trussogne',
@@ -439,6 +446,7 @@ export const projects: ProjectData[] = [
       solution: "Site avec reservation directe, galerie immersive des espaces et mise en avant des activites nature environnantes.",
       outcome: "Reservations directes 45% du total, commission economisee estimee a 8 000 euros par an.",
     },
+    websiteUrl: 'https://gitedetrussogne.be',
   },
   {
     id: 'eren',
@@ -466,6 +474,7 @@ export const projects: ProjectData[] = [
       solution: "Site corporate avec calculateur d'economies, etudes de cas detaillees et tunnel de conversion optimise.",
       outcome: "Leads qualifies +200%, cout d'acquisition divise par 3.",
     },
+    websiteUrl: 'https://eren.be',
   },
   {
     id: 'aluvi',
@@ -493,6 +502,7 @@ export const projects: ProjectData[] = [
       solution: "Refonte avec mise en avant des services, temoignages clients et formulaires de contact segmentes par besoin.",
       outcome: "Demandes de mandat en ligne +80%, positionnement SEO local top 5.",
     },
+    websiteUrl: 'https://aluvi.be',
   },
   {
     id: 'dripdrops',
@@ -520,6 +530,7 @@ export const projects: ProjectData[] = [
       solution: "E-commerce avec systeme de drops programmes, compte a rebours, notifications et experience mobile-first.",
       outcome: "Sell-out en moins de 2h sur les drops, base email +10 000 en 6 mois.",
     },
+    websiteUrl: 'https://dripdrops.be',
   },
   {
     id: 'basseilles',
@@ -547,6 +558,7 @@ export const projects: ProjectData[] = [
       solution: "Site avec parcours de decouverte visuel, filtrage par type d'experience et reservation directe integree.",
       outcome: "Reservations directes +70%, duree moyenne de sejour +0.8 nuit.",
     },
+    websiteUrl: 'https://fermedebasseilles.be',
   },
   {
     id: 'azzaizzy',
@@ -574,6 +586,7 @@ export const projects: ProjectData[] = [
       solution: "Recherche avancee avec Algolia, navigation par projet creatif et tutoriels integres aux fiches produit.",
       outcome: "Taux de conversion +45%, pages vues par session +60%.",
     },
+    websiteUrl: 'https://azzaizzy.com',
   },
   {
     id: 'gvegroup',
@@ -601,6 +614,7 @@ export const projects: ProjectData[] = [
       solution: "Architecture d'information par secteur avec storytelling d'impact et etudes de cas interactives.",
       outcome: "Temps passe sur le site +85%, demandes de partenariat +50%.",
     },
+    websiteUrl: 'https://gvegroup.be',
   },
   {
     id: 'foorn',
@@ -628,6 +642,7 @@ export const projects: ProjectData[] = [
       solution: "Site vitrine appetissant avec menu digital, commande en ligne et storytelling sur les origines libanaises.",
       outcome: "Commandes en ligne 30% du CA, notoriete locale en forte hausse.",
     },
+    websiteUrl: 'https://foorn.be',
   },
   {
     id: 'alianature',
@@ -655,6 +670,7 @@ export const projects: ProjectData[] = [
       solution: "E-commerce chaleureux avec mise en avant des productrices, contenu educatif et programme de fidelite.",
       outcome: "Ventes en ligne +90%, taux de fidelisation 35%.",
     },
+    websiteUrl: 'https://alianature.be',
   },
   {
     id: 'mayaglobal',
@@ -682,6 +698,7 @@ export const projects: ProjectData[] = [
       solution: "Site produit avec demo interactive, visualisations 3D des terrains et tunnel de conversion pour les essais gratuits.",
       outcome: "Demandes de demo +160%, cycle de vente raccourci de 40%.",
     },
+    websiteUrl: 'https://mayaglobal.io',
   },
   {
     id: 'creativeid',
@@ -709,6 +726,7 @@ export const projects: ProjectData[] = [
       solution: "Migration Shopify avec recherche instantanee Algolia, navigation par technique creative et fiches enrichies.",
       outcome: "Taux de rebond -35%, chiffre d'affaires en ligne +50%.",
     },
+    websiteUrl: 'https://creativeid.be',
   },
   {
     id: 'hexidesigns',
@@ -736,6 +754,7 @@ export const projects: ProjectData[] = [
       solution: "Portfolio minimaliste noir et blanc mettant en avant les collections avec navigation plein ecran.",
       outcome: "Portfolio utilise pour l'admission a Parsons, visibilite accrue dans le milieu de la mode.",
     },
+    websiteUrl: 'https://hexidesigns.com',
   },
   {
     id: 'mardieditions',
@@ -763,6 +782,7 @@ export const projects: ProjectData[] = [
       solution: "E-commerce editorial avec lookbooks saisonniers, guide de tailles intelligent et programme de fidelite.",
       outcome: "Taux de retour -25%, achats repetes +40% en 6 mois.",
     },
+    websiteUrl: 'https://mardieditions.com',
   },
   {
     id: 'locafut',
@@ -790,6 +810,7 @@ export const projects: ProjectData[] = [
       solution: "Site avec simulateur d'economies, catalogue interactif et formulaire de devis intelligent.",
       outcome: "Leads entrants +180%, cout d'acquisition client divise par 4.",
     },
+    websiteUrl: 'https://locafut.be',
   },
   {
     id: 'defierlant',
@@ -817,5 +838,6 @@ export const projects: ProjectData[] = [
       solution: "Galerie immersive ou chaque tableau est accompagne de son poeme, avec navigation par serie et exposition.",
       outcome: "Ventes d'oeuvres en ligne lancees, 8 expositions promues avec inscriptions digitales.",
     },
+    websiteUrl: 'https://cristophedefierlant.be',
   },
 ];

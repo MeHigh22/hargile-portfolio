@@ -109,20 +109,31 @@ export const Slide = forwardRef<HTMLDivElement, SlideProps>(
                 </span>
               </div>
 
-              {/* CTA: only render for projects that have case study data */}
-              {project.caseStudy && (
-                <button
-                  data-anim="cta"
-                  className="mt-6 font-mono text-sm tracking-wider text-accent border border-accent/40 px-4 py-2 rounded-full hover:bg-accent/10 transition-colors"
-                  onClick={() => {
-                    if (!useSliderStore.getState().isAnimating) {
-                      useViewStore.getState().openCase(project.id);
-                    }
-                  }}
-                >
-                  Voir l'etude de cas →
-                </button>
-              )}
+              {/* CTA */}
+              <div data-anim="cta" className="mt-6 flex gap-3">
+                {project.caseStudy && (
+                  <button
+                    className="font-mono text-sm tracking-wider text-accent border border-accent/40 px-4 py-2 rounded-full hover:bg-accent/10 transition-colors"
+                    onClick={() => {
+                      if (!useSliderStore.getState().isAnimating) {
+                        useViewStore.getState().openCase(project.id);
+                      }
+                    }}
+                  >
+                    Voir l'etude de cas →
+                  </button>
+                )}
+                {!project.caseStudy && project.websiteUrl && (
+                  <a
+                    href={project.websiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-mono text-sm tracking-wider text-accent border border-accent/40 px-4 py-2 rounded-full hover:bg-accent/10 transition-colors"
+                  >
+                    Voir le site →
+                  </a>
+                )}
+              </div>
             </div>
           </div>
 

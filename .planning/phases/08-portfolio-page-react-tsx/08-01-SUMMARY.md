@@ -125,6 +125,14 @@ None — no external service configuration required.
 - 08-03 (PortfolioPage full implementation) can proceed after 08-02 slide components exist
 - The stub PortfolioPage.tsx at `/portfolio` renders correctly; it will be replaced in 08-03
 
+## Self-Check: PASSED
+
+- All 8 created files confirmed present on disk
+- Both task commits confirmed in git log (cb07764, 023e44b)
+- portfolioDataAdapter tests: 14/14 passing
+- vite-config tests: 3/3 passing (including new historyApiFallback assertion)
+- TypeScript: 0 errors
+
 ---
 *Phase: 08-portfolio-page-react-tsx*
 *Completed: 2026-04-21*

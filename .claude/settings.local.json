@@ -3,7 +3,8 @@
     "allow": [
       "WebSearch",
       "Bash(node \"./.claude/get-shit-done/bin/gsd-tools.cjs\" state record-session --stopped-at \"Completed 04-02-PLAN.md \\(visual checkpoint approved by user\\)\")",
-      "WebFetch(domain:hargile.com)"
+      "WebFetch(domain:hargile.com)",
+      "Bash(npx tsc *)"
     ]
   }
 }
