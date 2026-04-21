@@ -827,7 +827,7 @@
 [data-portfolio] .outro {
   position: absolute;
   inset: 0;
-  padding: 110px 60px 90px;
+  padding: 110px 160px 90px 60px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
@@ -869,9 +869,9 @@
 [data-portfolio] .outro .right-col .contact {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 28px 36px;
+  gap: 20px 28px;
   text-align: left;
-  min-width: 340px;
+  min-width: 280px;
   font-family: var(--mono);
   font-size: 12px;
   letter-spacing: .08em;
@@ -895,48 +895,30 @@
 }
 [data-portfolio] .outro .socials {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   align-items: center;
 }
 [data-portfolio] .outro .socials a {
   color: var(--ink-dim);
   text-decoration: none;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
+  display: flex;
+  align-items: center;
   transition: color .2s;
 }
 [data-portfolio] .outro .socials a:hover {
   color: var(--blue);
 }
 [data-portfolio] .outro .socials a svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   fill: currentColor;
   display: block;
 }
 
-/* Tweaks panel */
-[data-portfolio] .tweaks {
-  position: fixed;
-  right: 28px;
-  bottom: 80px;
-  z-index: 200;
-  width: 300px;
-  background: rgba(10, 10, 12, .92);
-  backdrop-filter: blur(18px);
-  border: 1px solid var(--line-strong);
-  border-radius: 14px;
-  padding: 20px;
-  color: #F2F1EC;
-  font-family: var(--mono);
-  font-size: 11px;
-  display: none;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, .5);
-}
-[data-portfolio] .tweaks.on {
-  display: block;
+/* Tweaks panel — hidden */
+[data-portfolio] .tweaks,
+[data-portfolio] .tweaks-toggle {
+  display: none !important;
 }
 [data-portfolio] .tweaks h5 {
   letter-spacing: .22em;
