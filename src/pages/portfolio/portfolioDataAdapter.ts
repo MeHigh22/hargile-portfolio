@@ -365,7 +365,7 @@ export function adaptProjects(projects: ProjectData[]): PortfolioSlideData[] {
         scene: deriveScene(p),
         caption: [`Fig. ${String(i + 1).padStart(3, '0')} — ${p.category}`, p.client],
         quote: [override?.result ?? p.narrative.outcome, `— ${p.client}`],
-        year: p.year,
+        year: override?.tags ? override.tags[override.tags.length - 1] : p.year,
         heroImg: p.heroImg,
         websiteUrl: p.websiteUrl,
       };

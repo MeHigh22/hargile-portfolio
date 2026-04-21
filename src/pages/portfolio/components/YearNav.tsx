@@ -12,20 +12,22 @@ export function YearNav({ slides, currentIndex, activeYear, onGo, onYearChange }
   const years = [...new Set(slides.map(s => s.year))].sort((a, b) => Number(b) - Number(a));
 
   const isOutro = currentIndex === slides.length + 1;
-  // On cover (0) or outro: show year tabs only, no dots
-  const isChrome = currentIndex === 0 || isOutro;
+  const isCover = currentIndex === 0;
+  // On cover or outro: show year tabs only, no dots
+  const isChrome = isCover || isOutro;
+  const showNow = isCover || isOutro;
   const visibleDots = isChrome ? [] : slides.filter(s => s.year === activeYear);
 
   return (
     <nav className="year-nav">
       <div className="year-tabs">
-        {isOutro && (
+        {showNow && (
           <button key="now" className="year-tab active">Now</button>
         )}
         {years.map(yr => (
           <button
             key={yr}
-            className={['year-tab', !isOutro && yr === activeYear ? 'active' : ''].filter(Boolean).join(' ')}
+            className={['year-tab', !showNow && yr === activeYear ? 'active' : ''].filter(Boolean).join(' ')}
             onClick={() => {
               onYearChange(yr);
               const first = slides.find(s => s.year === yr);
