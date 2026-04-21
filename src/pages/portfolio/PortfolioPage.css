@@ -370,6 +370,12 @@
   pointer-events: auto;
 }
 
+/* portfolio-slide — initial state for GSAP-driven navigation engine (08-03) */
+[data-portfolio] .portfolio-slide {
+  opacity: 0;
+  pointer-events: none;
+}
+
 [data-portfolio] .kicker {
   font-family: var(--mono);
   font-size: 10px;
