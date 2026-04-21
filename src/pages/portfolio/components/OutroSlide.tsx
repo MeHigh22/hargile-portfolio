@@ -62,7 +62,7 @@ export const OutroSlide = React.forwardRef<HTMLElement, OutroSlideProps>(
           </div>
 
           <a
-            href="mailto:contact@hargile.com?subject=Nouveau%20projet%20Hargile&body=Bonjour%2C%0A%0AJe%20souhaite%20d%C3%A9marrer%20un%20projet%20avec%20Hargile.%0A%0ADescription%20du%20projet%20:%0A%0ABudget%20estim%C3%A9%20:%0A%0ACalendrier%20:"
+            href="mailto:charles.dl@hargile.com?subject=Nouveau%20projet%20Hargile&body=Bonjour%2C%0A%0AJe%20souhaite%20d%C3%A9marrer%20un%20projet%20avec%20Hargile.%0A%0ADescription%20du%20projet%20:%0A%0ABudget%20estim%C3%A9%20:%0A%0ACalendrier%20:"
             className="btn-ghost"
             style={{ background: 'var(--blue)', color: '#06080F', borderColor: 'var(--blue)' }}
           >

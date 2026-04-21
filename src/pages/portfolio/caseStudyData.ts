@@ -22,6 +22,66 @@ export interface CaseStudyProject {
   gallery: [SceneKey, SceneKey];
 }
 
+import { adaptProjects } from './portfolioDataAdapter';
+import { projects } from '../../data/projects';
+
+const _adapted = adaptProjects(projects);
+
+function buildFromAdapter(slug: string): CaseStudyProject | null {
+  const s = _adapted.find(p => p.slug === slug);
+  if (!s) return null;
+  const techTags = s.tags.slice(0, -1); // drop year
+  const sceneMap: Record<string, SceneKey> = {
+    dashboard: 'dashboard', trading: 'trading', gallery: 'gallery',
+    banking: 'banking', editorial: 'editorial', shop: 'shop',
+  };
+  const sc: SceneKey = sceneMap[s.scene] ?? 'dashboard';
+  const gallery2: SceneKey = sc === 'dashboard' ? 'gallery'
+    : sc === 'shop' ? 'editorial'
+    : sc === 'gallery' ? 'dashboard'
+    : 'dashboard';
+  return {
+    slug: s.slug,
+    num: s.num,
+    kind: s.kind,
+    name: s.name,
+    client: s.caption[1],
+    year: s.year,
+    duration: s.metrics[2]?.n ? `${s.metrics[2].n}${s.metrics[2].suf} semaines` : '12 semaines',
+    team: '2 devs · 1 designer',
+    tagline: s.tagline,
+    problem: s.problem,
+    approach: s.solution,
+    outcome: s.result,
+    pull: `« ${s.tagline} »`,
+    quote: s.quote,
+    metrics: s.metrics.map(m => ({ ...m, s: '' })),
+    stack: techTags.map((t, i) => {
+      const labels = ['Frontend', 'Backend', 'Base', 'Infra', 'CMS', 'Paiement', 'Analytics', 'Auth'];
+      return [labels[i] ?? `Tech ${i + 1}`, t] as [string, string];
+    }),
+    timeline: [
+      ['Phase 1', 'Découverte et cadrage', ''],
+      ['Phase 2', 'Conception et prototypage', ''],
+      ['Phase 3', 'Développement', ''],
+      ['Phase 4', 'Tests et recette', ''],
+      ['Phase 5', 'Lancement', ''],
+    ],
+    scene: sc,
+    gallery: [sc, gallery2],
+  };
+}
+
+export function getCaseStudy(slug: string): CaseStudyProject {
+  const handcrafted = CASE_STUDY_PROJECTS.find(p => p.slug === slug);
+  if (handcrafted) return handcrafted;
+  return buildFromAdapter(slug) ?? CASE_STUDY_PROJECTS[0];
+}
+
+export function getAllSlugs(): string[] {
+  return _adapted.map(p => p.slug);
+}
+
 export const CASE_STUDY_PROJECTS: CaseStudyProject[] = [
   {
     slug: 'atlas',

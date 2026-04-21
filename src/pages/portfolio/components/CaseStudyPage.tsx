@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import '../PortfolioPage.css';
 import './CaseStudyPage.css';
-import { CASE_STUDY_PROJECTS } from '../caseStudyData';
+import { getCaseStudy, getAllSlugs } from '../caseStudyData';
 import { SceneRenderer } from './SceneRenderer';
 import type { SceneKind } from '../types';
 
@@ -11,9 +11,11 @@ export function CaseStudyPage() {
   const slug = searchParams.get('p') ?? 'atlas';
   const rootRef = useRef<HTMLDivElement>(null);
 
-  const idx = CASE_STUDY_PROJECTS.findIndex(p => p.slug === slug);
-  const p = CASE_STUDY_PROJECTS[idx] ?? CASE_STUDY_PROJECTS[0];
-  const nextP = CASE_STUDY_PROJECTS[(idx + 1) % CASE_STUDY_PROJECTS.length];
+  const allSlugs = getAllSlugs();
+  const idx = allSlugs.indexOf(slug);
+  const p = getCaseStudy(slug);
+  const nextSlug = allSlugs[(idx + 1) % allSlugs.length] ?? allSlugs[0];
+  const nextP = getCaseStudy(nextSlug);
 
   // Scroll-reveal via IntersectionObserver
   useEffect(() => {
@@ -42,8 +44,7 @@ export function CaseStudyPage() {
         </Link>
         <nav>
           <Link to="/portfolio">← Portfolio</Link>
-          <a href="#"><span className="dot" />Dispo Q3 2026</a>
-          <a href="mailto:hello@hargile.studio" className="cta">Démarrer un projet →</a>
+          <a href="mailto:charles.dl@hargile.com" className="cta">Démarrer un projet →</a>
         </nav>
       </div>
 
@@ -178,8 +179,8 @@ export function CaseStudyPage() {
 
       {/* Footer */}
       <footer className="cs-footer">
-        <div>Hargile · 14 rue de Turenne, 75003 Paris</div>
-        <div><a href="mailto:hello@hargile.studio">hello@hargile.studio</a></div>
+        <div>Hargile · Rue Sterckx 5, bt. 28 · 1060 Saint-Gilles, Belgique</div>
+        <div><a href="mailto:charles.dl@hargile.com">charles.dl@hargile.com</a></div>
         <div>© 2026 — Tous droits réservés</div>
       </footer>
 
