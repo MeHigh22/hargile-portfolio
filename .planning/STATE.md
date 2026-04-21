@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Not started
-stopped_at: Completed 08-02-PLAN.md
-last_updated: "2026-04-21T08:21:03.642Z"
+stopped_at: "Checkpoint 08-03-Task4: human-verify /portfolio navigation"
+last_updated: "2026-04-21T08:28:55.931Z"
 last_activity: 2026-03-11 — Roadmap created, ready for plan-phase 5
 progress:
   total_phases: 8
-  completed_phases: 6
+  completed_phases: 7
   total_plans: 18
-  completed_plans: 16
+  completed_plans: 17
 ---
 
 # Project State
@@ -61,6 +61,7 @@ v1.1 Progress: [··········] 0% (0/3 phases)
 | Phase 07-metrics-gallery-polish P01 | 10 | 3 tasks | 14 files |
 | Phase 08-portfolio-page-react-tsx P01 | 5 | 2 tasks | 11 files |
 | Phase 08-portfolio-page-react-tsx P02 | 8 | 2 tasks | 9 files |
+| Phase 08-portfolio-page-react-tsx P03 | 6 | 3 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -130,6 +131,7 @@ Recent decisions affecting current work:
 - [Phase 08-portfolio-page-react-tsx]: adaptProjects() is a pure function at module level — no React dependency, trivially testable, zero side effects
 - [Phase 08-portfolio-page-react-tsx]: GSAP mock must include fromTo/from/killTweensOf — SlideAmbience (App regression test) calls gsap.fromTo() in useEffect; Observer mock must return {kill, enable, disable} object
 - [Phase 08-portfolio-page-react-tsx]: SceneRenderer useId() pattern: all SVG ids prefixed with uid — required for no-collision when same scene kind appears multiple times
+- [Phase 08-portfolio-page-react-tsx]: adaptedProjects at module level — pure function avoids recreation on every render; busyRef lock prevents Zustand re-render racing GSAP; .portfolio-slide CSS rule needed since components use that class not .slide
 
 ### Pending Todos
 
@@ -143,6 +145,6 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-04-21T08:21:03.638Z
-Stopped at: Completed 08-02-PLAN.md
+Last session: 2026-04-21T08:28:48.497Z
+Stopped at: Checkpoint 08-03-Task4: human-verify /portfolio navigation
 Resume file: None
