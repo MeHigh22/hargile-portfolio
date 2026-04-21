@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface MarqueeProps {
   items: string[];
   className?: string;
@@ -7,10 +5,9 @@ interface MarqueeProps {
 
 export function Marquee({ items, className }: MarqueeProps) {
   const content = items.map((item, i) => (
-    <React.Fragment key={i}>
-      {item}
-      <span className="star"> ★ </span>
-    </React.Fragment>
+    <span key={i}>
+      {item}<span className="star">✦</span>
+    </span>
   ));
   return (
     <div className={['marquee', className].filter(Boolean).join(' ')}>
