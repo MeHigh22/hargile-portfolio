@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Not started
-stopped_at: Completed 08-01-PLAN.md
-last_updated: "2026-04-21T08:09:42.022Z"
+stopped_at: Completed 08-02-PLAN.md
+last_updated: "2026-04-21T08:21:03.642Z"
 last_activity: 2026-03-11 — Roadmap created, ready for plan-phase 5
 progress:
   total_phases: 8
   completed_phases: 6
   total_plans: 18
-  completed_plans: 15
+  completed_plans: 16
 ---
 
 # Project State
@@ -60,6 +60,7 @@ v1.1 Progress: [··········] 0% (0/3 phases)
 | Phase 06-narrative-content-sections P02 | 3 | 1 tasks | 1 files |
 | Phase 07-metrics-gallery-polish P01 | 10 | 3 tasks | 14 files |
 | Phase 08-portfolio-page-react-tsx P01 | 5 | 2 tasks | 11 files |
+| Phase 08-portfolio-page-react-tsx P02 | 8 | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -127,6 +128,8 @@ Recent decisions affecting current work:
 - [Phase 08-portfolio-page-react-tsx]: All portfolio CSS scoped under [data-portfolio] attribute selector — zero bleed into existing slider app CSS vars (--bg, --ink, --blue)
 - [Phase 08-portfolio-page-react-tsx]: Globe _unbundled_ (transparent bg, reads --blue) copied to public/portfolio for CoverSlide iframe — not _standalone_ (has black bg)
 - [Phase 08-portfolio-page-react-tsx]: adaptProjects() is a pure function at module level — no React dependency, trivially testable, zero side effects
+- [Phase 08-portfolio-page-react-tsx]: GSAP mock must include fromTo/from/killTweensOf — SlideAmbience (App regression test) calls gsap.fromTo() in useEffect; Observer mock must return {kill, enable, disable} object
+- [Phase 08-portfolio-page-react-tsx]: SceneRenderer useId() pattern: all SVG ids prefixed with uid — required for no-collision when same scene kind appears multiple times
 
 ### Pending Todos
 
@@ -140,6 +143,6 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-04-21T08:09:42.018Z
-Stopped at: Completed 08-01-PLAN.md
+Last session: 2026-04-21T08:21:03.638Z
+Stopped at: Completed 08-02-PLAN.md
 Resume file: None
