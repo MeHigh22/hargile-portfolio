@@ -55,10 +55,6 @@
   50%       { opacity: .3 }
 }
 
-@keyframes marquee {
-  from { transform: translate3d(0, 0, 0) }
-  to   { transform: translate3d(-100%, 0, 0) }
-}
 
 @keyframes up {
   from { opacity: 0; transform: translateY(22px); filter: blur(6px); }
@@ -584,16 +580,14 @@
   color: var(--ink-dim);
   white-space: nowrap;
   display: flex;
+  contain: layout style;
 }
 [data-portfolio] .marquee-track {
   display: flex;
   gap: 60px;
   flex-shrink: 0;
   padding-right: 60px;
-  animation: marquee 80s linear infinite;
   will-change: transform;
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 [data-portfolio] .marquee-track span.star {
   color: var(--blue);
