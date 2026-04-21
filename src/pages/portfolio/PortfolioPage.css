@@ -116,7 +116,7 @@
   z-index: 90;
 }
 [data-portfolio] .logo img {
-  height: 100px;
+  height: 72px;
   width: auto;
   display: block;
 }
@@ -608,7 +608,7 @@
   overflow: hidden;
 }
 [data-portfolio] .project .left {
-  padding: 110px 60px 90px;
+  padding: 130px 60px 90px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -617,7 +617,7 @@
 }
 [data-portfolio] .project .project-num {
   position: absolute;
-  top: 116px;
+  top: 90px;
   left: 60px;
   font-family: var(--mono);
   font-size: 11px;
