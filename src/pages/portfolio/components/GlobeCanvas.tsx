@@ -36,9 +36,13 @@ export function GlobeCanvas({ className }: GlobeCanvasProps) {
     const resize = () => {
       const r = canvas.getBoundingClientRect();
       const s = Math.max(1, Math.min(r.width, r.height));
-      renderer.setSize(s, s, false);
+      if (s > 0) renderer.setSize(s, s, false);
     };
-    resize();
+    // Defer initial size read — parent may not be laid out yet on first paint
+    requestAnimationFrame(() => {
+      resize();
+      renderer.render(scene, camera);
+    });
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
@@ -150,6 +154,8 @@ export function GlobeCanvas({ className }: GlobeCanvasProps) {
     <canvas
       ref={canvasRef}
       className={className}
+      width={500}
+      height={500}
       style={{ display: 'block' }}
     />
   );
