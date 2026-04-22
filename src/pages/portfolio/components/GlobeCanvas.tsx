@@ -32,25 +32,36 @@ export function GlobeCanvas({ className }: GlobeCanvasProps) {
     let renderer: THREE.WebGLRenderer;
     try {
       renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-    } catch {
-      // WebGL unavailable — bail silently, canvas stays blank
+    } catch (e) {
+      console.error('[Globe] WebGLRenderer failed:', e);
       return;
     }
+    console.log('[Globe] renderer created, canvas size:', canvas.width, canvas.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
 
+    let sized = false;
     const resize = () => {
       const r = canvas.getBoundingClientRect();
-      const s = Math.max(1, Math.min(r.width, r.height));
-      // Always set size — fall back to the canvas HTML attribute if layout not ready
-      const sz = s > 4 ? s : canvas.width || 500;
-      renderer.setSize(sz, sz, false);
+      const s = Math.min(r.width, r.height);
+      if (s > 4) {
+        renderer.setSize(s, s, false);
+        sized = true;
+      } else if (!sized) {
+        // Canvas is hidden (slide not yet visible) — use fallback and keep polling
+        renderer.setSize(canvas.width || 500, canvas.height || 500, false);
+      }
     };
-    // Initial size — try immediately, then re-check after layout settles
-    resize();
-    requestAnimationFrame(() => { resize(); renderer.render(scene, camera); });
-    // Also retry after a short delay in case parent is still animating in
-    setTimeout(() => resize(), 300);
+
+    // Poll until the canvas has a real layout size (slide becomes visible)
+    const pollResize = () => {
+      const r = canvas.getBoundingClientRect();
+      console.log('[Globe] pollResize rect:', r.width, r.height, 'sized:', sized);
+      resize();
+      if (!sized) setTimeout(pollResize, 100);
+    };
+    requestAnimationFrame(() => { pollResize(); renderer.render(scene, camera); });
+
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
