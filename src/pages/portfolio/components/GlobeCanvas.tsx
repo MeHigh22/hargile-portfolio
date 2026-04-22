@@ -12,8 +12,13 @@ export function GlobeCanvas({ className }: GlobeCanvasProps) {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const getBlue = () =>
-      getComputedStyle(document.documentElement).getPropertyValue('--blue').trim() || '#95B8F8';
+    const getBlue = () => {
+      const fromRoot = getComputedStyle(document.documentElement).getPropertyValue('--blue').trim();
+      if (fromRoot) return fromRoot;
+      const portfolioEl = document.querySelector('[data-portfolio]');
+      if (portfolioEl) return getComputedStyle(portfolioEl).getPropertyValue('--blue').trim() || '#95B8F8';
+      return '#95B8F8';
+    };
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
