@@ -29,20 +29,28 @@ export function GlobeCanvas({ className }: GlobeCanvasProps) {
     const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
     camera.position.z = 3.2;
 
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    let renderer: THREE.WebGLRenderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    } catch {
+      // WebGL unavailable — bail silently, canvas stays blank
+      return;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000, 0);
 
     const resize = () => {
       const r = canvas.getBoundingClientRect();
       const s = Math.max(1, Math.min(r.width, r.height));
-      if (s > 0) renderer.setSize(s, s, false);
+      // Always set size — fall back to the canvas HTML attribute if layout not ready
+      const sz = s > 4 ? s : canvas.width || 500;
+      renderer.setSize(sz, sz, false);
     };
-    // Defer initial size read — parent may not be laid out yet on first paint
-    requestAnimationFrame(() => {
-      resize();
-      renderer.render(scene, camera);
-    });
+    // Initial size — try immediately, then re-check after layout settles
+    resize();
+    requestAnimationFrame(() => { resize(); renderer.render(scene, camera); });
+    // Also retry after a short delay in case parent is still animating in
+    setTimeout(() => resize(), 300);
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
