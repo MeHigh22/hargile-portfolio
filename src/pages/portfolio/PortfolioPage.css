@@ -684,7 +684,7 @@
 [data-portfolio] .project .right {
   position: relative;
   overflow: hidden;
-  background: #06080F;
+  background: var(--bg);
 }
 [data-portfolio] .project .right .img-wrap {
   position: absolute;
@@ -696,7 +696,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(70% 50% at 30% 60%, transparent, rgba(6, 8, 15, .35));
+  background: radial-gradient(70% 50% at 30% 60%, transparent, rgba(8, 16, 30, .35));
   pointer-events: none;
 }
 [data-portfolio] .project .metric-chips {
@@ -709,7 +709,7 @@
   z-index: 3;
 }
 [data-portfolio] .chip {
-  background: rgba(10, 10, 12, .6);
+  background: rgba(8, 16, 30, .7);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, .1);
   padding: 14px 18px;
@@ -961,18 +961,314 @@
   color: #06080F;
 }
 
-@media (max-width: 900px) {
-  [data-portfolio] .cover,
-  [data-portfolio] .project,
-  [data-portfolio] .outro {
-    grid-template-columns: 1fr !important;
-    padding: 100px 24px 100px !important;
-  }
-  [data-portfolio] .topmeta,
+/* ═══════════════════════════════════════════════════════════
+   DotNav base styles (desktop-first: hidden)
+   ═══════════════════════════════════════════════════════════ */
+[data-portfolio] .dot-nav {
+  display: none;
+  position: fixed;
+  bottom: 64px;
+  left: 0;
+  right: 0;
+  justify-content: center;
+  gap: 8px;
+  z-index: 86;
+  pointer-events: none;
+}
+[data-portfolio] .dot-nav-btn {
+  pointer-events: auto;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  cursor: pointer;
+  padding: 20px 4px;
+  box-sizing: content-box;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+[data-portfolio] .dot-nav-btn.active {
+  background: #95B8F8;
+  border-color: #95B8F8;
+  box-shadow: 0 0 6px rgba(149, 184, 248, 0.5);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE (≤ 767px) — portfolio page responsive layout
+   ═══════════════════════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+  /* ── Chrome: Logo ── */
   [data-portfolio] .logo {
+    left: 16px;
+    top: 8px;
+  }
+  [data-portfolio] .logo img {
+    height: 48px;
+  }
+
+  /* ── Chrome: Topmeta ── */
+  [data-portfolio] .topmeta {
+    top: 16px;
+    right: 16px;
+    gap: 12px;
     font-size: 10px;
   }
+  [data-portfolio] .topmeta a.cta {
+    display: none;
+  }
+  [data-portfolio] .contact-btn {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    padding: 0 8px;
+  }
+
+  /* ── Chrome: ProgressBar ── */
+  [data-portfolio] .bottom {
+    left: 16px;
+    right: 96px;
+    bottom: 16px;
+  }
+  [data-portfolio] .bottom .slide-title {
+    display: none;
+  }
+
+  /* ── Chrome: Nav arrows ── */
+  [data-portfolio] .nav {
+    bottom: 12px;
+    right: 16px;
+    gap: 8px;
+  }
+
+  /* ── Chrome: YearNav hidden ── */
   [data-portfolio] .year-nav {
+    display: none;
+  }
+
+  /* ── ProjectSlide: Single-column grid ── */
+  [data-portfolio] .project {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    overflow-y: auto;
+  }
+
+  /* ── ProjectSlide: Right panel (image) — on top ── */
+  [data-portfolio] .project .right {
+    order: 1;
+    position: relative;
+    height: clamp(200px, 55vw, 280px);
+    overflow: visible;
+    border-radius: 0;
+  }
+
+  /* ── ProjectSlide: img-wrap fills the right panel ── */
+  [data-portfolio] .project .right .img-wrap {
+    position: absolute;
+    inset: 0;
+    border-radius: 0;
+    overflow: hidden;
+  }
+
+  /* ── ProjectSlide: img-caption hidden on mobile ── */
+  [data-portfolio] .img-caption {
+    display: none;
+  }
+
+  /* ── ProjectSlide: Left panel (text) — below image ── */
+  [data-portfolio] .project .left {
+    order: 2;
+    padding: 24px 16px 80px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    justify-content: flex-start;
+  }
+
+  /* ── ProjectSlide: project-num back to flow ── */
+  [data-portfolio] .project .project-num {
+    position: static;
+    margin-bottom: 8px;
+  }
+
+  /* ── ProjectSlide: h2 ── */
+  [data-portfolio] .project h2 {
+    font-size: clamp(36px, 9.5vw, 56px);
+    margin: 12px 0 8px;
+  }
+
+  /* ── ProjectSlide: tagline ── */
+  [data-portfolio] .project .tagline {
+    font-size: 18px;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  /* ── ProjectSlide: sections ── */
+  [data-portfolio] .project .sections {
+    gap: 16px;
+    margin-bottom: 20px;
+    max-width: 100%;
+  }
+
+  /* ── ProjectSlide: section rows stack label above paragraph ── */
+  [data-portfolio] .project .sections .row {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* ── ProjectSlide: tags row ── */
+  [data-portfolio] .project .tags-row {
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  /* ── ProjectSlide: action buttons stack vertically ── */
+  [data-portfolio] .project .actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+  [data-portfolio] .project .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ── Metric chips: horizontal scrollable strip below image ── */
+  [data-portfolio] .project .metric-chips {
+    position: static;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    padding: 8px 16px;
+    gap: 8px;
+    top: auto;
+    left: auto;
+  }
+  [data-portfolio] .project .metric-chips::-webkit-scrollbar {
+    display: none;
+  }
+  [data-portfolio] .chip {
+    flex-shrink: 0;
+    min-width: 120px;
+    padding: 8px 16px;
+  }
+  [data-portfolio] .chip .cn {
+    font-size: clamp(36px, 9.5vw, 56px);
+    font-weight: 300;
+  }
+
+  /* ── CoverSlide: single column, globe hidden ── */
+  [data-portfolio] .cover {
+    grid-template-columns: 1fr;
+    padding: 80px 16px 80px;
+  }
+  [data-portfolio] .cover-globe {
+    display: none;
+  }
+  [data-portfolio] .cover-left {
+    padding-right: 0;
+    grid-column: 1;
+  }
+  [data-portfolio] .cover h1 {
+    font-size: clamp(36px, 9.5vw, 56px);
+  }
+  [data-portfolio] .cover .lede {
+    font-size: 15px;
+    margin-top: 12px;
+  }
+  [data-portfolio] .cover-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-top: 20px;
+  }
+  [data-portfolio] .cover .stats {
+    gap: 24px;
+  }
+  [data-portfolio] .cover .stat .n {
+    font-size: clamp(36px, 9.5vw, 56px);
+  }
+  [data-portfolio] .cover .cover-marquee {
+    grid-column: 1;
+    font-size: 18px;
+  }
+
+  /* ── OutroSlide: single column ── */
+  [data-portfolio] .outro {
+    grid-template-columns: 1fr;
+    padding: 80px 16px 100px;
+    gap: 40px;
+    align-items: start;
+  }
+  [data-portfolio] .outro h2 {
+    font-size: clamp(36px, 9.5vw, 56px);
+  }
+  [data-portfolio] .outro .right-col {
+    align-items: flex-start;
+    text-align: left;
+  }
+  [data-portfolio] .outro .contact {
+    min-width: 0;
+    width: 100%;
+  }
+  [data-portfolio] .outro .socials {
+    gap: 16px;
+    justify-content: flex-start;
+  }
+  [data-portfolio] .outro .btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* ── DotNav: shown on mobile ── */
+  [data-portfolio] .dot-nav {
+    display: flex;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TABLET (768px–1023px) — condensed split-screen
+   ═══════════════════════════════════════════════════════════ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  [data-portfolio] .logo {
+    left: 24px;
+  }
+  [data-portfolio] .logo img {
+    height: 56px;
+  }
+  [data-portfolio] .topmeta {
+    right: 24px;
+    font-size: 11px;
+  }
+  [data-portfolio] .year-nav {
+    display: none;
+  }
+  [data-portfolio] .project {
+    grid-template-columns: 1fr 1fr;
+  }
+  [data-portfolio] .project .left {
+    padding: 100px 32px 80px;
+  }
+  [data-portfolio] .project .project-num {
+    left: 32px;
+  }
+  [data-portfolio] .project h2 {
+    font-size: clamp(40px, 6vw, 72px);
+  }
+  [data-portfolio] .cover {
+    grid-template-columns: 1fr 1fr;
+    padding: 100px 32px 80px;
+  }
+  [data-portfolio] .outro {
+    padding: 100px 48px 80px 32px;
+  }
+  [data-portfolio] .bottom {
+    left: 24px;
+  }
+  [data-portfolio] .nav {
+    right: 24px;
+  }
+  [data-portfolio] .dot-nav {
     display: none;
   }
 }
