@@ -5,7 +5,7 @@
 
 /* ---------- CSS custom properties — scoped to portfolio root ---------- */
 [data-portfolio] {
-  --bg: #0A0A0C;
+  --bg: #0c1426;
   --ink: #F2F1EC;
   --ink-dim: #A8A69E;
   --line: rgba(242, 241, 236, 0.12);
