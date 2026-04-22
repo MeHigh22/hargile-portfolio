@@ -18,7 +18,7 @@ export const Marquee = memo(function Marquee({ items, className }: MarqueeProps)
       gsap.killTweensOf(track);
 
       // Desktop: fixed 60s (original feel). Mobile: slower 40px/s.
-      const duration = window.innerWidth < 768 ? halfWidth / 35 : 60;
+      const duration = window.innerWidth < 768 ? halfWidth / 35 : 75;
 
       // Proxy + wrap: playhead runs forever, wrap keeps x in [-halfWidth, 0)
       // so there is never a hard position reset — fully seamless
