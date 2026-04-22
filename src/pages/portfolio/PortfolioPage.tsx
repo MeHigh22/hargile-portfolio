@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import gsap from 'gsap';
+import { Observer } from 'gsap/Observer';
 import './PortfolioPage.css';
 import { projects } from '../../data/projects';
 import { adaptProjects } from './portfolioDataAdapter';
@@ -20,6 +21,8 @@ export function PortfolioPage() {
   const rootRef = useRef<HTMLDivElement>(null);
   const slideRefs = useRef<(HTMLElement | null)[]>([]);
   const busyRef = useRef(false);
+  const observerRef = useRef<ReturnType<typeof Observer.create> | null>(null);
+  const hintRef = useRef<HTMLDivElement>(null);
   const store = usePortfolioStore();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -102,6 +105,60 @@ export function PortfolioPage() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [go, store.currentIndex]);
 
+  // Touch/swipe navigation via GSAP Observer
+  useEffect(() => {
+    gsap.registerPlugin(Observer);
+    observerRef.current = Observer.create({
+      target: window,
+      type: 'wheel,touch,pointer',
+      tolerance: 40,
+      onLeft: () => go(usePortfolioStore.getState().currentIndex + 1),
+      onRight: () => go(usePortfolioStore.getState().currentIndex - 1),
+      onDown: () => go(usePortfolioStore.getState().currentIndex + 1),
+      onUp: () => go(usePortfolioStore.getState().currentIndex - 1),
+      preventDefault: true,
+    });
+    return () => {
+      observerRef.current?.kill();
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps — go is stable, getState reads live
+
+  // One-time swipe affordance hint (mobile only, localStorage-gated)
+  useEffect(() => {
+    if (localStorage.getItem('portfolio-swipe-seen')) return;
+    const timer = setTimeout(() => {
+      if (!hintRef.current) return;
+      gsap.fromTo(
+        hintRef.current,
+        { opacity: 0, y: 8 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          delay: 0.5,
+          onComplete: () => {
+            gsap.to(hintRef.current, { opacity: 0, duration: 0.5, delay: 2 });
+          },
+        }
+      );
+    }, 800);
+
+    const dismiss = () => {
+      localStorage.setItem('portfolio-swipe-seen', '1');
+      if (hintRef.current) gsap.to(hintRef.current, { opacity: 0, duration: 0.3 });
+      window.removeEventListener('touchstart', dismiss);
+      window.removeEventListener('mousedown', dismiss);
+    };
+    window.addEventListener('touchstart', dismiss, { once: true });
+    window.addEventListener('mousedown', dismiss, { once: true });
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('touchstart', dismiss);
+      window.removeEventListener('mousedown', dismiss);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps — runs once on mount
+
   // Derive current slide title for ProgressBar
   const currentSlide = slides[store.currentIndex];
   const currentTitle =
@@ -153,8 +210,8 @@ export function PortfolioPage() {
           currentTitle={currentTitle}
         />
         <div className="nav">
-          <button onClick={() => go(store.currentIndex - 1)}>←</button>
-          <button onClick={() => go(store.currentIndex + 1)} className="next">→</button>
+          <button aria-label="Projet précédent" onClick={() => go(store.currentIndex - 1)}>←</button>
+          <button aria-label="Projet suivant" onClick={() => go(store.currentIndex + 1)} className="next">→</button>
         </div>
         <DotNav
           totalCount={slides.length}
@@ -185,6 +242,9 @@ export function PortfolioPage() {
         <OutroSlide ref={setSlideRef(slides.length - 1) as React.Ref<HTMLElement>} />
       </main>
 
+      <div ref={hintRef} className="swipe-hint" aria-hidden="true">
+        Glissez →
+      </div>
       <TweaksPanel portfolioRef={rootRef as React.RefObject<HTMLElement | null>} />
     </div>
   );
