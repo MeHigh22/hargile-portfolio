@@ -1,5 +1,13 @@
 {
   "rewrites": [
+    {
+      "source": "/portfolio/globe-unbundled.html",
+      "destination": "/portfolio/globe-unbundled.html"
+    },
+    {
+      "source": "/portfolio/globe.html",
+      "destination": "/portfolio/globe.html"
+    },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

@@ -785,7 +785,7 @@
   width: 100%;
   max-width: 760px;
   aspect-ratio: 16 / 10;
-  background: #0E1220;
+  background: var(--bg);
   border: 1px solid rgba(149, 184, 248, .2);
   border-radius: 10px;
   overflow: hidden;
@@ -825,7 +825,7 @@
   flex: 1;
   position: relative;
   overflow: hidden;
-  background: #0B0E19;
+  background: var(--bg);
 }
 
 [data-portfolio] .scene {
