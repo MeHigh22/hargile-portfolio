@@ -11,7 +11,6 @@ import { ProjectSlide } from './components/ProjectSlide';
 import { OutroSlide } from './components/OutroSlide';
 import { YearNav } from './components/YearNav';
 import { ProgressBar } from './components/ProgressBar';
-import { DotNav } from './components/DotNav';
 import { TweaksPanel } from './components/TweaksPanel';
 
 // Called once at module level — pure function, no React dependency
@@ -213,12 +212,7 @@ export function PortfolioPage() {
           <button aria-label="Projet précédent" onClick={() => go(store.currentIndex - 1)}>←</button>
           <button aria-label="Projet suivant" onClick={() => go(store.currentIndex + 1)} className="next">→</button>
         </div>
-        <DotNav
-          totalCount={slides.length}
-          slides={adaptedProjects}
-          currentIndex={store.currentIndex}
-          onGo={go}
-        />
+
       </div>
 
       {/* Stage — all slides stacked, GSAP controls opacity */}

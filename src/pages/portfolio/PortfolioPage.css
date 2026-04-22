@@ -1200,26 +1200,31 @@
     justify-content: center;
   }
 
-  /* ── CoverSlide: stacked — text top, globe below, marquee bottom ── */
+  /* ── CoverSlide: flex column, scrollable, globe visible ── */
   [data-portfolio] .cover {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 180px auto;
+    display: flex;
+    flex-direction: column;
     padding: 70px 0 0;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   [data-portfolio] .cover .cover-left {
     padding: 0 16px;
-    grid-column: 1;
-    grid-row: 1;
-    overflow-y: auto;
+    flex: 0 0 auto;
     justify-content: flex-start;
   }
   [data-portfolio] .cover .cover-globe {
     display: flex;
-    grid-column: 1;
-    grid-row: 2;
-    height: 180px;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 auto;
+    min-height: 180px;
     overflow: hidden;
+    position: relative;
+  }
+  [data-portfolio] .cover .cover-globe canvas {
+    width: min(65vw, 260px) !important;
+    height: min(65vw, 260px) !important;
   }
   [data-portfolio] .cover .cover-globe::after {
     content: "";
@@ -1231,30 +1236,50 @@
       linear-gradient(to top, var(--bg) 0%, transparent 35%);
   }
   [data-portfolio] .cover .cover-marquee {
-    grid-column: 1;
-    grid-row: 3;
+    flex: 0 0 auto;
+    margin-bottom: 80px;
   }
   [data-portfolio] .cover h1 {
-    font-size: clamp(30px, 8vw, 44px);
+    font-size: clamp(38px, 10vw, 52px);
+    margin-bottom: 12px;
   }
   [data-portfolio] .cover .lede {
-    font-size: 14px;
-    margin-top: 10px;
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+    line-height: 1.5;
   }
-  [data-portfolio] .cover-actions {
+  [data-portfolio] .cover .cover-actions {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
-    margin-top: 16px;
+    margin-top: 20px;
+  }
+  [data-portfolio] .cover .cover-actions .btn-ghost {
+    order: 2;
+    width: 100%;
+    justify-content: center;
   }
   [data-portfolio] .cover .stats {
-    gap: 20px;
+    order: 1;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+  [data-portfolio] .cover .stat {
+    flex: 1;
+    align-items: center;
+    text-align: center;
   }
   [data-portfolio] .cover .stat .n {
-    font-size: clamp(28px, 7vw, 36px);
+    font-size: clamp(20px, 5.5vw, 26px);
+  }
+  [data-portfolio] .cover .stat .l {
+    font-size: 8px;
   }
   [data-portfolio] .cover .cover-marquee {
-    grid-column: 1;
     font-size: 16px;
   }
 
