@@ -10,6 +10,7 @@ import { ProjectSlide } from './components/ProjectSlide';
 import { OutroSlide } from './components/OutroSlide';
 import { YearNav } from './components/YearNav';
 import { ProgressBar } from './components/ProgressBar';
+import { DotNav } from './components/DotNav';
 import { TweaksPanel } from './components/TweaksPanel';
 
 // Called once at module level — pure function, no React dependency
@@ -125,6 +126,7 @@ export function PortfolioPage() {
         <div className="topmeta">
           <span><span className="dot" />Dispo — Q3 2026</span>
           <button
+            className="contact-btn"
             onClick={() => go(slides.length - 1)}
             style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'inherit', font: 'inherit' }}
           >
@@ -154,6 +156,12 @@ export function PortfolioPage() {
           <button onClick={() => go(store.currentIndex - 1)}>←</button>
           <button onClick={() => go(store.currentIndex + 1)} className="next">→</button>
         </div>
+        <DotNav
+          totalCount={slides.length}
+          slides={adaptedProjects}
+          currentIndex={store.currentIndex}
+          onGo={go}
+        />
       </div>
 
       {/* Stage — all slides stacked, GSAP controls opacity */}
