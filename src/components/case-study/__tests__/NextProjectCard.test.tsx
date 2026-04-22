@@ -80,7 +80,7 @@ describe('NextProjectCard', () => {
   });
 
   it('has cursor-pointer on the clickable card', () => {
-    const { container } = render(<NextProjectCard projectId="atlas" />);
+    render(<NextProjectCard projectId="atlas" />);
     const button = screen.getByRole('button');
     expect(button.className).toContain('cursor-pointer');
   });

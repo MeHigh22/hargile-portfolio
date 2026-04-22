@@ -21,6 +21,8 @@ const mockProject: ProjectData = {
     gradientFrom: '#96b8f7',
     gradientTo: '#b896f7',
   },
+  ambience: 'grid',
+  imageRatio: 'balanced',
   industry: 'SaaS',
   narrative: {
     problem: 'The old dashboard was slow.',

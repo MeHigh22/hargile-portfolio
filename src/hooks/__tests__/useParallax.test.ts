@@ -62,7 +62,7 @@ describe('useParallax', () => {
   it('kills the tween on unmount', async () => {
     const killMock = vi.fn();
     const gsap = (await import('gsap')).default;
-    vi.mocked(gsap.to).mockReturnValue({ kill: killMock } as ReturnType<typeof gsap.to>);
+    vi.mocked(gsap.to).mockReturnValue({ kill: killMock } as unknown as ReturnType<typeof gsap.to>);
 
     const { unmount } = renderHook(() => {
       const containerRef  = useRef<HTMLDivElement>(container);

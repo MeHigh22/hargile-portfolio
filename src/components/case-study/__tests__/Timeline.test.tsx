@@ -100,7 +100,7 @@ describe('Timeline', () => {
   });
 
   it('applies font-mono class to phase name', () => {
-    const { container } = render(
+    render(
       <Timeline steps={[mockSteps[0]]} panelRef={mockPanelRef} reducedMotion={false} />
     );
     const phaseEl = screen.getByText('Découverte');
@@ -108,7 +108,7 @@ describe('Timeline', () => {
   });
 
   it('applies font-mono class to duration', () => {
-    const { container } = render(
+    render(
       <Timeline steps={[mockSteps[0]]} panelRef={mockPanelRef} reducedMotion={false} />
     );
     const durationEl = screen.getByText('2 semaines');

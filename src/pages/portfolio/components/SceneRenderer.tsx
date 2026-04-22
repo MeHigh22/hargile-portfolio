@@ -3,7 +3,7 @@ import type { SceneKind } from '../types';
 
 // ---------- SceneWrapper ----------
 
-function SceneWrapper({ uid, children }: { uid: string; children: React.ReactNode }) {
+function SceneWrapper({ uid: _uid, children }: { uid: string; children: React.ReactNode }) {
   return (
     <div className="mock">
       <div className="mock-browser">
