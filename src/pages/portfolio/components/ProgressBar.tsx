@@ -15,7 +15,7 @@ export function ProgressBar({ current, total, currentTitle, className }: Progres
         &nbsp;/&nbsp;
         <span>{String(total).padStart(2, '0')}</span>
         &nbsp;&nbsp;
-        <span>{currentTitle}</span>
+        <span className="slide-title">{currentTitle}</span>
       </div>
       <div className="progress">
         <div className="fill" style={{ width: `${fillPct}%` }} />
