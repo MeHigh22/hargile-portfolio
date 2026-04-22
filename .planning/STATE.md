@@ -1,16 +1,16 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-status: Not started
-stopped_at: "Checkpoint 08-03-Task4: human-verify /portfolio navigation"
-last_updated: "2026-04-21T08:28:55.931Z"
-last_activity: 2026-03-11 — Roadmap created, ready for plan-phase 5
+milestone: v2.0
+milestone_name: Portfolio Page
+status: In Progress
+stopped_at: "09-01-PLAN.md complete — ready for 09-02 touch gestures"
+last_updated: "2026-04-22T15:01:00Z"
+last_activity: 2026-04-22 — Phase 9 Plan 01 complete: mobile CSS + DotNav component
 progress:
-  total_phases: 8
-  completed_phases: 7
-  total_plans: 18
-  completed_plans: 17
+  total_phases: 9
+  completed_phases: 8
+  total_plans: 20
+  completed_plans: 18
 ---
 
 # Project State
@@ -62,6 +62,7 @@ v1.1 Progress: [··········] 0% (0/3 phases)
 | Phase 08-portfolio-page-react-tsx P01 | 5 | 2 tasks | 11 files |
 | Phase 08-portfolio-page-react-tsx P02 | 8 | 2 tasks | 9 files |
 | Phase 08-portfolio-page-react-tsx P03 | 6 | 3 tasks | 6 files |
+| Phase 09-portfolio-mobile-slider P01 | 2 | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -132,6 +133,10 @@ Recent decisions affecting current work:
 - [Phase 08-portfolio-page-react-tsx]: GSAP mock must include fromTo/from/killTweensOf — SlideAmbience (App regression test) calls gsap.fromTo() in useEffect; Observer mock must return {kill, enable, disable} object
 - [Phase 08-portfolio-page-react-tsx]: SceneRenderer useId() pattern: all SVG ids prefixed with uid — required for no-collision when same scene kind appears multiple times
 - [Phase 08-portfolio-page-react-tsx]: adaptedProjects at module level — pure function avoids recreation on every render; busyRef lock prevents Zustand re-render racing GSAP; .portfolio-slide CSS rule needed since components use that class not .slide
+- [Phase 09-01]: DotNav base styles (display:none) placed BEFORE mobile @media block so display:flex override takes effect
+- [Phase 09-01]: Metric chips moved from position:absolute to position:static horizontal scroll strip on mobile
+- [Phase 09-01]: Project .right panel: overflow:visible on mobile so clamp() height image container is not clipped
+- [Phase 09-01]: contact-btn className added to Contact button for 44px touch target enforcement via CSS
 
 ### Pending Todos
 
@@ -145,6 +150,6 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-04-21T08:28:48.497Z
-Stopped at: Checkpoint 08-03-Task4: human-verify /portfolio navigation
+Last session: 2026-04-22T15:01:00Z
+Stopped at: Completed 09-01-PLAN.md — mobile CSS + DotNav component
 Resume file: None

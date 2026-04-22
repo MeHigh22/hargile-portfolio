@@ -62,6 +62,16 @@
 
 - [x] **CSDATA-01**: Rich placeholder content exists for all 3 beta projects (atlas, pulse, verde) with realistic fake metrics, timelines, testimonials, and screenshots
 
+## v2.0 Requirements (Portfolio Mobile)
+
+### Mobile Layout
+
+- [x] **MOB-01**: On mobile (≤ 767px), all slides (cover, projects, outro) render in single-column stacked layout — image panel above, text panel below
+- [x] **MOB-02**: A dot indicator row replaces YearNav on mobile — one dot per slide, tapping navigates to that slide, touch targets ≥ 44px
+- [ ] **MOB-03**: Horizontal swipe gestures navigate slides without triggering vertical text-panel scroll (touch-action: pan-y on .left panel, Observer tolerance ≥ 40px)
+- [x] **MOB-04**: Chrome is condensed on mobile: logo 48px, topmeta shows availability dot + "Nous contacter" only, nav arrows at bottom-right, progress bar condensed
+- [ ] **MOB-05**: Desktop layout (≥ 1024px) shows zero visual regressions from mobile CSS additions
+
 ## Future Requirements
 
 ### Advanced Transitions
@@ -142,11 +152,17 @@
 | CSVIS-03 | Phase 5 | Complete |
 | CSVIS-04 | Phase 5 | Complete |
 | CSDATA-01 | Phase 5 | Complete |
+| MOB-01 | Phase 9 | Complete |
+| MOB-02 | Phase 9 | Complete |
+| MOB-03 | Phase 9 | Pending |
+| MOB-04 | Phase 9 | Complete |
+| MOB-05 | Phase 9 | Pending |
 
 **Coverage:**
 - v1.0 requirements: 15 total (14 complete, 1 pending)
 - v1.1 requirements: 16 total
-- Mapped to phases: 16
+- v2.0 requirements: 5 total (3 complete, 2 pending)
+- Mapped to phases: 21
 - Unmapped: 0
 
 ---

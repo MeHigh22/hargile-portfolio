@@ -159,8 +159,24 @@ Plans:
 - [ ] 08-02-PLAN.md -- CoverSlide, ProjectSlide, OutroSlide, YearNav, Marquee components — all data from projects.ts
 - [ ] 08-03-PLAN.md -- GSAP slide transitions, keyboard/arrow navigation, progress bar, globe iframe integration, CaseStudyPage at /portfolio/case-study
 
+### Phase 9: Portfolio Mobile Slider
+**Goal**: The `/portfolio` page works correctly on mobile (≤ 767px) and tablet (768px–1023px) — stacked single-column slides, dot indicator navigation replacing YearNav, touch-swipe gesture guard, and condensed chrome — with zero changes to the desktop layout
+**Depends on**: Phase 8
+**Requirements**: MOB-01, MOB-02, MOB-03, MOB-04, MOB-05
+**Success Criteria** (what must be TRUE):
+  1. On a 375px viewport, all three project slides, cover, and outro render in a single-column stacked layout with image panel on top and text panel below
+  2. A dot indicator row (one dot per slide) appears at the bottom of the mobile screen, replaces YearNav, and tapping any dot navigates to that slide
+  3. Horizontal swipe gestures navigate between slides without triggering vertical text-panel scroll (touch-action: pan-y guard on .left panel)
+  4. The chrome (logo, topmeta, nav arrows, progress bar) is condensed correctly on mobile with all touch targets ≥ 44px
+  5. Desktop layout (≥ 1024px) shows zero visual regressions
+**Plans**: 2 plans
+
+Plans:
+- [x] 09-01-PLAN.md -- Mobile CSS media queries: single-column slides, condensed chrome, DotNav component, metric chips horizontal scroll strip
+- [ ] 09-02-PLAN.md -- Touch guard (touch-action: pan-y), Observer tolerance, swipe affordance hint, tablet breakpoint, accessibility audit
+
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -172,3 +188,4 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8
 | 6. Narrative Content Sections | 2/2 | Complete   | 2026-03-11 |
 | 7. Metrics, Gallery & Polish | 1/2 | In Progress|  |
 | 8. Portfolio Page — React/TSX | 2/3 | In Progress|  |
+| 9. Portfolio Mobile Slider | 1/2 | In Progress |  |
