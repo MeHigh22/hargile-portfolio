@@ -3,9 +3,9 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Portfolio Page
 status: In Progress
-stopped_at: "09-01-PLAN.md complete — ready for 09-02 touch gestures"
-last_updated: "2026-04-22T15:01:00Z"
-last_activity: 2026-04-22 — Phase 9 Plan 01 complete: mobile CSS + DotNav component
+stopped_at: "09-02-PLAN.md Tasks 1 and 2 complete — awaiting Task 3 human-verify checkpoint"
+last_updated: "2026-04-22T15:07:33Z"
+last_activity: 2026-04-22 — Phase 9 Plan 02 Tasks 1-2 complete: GSAP Observer + swipe hint CSS
 progress:
   total_phases: 9
   completed_phases: 8
@@ -63,6 +63,7 @@ v1.1 Progress: [··········] 0% (0/3 phases)
 | Phase 08-portfolio-page-react-tsx P02 | 8 | 2 tasks | 9 files |
 | Phase 08-portfolio-page-react-tsx P03 | 6 | 3 tasks | 6 files |
 | Phase 09-portfolio-mobile-slider P01 | 2 | 3 tasks | 4 files |
+| Phase 09-portfolio-mobile-slider P02 | 2 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -137,6 +138,9 @@ Recent decisions affecting current work:
 - [Phase 09-01]: Metric chips moved from position:absolute to position:static horizontal scroll strip on mobile
 - [Phase 09-01]: Project .right panel: overflow:visible on mobile so clamp() height image container is not clipped
 - [Phase 09-01]: contact-btn className added to Contact button for 44px touch target enforcement via CSS
+- [Phase 09-02]: Observer reads live index via usePortfolioStore.getState().currentIndex in callbacks — no stale closure
+- [Phase 09-02]: swipe-hint base display:none placed before @media block; mobile block overrides to display:block — consistent with DotNav pattern
+- [Phase 09-02]: touch-action: pan-y scoped to .project .left only — preserves vertical scroll in text panel while horizontal gestures propagate to Observer
 
 ### Pending Todos
 
@@ -150,6 +154,6 @@ None currently.
 
 ## Session Continuity
 
-Last session: 2026-04-22T15:01:00Z
-Stopped at: Completed 09-01-PLAN.md — mobile CSS + DotNav component
+Last session: 2026-04-22T15:07:33Z
+Stopped at: 09-02-PLAN.md Tasks 1-2 complete — checkpoint:human-verify pending for Task 3
 Resume file: None
