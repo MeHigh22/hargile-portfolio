@@ -5,11 +5,11 @@
 
 /* ---------- CSS custom properties — scoped to portfolio root ---------- */
 [data-portfolio] {
-  --bg: #0c1426;
-  --ink: #F2F1EC;
-  --ink-dim: #A8A69E;
-  --line: rgba(242, 241, 236, 0.12);
-  --line-strong: rgba(242, 241, 236, 0.22);
+  --bg: #0a121e;
+  --ink: #E8EEFE;
+  --ink-dim: #8A9BC4;
+  --line: rgba(232, 238, 254, 0.12);
+  --line-strong: rgba(232, 238, 254, 0.22);
   --blue: #95B8F8;
   --blue-deep: #5B7BD6;
   --display: 'Cormorant Garamond', 'Fraunces', serif;
@@ -23,6 +23,14 @@
   --ink-dim: #5A5850;
   --line: rgba(15, 15, 18, 0.14);
   --line-strong: rgba(15, 15, 18, 0.25);
+}
+
+[data-portfolio][data-theme="ink"] {
+  --bg: #0c1426;
+  --ink: #F2F1EC;
+  --ink-dim: #A8A69E;
+  --line: rgba(242, 241, 236, 0.12);
+  --line-strong: rgba(242, 241, 236, 0.22);
 }
 
 [data-portfolio][data-theme="cobalt"] {
