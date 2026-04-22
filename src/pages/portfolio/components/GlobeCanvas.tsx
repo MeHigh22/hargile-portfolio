@@ -13,10 +13,15 @@ export function GlobeCanvas({ className }: GlobeCanvasProps) {
     if (!canvas) return;
 
     const getBlue = () => {
-      const fromRoot = getComputedStyle(document.documentElement).getPropertyValue('--blue').trim();
-      if (fromRoot) return fromRoot;
-      const portfolioEl = document.querySelector('[data-portfolio]');
-      if (portfolioEl) return getComputedStyle(portfolioEl).getPropertyValue('--blue').trim() || '#95B8F8';
+      // First try inline style (set by TweaksPanel), then CSS var, then fallback
+      const portfolioEl = document.querySelector('[data-portfolio]') as HTMLElement | null;
+      if (portfolioEl?.style.getPropertyValue('--blue').trim()) {
+        return portfolioEl.style.getPropertyValue('--blue').trim();
+      }
+      if (portfolioEl) {
+        const fromEl = getComputedStyle(portfolioEl).getPropertyValue('--blue').trim();
+        if (fromEl) return fromEl;
+      }
       return '#95B8F8';
     };
 

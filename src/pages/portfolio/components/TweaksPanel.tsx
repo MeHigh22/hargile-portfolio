@@ -26,7 +26,7 @@ function getLS(key: string, fallback: string): string {
 
 export function TweaksPanel({ portfolioRef, className }: TweaksPanelProps) {
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<Theme>(() => getLS('portfolio-theme', 'ink') as Theme);
+  const [theme, setTheme] = useState<Theme>(() => getLS('portfolio-theme', 'cobalt') as Theme);
   const [display, setDisplay] = useState<Display>(() => getLS('portfolio-display', 'cormorant') as Display);
   const [accent, setAccent] = useState<Accent>(() => getLS('portfolio-accent', 'blue') as Accent);
 
