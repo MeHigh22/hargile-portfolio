@@ -993,6 +993,23 @@
   box-shadow: 0 0 6px rgba(149, 184, 248, 0.5);
 }
 
+/* ── Swipe affordance hint (mobile-only, GSAP-animated) ── */
+[data-portfolio] .swipe-hint {
+  display: none;
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  z-index: 95;
+  pointer-events: none;
+  opacity: 0;
+}
+
 /* ═══════════════════════════════════════════════════════════
    MOBILE (≤ 767px) — portfolio page responsive layout
    ═══════════════════════════════════════════════════════════ */
@@ -1082,6 +1099,7 @@
     overflow-y: auto;
     overflow-x: hidden;
     justify-content: flex-start;
+    touch-action: pan-y;
   }
 
   /* ── ProjectSlide: project-num back to flow ── */
@@ -1223,6 +1241,11 @@
   /* ── DotNav: shown on mobile ── */
   [data-portfolio] .dot-nav {
     display: flex;
+  }
+
+  /* ── Swipe hint: shown on mobile ── */
+  [data-portfolio] .swipe-hint {
+    display: block;
   }
 }
 
