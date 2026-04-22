@@ -1,6 +1,7 @@
 import React from 'react';
 import type { PortfolioSlideData } from '../types';
 import { Marquee } from './Marquee';
+import { GlobeCanvas } from './GlobeCanvas';
 
 interface CoverSlideProps {
   slides: PortfolioSlideData[];
@@ -50,14 +51,9 @@ export const CoverSlide = React.forwardRef<HTMLDivElement, CoverSlideProps>(
           </div>
         </div>
 
-        {/* Right column — globe iframe */}
+        {/* Right column — globe */}
         <div className="cover-globe">
-          <iframe
-            src="/portfolio/globe-unbundled.html"
-            title="Carte globale"
-            scrolling="no"
-            tabIndex={-1}
-          />
+          <GlobeCanvas />
         </div>
 
         {/* Bottom row — marquee spanning both columns */}
