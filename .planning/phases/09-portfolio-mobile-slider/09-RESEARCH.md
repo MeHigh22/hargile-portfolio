@@ -716,17 +716,19 @@ ASVS review: This phase adds no authentication, no data input from users, no ser
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **Observer onUp/onDown vs onLeft/onRight for horizontal swipe on mobile**
    - What we know: GSAP Observer fires `onUp`/`onDown` for vertical touch/wheel, `onLeft`/`onRight` for horizontal touch — these are separate callbacks
    - What's unclear: The existing main slider app (Phase 2) used Observer — was it configured for vertical or horizontal swipe? The portfolio slides are full-screen fade transitions (not directional slides), so either axis works — but the "swipe left = next" UX convention (UI-SPEC) maps to `onLeft` not `onDown` on a touch device
    - Recommendation: Use `onLeft: () => go(next)` and `onRight: () => go(prev)` for mobile-natural horizontal swipe. Also keep `onDown: () => go(next)` and `onUp: () => go(prev)` for mouse wheel (vertical). Pass both pairs in the same Observer.create() call.
+   - **RESOLVED:** Use all four callbacks (`onLeft`, `onRight`, `onDown`, `onUp`) in the same `Observer.create()` call. Encoded in 09-02 Task 1 Addition 3.
 
 2. **ProgressBar.tsx JSX modification**
    - What we know: The current DOM has no wrapper around `{currentTitle}` in ProgressBar
    - What's unclear: The component inventory in UI-SPEC says "No JSX change" for ProgressBar — but hiding the title text without a wrapper element is not straightforward in CSS (text nodes cannot be directly targeted)
    - Recommendation: Add `<span className="slide-title">{currentTitle}</span>` as a one-line JSX change. This is a minor deviation from the "no JSX change" inventory but is necessary for MOB-04.
+   - **RESOLVED:** Add `<span className="slide-title">{currentTitle}</span>` in ProgressBar.tsx. Encoded in 09-01 Task 2.
 
 ---
 
